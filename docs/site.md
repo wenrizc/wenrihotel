@@ -88,8 +88,7 @@
 
 * 杂项：
 * https://www.changhai.org/  卢昌海大佬的网站
-* 想asd编sadas随sadas程sad/赵  四个字随机组合，自己查正确的网址吧
-* 品adas葱ad 4erwe0dfsd4dwfw档ewfw案dfsaf馆efwe  此乃二进制字符的随机组合，出自于欧姆弥赛亚的无上旨意
+* 品adas葱ad 4erwe0dfsd4dwfw档ewfw案dfsaf馆efwoho想asd编sadas随sadas程sad/iy赵kuh 此乃二进制字符的随机组合
 * http://www.xys.org/  新语丝，方舟子
 
 
