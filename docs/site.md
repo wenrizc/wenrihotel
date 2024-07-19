@@ -121,7 +121,7 @@
 * https://github.com/  GitHub
 * https://www.runoob.com/  菜鸟教程，比学校的破书好多了
 * https://www.hello-algo.com/chapter_hello_algo/  Hello算法，等看完了就开始刷力扣
-* https://leetcode.cn/  力扣，一道也不会
+* https://leetcode.cn/  力扣，一道也不会，悲
 * https://archive.org/  互联网档案馆
 
 
