@@ -88,7 +88,6 @@
 
 * 杂项：
 * https://www.changhai.org/  卢昌海大佬的网站
-* 品adas葱ad 4erwe0dfsd4dwfw档ewfw案dfsaf馆efwoho想asd编sadas随sadas程sad/iy赵kuh 此乃二进制字符的随机组合
 * http://www.xys.org/  新语丝，方舟子
 
 
