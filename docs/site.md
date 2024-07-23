@@ -8,7 +8,7 @@
 * https://www.zhonghuadiancang.com/  中华典藏
 * https://www.cthulhuclub.com/  克苏鲁小说
 
-
+---
 
 * 二次元：
 * https://bangumi.tv/  bangumi评分网站
@@ -29,7 +29,7 @@
 * https://www.bilinovel.com/  哔哩轻小说
 * https://angelkawaii.com/ch/  超绝最可爱天使酱的官方网站
 
-
+---
 
 * 游戏：
 * https://www.ttloli.com/  忧郁的弟弟，galgame网站，但是大部分资源都无了，弟弟也不更新了，悲
@@ -46,7 +46,7 @@
 * http://americanconquest.info/  征服美洲
 * https://wh40k.lexicanum.com/wiki/Main_Page/  战锤40k论坛
 
-
+---
 
 * 摄影：
 * https://www.darkmap.cn/  光污染地图
@@ -66,7 +66,7 @@
 * https://www.fengniao.com/  蜂鸟
 * https://tuchong.com/  图虫
 
-
+---
 
 * 论坛：
 * https://trow.cc/  社区讨论一切和奇幻有关的话题，从游戏到文化，都有涉及。The Ring of Wonder，俗称特珞，乃一个莫名其妙的的奇幻位面，由淫色独裁，下有特珞双剑、特珞三贤者、特珞六神官、特珞十八将、特珞志愿军及游兵散勇无数。
@@ -75,7 +75,7 @@
 * https://www.4chan.org/index.php/  4chan
 * https://www.talkcc.com/  还活着的BBS论坛
 
-
+---
 
 * 影视：
 * https://www.5dm.link/  能用
@@ -84,13 +84,13 @@
 * https://docu-lib.com/  纪录片
 * https://vidhub.tv/  能用
 
-
+---
 
 * 杂项：
 * https://www.changhai.org/  卢昌海大佬的网站
 * http://www.xys.org/  新语丝，方舟子
 
-
+---
 
 * 音乐：
 * https://lizhi.turkyden.com/#/   李志音乐播放器，逼哥的歌基本都全了
@@ -98,7 +98,7 @@
 * http://www.yinhuafeng.cn/yinyue/  能用
 * https://www.suno.ai/  suno，AI音乐生成器
 
-
+---
 
 * 工具：
 * https://github.com/DIYgod/RSSHub/  RSS，另一种获取信息的方式
@@ -113,7 +113,7 @@
 * https://unvcode.librian.net/  幼女code，反和谐超级武器！
 * https://jianwai.youdao.com/  字幕生成器
 
-
+---
 
 * 计算机：
 * https://github.com/  GitHub
