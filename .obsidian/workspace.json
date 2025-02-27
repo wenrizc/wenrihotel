@@ -1,0 +1,198 @@
+{
+  "main": {
+    "id": "5c9dae342d84cd75",
+    "type": "split",
+    "children": [
+      {
+        "id": "05eb82175488b7a1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3ce2e35c36371319",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "java/基础/反射.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "反射"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f835dbd418deebe5",
+    "type": "split",
+    "children": [
+      {
+        "id": "d571ccc34d9e22d9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a86fdb0bd4f1495b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "e77bfa1cede889cb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "20b73cd26d6a6030",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 299.5
+  },
+  "right": {
+    "id": "fff8a72030cb26a2",
+    "type": "split",
+    "children": [
+      {
+        "id": "e1f03924e55c9d95",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e6e35788293aea05",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "算法第四版/排序/希尔排序.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "希尔排序 的反向链接列表"
+            }
+          },
+          {
+            "id": "483ab46b660e5a8d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "算法第四版/排序/希尔排序.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "希尔排序 的出链列表"
+            }
+          },
+          {
+            "id": "5f9f9b82541efe0f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "ba416def3db9804e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "算法第四版/排序/希尔排序.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "希尔排序 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "3ce2e35c36371319",
+  "lastOpenFiles": [
+    "java/基础/注解.md",
+    "java/基础/反射.md",
+    "java/基础/泛型.md",
+    "java/基础/异常.md",
+    "算法第四版/排序/归并排序.md",
+    "算法第四版/排序/选择排序.md",
+    "PA实验笔记/PA2/指令周期.md",
+    "PA实验笔记/PA2/静态指令与动态指令.md",
+    "苍穹外卖/架构.md",
+    "cang.md",
+    "临时.md",
+    "苍穹外卖",
+    "算法第四版/排序/希尔排序.md",
+    "java/基础",
+    "java/未命名.md",
+    "java",
+    "算法第四版/排序/插入排序.md",
+    "算法第四版/排序",
+    "算法第四版/未命名.md",
+    "suanfa.md",
+    "算法第四版",
+    "PA实验笔记/PA2",
+    "PA实验笔记",
+    "欢迎.md"
+  ]
+}
