@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "bb762f0b8e338b5b",
+        "id": "8fb1aedd75edc42c",
         "type": "tabs",
         "children": [
           {
-            "id": "e8cde35a3f7f556c",
+            "id": "616d3c072e643438",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "java/基础/SPI机制.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "SPI机制"
             }
           }
         ]
@@ -90,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "java/基础/SPI机制.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "反向链接"
+              "title": "SPI机制 的反向链接列表"
             }
           },
           {
@@ -108,11 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "java/基础/SPI机制.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "出链"
+              "title": "SPI机制 的出链列表"
             }
           },
           {
@@ -136,12 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "java/基础/SPI机制.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "SPI机制 的大纲"
             }
           }
         ]
@@ -161,8 +168,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e8cde35a3f7f556c",
+  "active": "616d3c072e643438",
   "lastOpenFiles": [
+    "java/基础/SPI机制.md",
+    "java/基础/反射.md",
     "index.md"
   ]
 }
