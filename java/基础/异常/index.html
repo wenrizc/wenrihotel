@@ -1,0 +1,1130 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://wenrizc.github.io/wenrihotel/java/%E5%9F%BA%E7%A1%80/%E5%BC%82%E5%B8%B8/">
+      
+      
+        <link rel="prev" href="../%E5%8F%8D%E5%B0%84/">
+      
+      
+        <link rel="next" href="../%E6%B3%9B%E5%9E%8B/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>异常 - 文日小栈</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="文日小栈" class="md-header__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            文日小栈
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              异常
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="文日小栈" class="md-nav__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    文日小栈
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    欢迎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PA实验笔记
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            PA实验笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PA2
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            PA2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PA%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/PA2/%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    指令周期
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PA%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/PA2/%E9%9D%99%E6%80%81%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%8A%A8%E6%80%81%E6%8C%87%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    静态指令与动态指令
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPI%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPI机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%8F%8D%E5%B0%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    反射
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    异常
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B3%9B%E5%9E%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    泛型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B3%A8%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    注解
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    算法第四版
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            算法第四版
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    排序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            排序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    希尔排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    归并排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    插入排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    选择排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    苍穹外卖
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            苍穹外卖
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    架构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>异常</h1>
+
+<p><strong>异常的层次结构</strong></p>
+<ul>
+<li>
+<p><strong>异常定义:</strong> 程序运行期间发生的<strong>不期而至的状况</strong>，干扰正常指令流程的<strong>事件</strong>。Java 异常都是 <strong>Throwable 类的子类实例</strong>，描述错误条件。</p>
+</li>
+<li>
+<p><strong>Throwable 类:</strong> Java 错误与异常的<strong>超类</strong>，包含两个子类：<strong>Error (错误)</strong> 和 <strong>Exception (异常)</strong>。提供 <code>printStackTrace()</code> 等接口获取<strong>堆栈跟踪信息</strong>。</p>
+<ul>
+<li>
+<p><strong>Error (错误):</strong></p>
+<ul>
+<li>程序<strong>无法处理的严重错误</strong>，通常表示 <strong>JVM 自身出现问题</strong>。</li>
+<li>例如 <code>OutOfMemoryError</code> (内存不足), <code>StackOverflowError</code> (栈溢出) 等。</li>
+<li><strong>不受检异常</strong>，<strong>非代码性错误</strong>，<strong>应用程序不应处理</strong>。</li>
+<li>
+<p>JVM 通常会<strong>终止线程</strong>。</p>
+<ul>
+<li><strong>Exception (异常):</strong></li>
+</ul>
+</li>
+<li>
+<p>程序<strong>可以捕获和处理的异常</strong>。</p>
+</li>
+<li>分为两类:<ul>
+<li><strong>运行时异常 (RuntimeException):</strong><ul>
+<li><code>RuntimeException</code> 类及其子类，例如 <code>NullPointerException</code>, <code>IndexOutOfBoundsException</code>。</li>
+<li><strong>不检查异常</strong>，<strong>可以选择捕获处理，也可以不处理</strong>。</li>
+<li>通常由<strong>程序逻辑错误</strong>引起，应尽可能避免。</li>
+<li><strong>编译器不强制检查</strong>。</li>
+</ul>
+</li>
+<li><strong>编译时异常 (非运行时异常/可查异常):</strong><ul>
+<li><code>RuntimeException</code> 以外的 <code>Exception</code> 类及其子类，例如 <code>IOException</code>, <code>SQLException</code>。</li>
+<li><strong>必须处理的异常</strong>，<strong>不处理则编译不通过</strong>。</li>
+<li><strong>编译器强制检查</strong>，必须 <code>try-catch</code> 捕获或 <code>throws</code> 声明抛出。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>可查异常 vs. 不可查异常:</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>可查异常 (Checked Exceptions):</strong></p>
+<ul>
+<li><strong>编译器要求必须处理</strong> 的异常。</li>
+<li>程序运行中容易出现、可预测的异常状况。</li>
+<li>例如，文件找不到 (<code>FileNotFoundException</code>)、网络连接失败 (<code>IOException</code>)。</li>
+<li><strong>必须 <code>try-catch</code> 捕获或 <code>throws</code> 声明抛出</strong>。</li>
+<li>
+<p>除了 <code>RuntimeException</code> 及其子类，其他 <code>Exception</code> 子类都是可查异常。</p>
+<ul>
+<li><strong>不可查异常 (Unchecked Exceptions):</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>编译器不强制处理</strong> 的异常。</p>
+</li>
+<li>包括 <strong>运行时异常 (RuntimeException 及其子类)</strong> 和 <strong>错误 (Error)</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>异常基础</strong></p>
+<ul>
+<li>
+<p><strong>异常关键字:</strong></p>
+<ul>
+<li><strong><code>try</code>:</strong> <strong>监听</strong>代码块，可能抛出异常的代码放入 <code>try</code> 块。</li>
+<li><strong><code>catch</code>:</strong> <strong>捕获</strong> <code>try</code> 块中发生的异常。</li>
+<li><strong><code>finally</code>:</strong> <strong>总是被执行</strong> 的代码块，用于<strong>资源回收</strong> (如数据库连接、文件流)。<code>finally</code> 执行完后，才会执行 <code>try</code> 或 <code>catch</code> 块中的 <code>return</code> 或 <code>throw</code> 语句，除非 <code>finally</code> 中也使用了 <code>return</code> 或 <code>throw</code> 等终止方法语句。</li>
+<li><strong><code>throw</code>:</strong> <strong>手动抛出</strong> 异常。</li>
+<li><strong><code>throws</code>:</strong> 在方法签名中<strong>声明方法可能抛出的异常</strong>。</li>
+<li>
+<p><strong>异常声明 (<code>throws</code>):</strong></p>
+</li>
+<li>
+<p>方法中若存在<strong>编译时异常</strong>，且不捕获，<strong>必须在方法签名中使用 <code>throws</code> 声明</strong>，告知调用者处理异常。</p>
+</li>
+<li>声明多个异常用<strong>逗号分隔</strong>。</li>
+<li><strong>子类方法</strong> 覆盖父类方法时，<strong>不能声明新的或更宽泛的异常</strong>，声明的异常必须是父类方法声明异常的<strong>同类或子类</strong>，或者不声明异常 (如果父类方法没有声明异常)。</li>
+<li><strong>规则:</strong><ul>
+<li><strong>不可查异常</strong> (Error, RuntimeException)：<strong>可以不声明</strong>，编译通过，运行时可能抛出。</li>
+<li><strong>可查异常</strong> (Checked Exception)：<strong>必须声明或捕获</strong>，否则编译错误。</li>
+<li>仅当方法 <strong>抛出异常</strong> 时，调用者才需要处理或声明抛出。</li>
+</ul>
+</li>
+<li>
+<p><strong>异常抛出 (<code>throw</code>):</strong></p>
+</li>
+<li>
+<p>使用 <code>throw</code> 关键字 <strong>手动抛出异常实例</strong>。</p>
+</li>
+<li>通常用于 <strong>指示代码错误或异常情况</strong>。</li>
+<li>多系统集成时，可用于 <strong>转换异常类型</strong>，统一对外暴露异常，隐藏内部细节。</li>
+<li>
+<p><strong>自定义异常:</strong></p>
+</li>
+<li>
+<p>自定义异常类通常<strong>继承 <code>Exception</code> 类</strong> (编译时异常) 或 <code>RuntimeException</code> 类 (运行时异常)。</p>
+</li>
+<li>习惯包含<strong>两个构造函数</strong>:<ul>
+<li><strong>无参构造函数</strong> (<code>public MyException(){ }</code>)</li>
+<li><strong>带详细描述信息构造函数</strong> (<code>public MyException(String msg){ super(msg); }</code>)，方便调试和日志记录。</li>
+</ul>
+</li>
+<li>
+<p><strong>异常捕获:</strong></p>
+</li>
+<li>
+<p><strong><code>try-catch</code>:</strong> 捕获并处理异常。</p>
+<ul>
+<li>可以 <strong>捕获多种异常类型</strong>，<strong>不同 <code>catch</code> 块处理不同异常</strong>。</li>
+<li><strong>同一个 <code>catch</code> 块</strong> 也可以 <strong>捕获多种异常</strong>，用 <strong><code>|</code> 分隔</strong>。</li>
+</ul>
+</li>
+<li><strong><code>try-catch-finally</code>:</strong> 完整异常处理结构，<code>finally</code> 块<strong>确保资源回收</strong>。<ul>
+<li><strong>执行顺序:</strong><ul>
+<li><strong><code>try</code> 无异常:</strong> <code>try</code> -&gt; <code>finally</code> -&gt; 后续代码。</li>
+<li><strong><code>try</code> 有异常，<code>catch</code> 无匹配:</strong> <code>try</code> (异常点前代码) -&gt; <code>finally</code> -&gt; 异常抛给 JVM，后续代码不执行。</li>
+<li><strong><code>try</code> 有异常，<code>catch</code> 有匹配:</strong> <code>try</code> (异常点前代码) -&gt; <code>catch</code> (匹配的块) -&gt; <code>finally</code> -&gt; 后续代码。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong><code>try-finally</code>:</strong> <strong>不捕获异常</strong>，但<strong>保证 <code>finally</code> 块执行</strong>，用于资源清理。<ul>
+<li><code>try</code> 块异常，异常代码后语句不执行，直接执行 <code>finally</code>。</li>
+<li><code>try</code> 块无异常，执行完 <code>try</code> 后执行 <code>finally</code>。</li>
+<li>例如，IO 流关闭、Lock 释放等。</li>
+<li><strong><code>finally</code> 不执行的情况:</strong> <code>System.exit()</code>, <code>finally</code> 块内异常, 线程死亡, CPU 关闭。</li>
+</ul>
+</li>
+<li><strong><code>try-with-resource</code> (Java 7+):</strong> <strong>自动资源管理</strong>，资源需实现 <code>AutoCloseable</code> 接口。<ul>
+<li>在 <code>try()</code> 中声明资源，<code>try</code> 块结束后<strong>自动调用 <code>close()</code> 关闭资源</strong>。</li>
+<li>若 <code>close()</code> 抛出异常，会被<strong>抑制</strong>，原始异常优先抛出。被抑制的异常可通过 <code>getSuppressed()</code> 获取。</li>
+</ul>
+</li>
+<li>
+<p><strong>异常基础总结:</strong></p>
+</li>
+<li>
+<p><code>try</code>, <code>catch</code>, <code>finally</code> 不能单独使用，必须组合 (<code>try-catch</code>, <code>try-finally</code>, <code>try-catch-finally</code>)。</p>
+</li>
+<li><code>try</code> 监控代码，异常发生则停止 <code>try</code> 块后续代码，交给 <code>catch</code> 处理。</li>
+<li><code>finally</code> 代码块<strong>一定执行</strong>，用于资源回收。</li>
+<li><code>throws</code> 声明异常，<code>throw</code> 抛出异常。</li>
+<li><strong>Java 编程思想异常总结:</strong> 在<strong>恰当级别处理问题</strong>、解决问题重试、修补绕过、替换数据、完成当前工作后抛出、转换异常抛出、终止程序、简化异常模式、安全类库和程序。</li>
+</ul>
+</li>
+</ul>
+<p><strong>异常实践</strong></p>
+<ul>
+<li>
+<p><strong>最佳实践:</strong></p>
+<ul>
+<li><strong>只在异常情况下使用异常:</strong> 异常用于<strong>不正常条件</strong>，<strong>不用于正常控制流程</strong>。避免 <code>catch</code> 预检查可以规避的 <code>RuntimeException</code> (如 <code>NullPointerException</code>, <code>IndexOutOfBoundsException</code>)。</li>
+<li><strong><code>finally</code> 清理资源或 <code>try-with-resource</code>:</strong> 确保资源 (如 IO 流) <strong>在使用后被关闭</strong>。</li>
+<li><strong>尽量使用标准异常:</strong> <strong>重用</strong> Java 标准异常，API 更易用，代码更易读，减少异常类数量。例如 <code>IllegalArgumentException</code>, <code>IllegalStateException</code>, <code>NullPointerException</code>, <code>IndexOutOfBoundsException</code>, <code>ConcurrentModificationException</code>, <code>UnsupportedOperationException</code>。</li>
+<li><strong>对异常进行文档说明:</strong> 使用 <strong>Javadoc <code>@throws</code> 声明</strong>，描述异常场景，提供足够信息给调用者。</li>
+<li><strong>优先捕获最具体的异常:</strong> <code>catch</code> 块顺序应 <strong>从具体到宽泛</strong>，避免捕获父类异常导致子类 <code>catch</code> 块无法执行。</li>
+<li><strong>不要捕获 <code>Throwable</code>:</strong> <code>Throwable</code> 包括 <code>Error</code> 和 <code>Exception</code>，<strong>不应捕获 <code>Error</code></strong>，除非确定能处理严重错误。</li>
+<li><strong>不要忽略异常:</strong> <code>catch</code> 块<strong>至少要记录异常信息</strong> (日志)。</li>
+<li><strong>不要记录并抛出异常:</strong> 避免 <strong>重复日志</strong>，除非需要 <strong>包装异常</strong> 为自定义异常并添加更具体信息。</li>
+<li><strong>包装异常时保留原始异常:</strong> 使用 <code>Exception</code> 接受 <code>Throwable</code> 参数的构造函数，<strong>保留原始异常堆栈信息</strong>，方便问题分析。</li>
+<li><strong>不要使用异常控制程序流程:</strong> <strong>异常用于异常情况</strong>，<strong>条件判断用 <code>if</code> 语句</strong>，避免性能问题。</li>
+<li><strong>不在 <code>finally</code> 块中使用 <code>return</code>:</strong> <code>finally</code> 中的 <code>return</code> 会 <strong>覆盖 <code>try</code> 或 <code>catch</code> 块的 <code>return</code> 值</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>深入理解异常</strong></p>
+<ul>
+<li>
+<p><strong>JVM 异常处理机制:</strong></p>
+<ul>
+<li><strong>异常表 (Exception Table):</strong> Class 文件中存储异常处理信息。</li>
+<li>
+<p><strong>异常处理流程:</strong></p>
+<ol>
+<li>异常发生时，JVM 在<strong>当前方法的异常表</strong>中查找<strong>匹配的处理者</strong> (from, to, type)。</li>
+<li>找到匹配处理者，<strong>调用 <code>target</code> 位置的处理者</strong> (catch 块)。</li>
+<li>未找到匹配，<strong>向上查找调用方法的异常表</strong> (弹栈)。</li>
+<li>所有栈帧弹出仍未处理，抛给 <strong>当前线程 (Thread)</strong>。</li>
+<li>线程终止，若为<strong>最后非守护线程</strong>，JVM 终止运行。</li>
+</ol>
+</li>
+<li>
+<p><strong><code>try-catch-finally</code> 原理:</strong> <code>finally</code> 块代码被 <strong>复制到 <code>try</code> 和 <code>catch</code> 块的出口处</strong> (字节码层面)。</p>
+</li>
+<li><strong><code>catch</code> 顺序:</strong> <strong>具体异常先 <code>catch</code>，宽泛异常后 <code>catch</code></strong>，否则编译错误。</li>
+<li><strong><code>return</code> 和 <code>finally</code>:</strong> <code>finally</code> 块在 <code>return</code> 前执行，但 <code>finally</code> 中的 <code>return</code> 会覆盖 <code>try</code> 或 <code>catch</code> 的 <code>return</code> 值。</li>
+<li>
+<p><strong>异常耗时:</strong></p>
+</li>
+<li>
+<p><strong>异常创建耗时:</strong> 创建异常对象比普通对象<strong>更耗时</strong> (约 20 倍)。</p>
+</li>
+<li><strong>异常抛出和捕获耗时:</strong> 抛出和捕获异常更耗时 (约为创建异常对象的 4 倍)。</li>
+<li><strong>主要耗时点:</strong> <strong>堆栈跟踪 (Stack Trace) 的生成</strong>。
+<strong>异常性能分析：异常慢在哪里？</strong></li>
+</ul>
+</li>
+<li>
+<p>异常处理的主要性能开销并非在于异常对象的创建，而是在于<strong>抛出和捕获异常</strong>的过程。</p>
+</li>
+</ul>
+<p><strong>异常抛出时 JVM 的行为</strong></p>
+<ul>
+<li><strong>字节码分析 (<code>javap -verbose</code>)</strong>: 分析 <code>catchException()</code> 方法的字节码，重点关注 <code>athrow</code> 指令。</li>
+<li><strong><code>athrow</code> 指令的运作过程:</strong><ol>
+<li><strong>检查栈顶异常对象:</strong> 确认类型为 <code>java.lang.Throwable</code> 的子类。</li>
+<li><strong>异常对象出栈:</strong> 暂时将异常对象引用从操作栈中移除。</li>
+<li><strong>搜索异常表:</strong> 在当前方法的异常表中查找合适的异常处理器 (handler)。</li>
+<li><strong>找到 Handler:</strong><ul>
+<li><strong>重置 PC 寄存器:</strong> 指向异常 handler 的起始指令。</li>
+<li><strong>清空操作栈:</strong> 为异常处理做准备。</li>
+<li><strong>异常对象入栈:</strong> 将之前出栈的异常对象引用重新压入操作栈，供 <code>catch</code> 块访问。</li>
+<li><strong>跳转到 Handler:</strong> 程序执行流程跳转到异常 handler 的代码。</li>
+</ul>
+</li>
+<li><strong>未找到 Handler:</strong><ul>
+<li><strong>栈帧出栈:</strong> 将当前方法的栈帧从 JVM 栈中弹出。</li>
+<li><strong>向上查找:</strong> 在调用方法的栈帧中重复异常处理查找过程。</li>
+<li><strong>线程终止 (最终):</strong> 若所有栈帧都弹出仍未找到 handler，线程被迫终止。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>异常表 (Exception Table):</strong> 记录了异常处理信息，包括异常作用范围 (<code>from</code>-<code>to</code>)、异常类型 (<code>type</code>)、异常处理器位置 (<code>target</code>)。<code>catch</code> 和 <code>finally</code> 关键字的实现都依赖于字节码和异常表。</li>
+<li><strong>总结 <code>athrow</code> 指令的 JVM 行为:</strong> 涉及类型检查、异常表搜索、程序计数器重置、栈操作、栈帧操作，甚至线程终止等复杂步骤，这些操作共同导致了异常处理的性能开销。</li>
+</ul>
+<p><strong>HotSpot VM 源码分析</strong></p>
+<ul>
+<li><strong>源码位置:</strong> OpenJDK HotSpot VM 源码 <code>bytecodeInterpreter.cpp</code> 中的 <code>CASE(_athrow)</code> 部分。</li>
+<li><strong>关键步骤:</strong><ol>
+<li><strong>提取异常对象:</strong> 从操作栈中获取异常对象引用 (<code>STACK_OBJECT(-1)</code>).</li>
+<li><strong>空指针检查:</strong> <code>CHECK_NULL(except_oop)</code>，如果异常对象为空，则抛出 <code>NullPointerException</code>。</li>
+<li><strong>设置 <code>pending_exception</code>:</strong> <code>THREAD-&gt;set_pending_exception(except_oop, NULL, 0)</code>，将异常对象设置为线程的待处理异常。</li>
+<li><strong>跳转到 <code>handle_exception</code>:</strong> <code>goto handle_exception</code>，进入通用的异常处理流程。</li>
+</ol>
+</li>
+<li><strong><code>handle_exception</code> 关键代码:</strong><ol>
+<li><strong>查找异常处理器:</strong> <code>CALL_VM(continuation_bci = (intptr_t)InterpreterRuntime::exception_handler_for_exception(THREAD, except_oop()), handle_exception)</code>，通过 <code>InterpreterRuntime::exception_handler_for_exception</code> 查找异常表。</li>
+<li><strong>找到 Handler (<code>continuation_bci &gt;= 0</code>):</strong><ul>
+<li><strong>异常对象入栈:</strong> <code>SET_STACK_OBJECT(except_oop(), 0)</code>。</li>
+<li><strong>重置 PC 指针:</strong> <code>pc = METHOD-&gt;code_base() + continuation_bci</code>，指向 handler 代码。</li>
+<li><strong>跳转到 <code>run</code>:</strong> <code>goto run</code>，继续执行。</li>
+</ul>
+</li>
+<li><strong>未找到 Handler:</strong><ul>
+<li><strong>重新设置 <code>pending_exception</code>:</strong> <code>THREAD-&gt;set_pending_exception(except_oop(), NULL, 0)</code>。</li>
+<li><strong>跳转到 <code>handle_return</code>:</strong> <code>goto handle_return</code>，进行方法退出处理。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>结论:</strong> HotSpot VM 的 <code>athrow</code> 指令实现印证了字节码分析的结论，异常处理涉及复杂的查找和跳转过程，导致性能开销。</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1434 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://wenrizc.github.io/wenrihotel/java/%E5%9F%BA%E7%A1%80/%E5%8F%8D%E5%B0%84/">
+      
+      
+        <link rel="prev" href="../SPI%E6%9C%BA%E5%88%B6/">
+      
+      
+        <link rel="next" href="../%E5%BC%82%E5%B8%B8/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
+    
+    
+      
+        <title>反射 - 文日小栈</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-rtti" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="文日小栈" class="md-header__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            文日小栈
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              反射
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="文日小栈" class="md-nav__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    文日小栈
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    欢迎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PA实验笔记
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            PA实验笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    PA2
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            PA2
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PA%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/PA2/%E6%8C%87%E4%BB%A4%E5%91%A8%E6%9C%9F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    指令周期
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../PA%E5%AE%9E%E9%AA%8C%E7%AC%94%E8%AE%B0/PA2/%E9%9D%99%E6%80%81%E6%8C%87%E4%BB%A4%E4%B8%8E%E5%8A%A8%E6%80%81%E6%8C%87%E4%BB%A4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    静态指令与动态指令
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Java
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../SPI%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SPI机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    反射
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    反射
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-rtti" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. RTTI 与反射
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Class 类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 类加载机制
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 反射核心组件与使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 反射核心组件与使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Constructor 类（构造方法）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Field 类（成员变量）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Method 类（方法）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 反射操作流程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 注意事项与扩展
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-classclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 从.class文件到Class对象
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 从.class文件到Class对象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class" class="md-nav__link">
+    <span class="md-ellipsis">
+      类加载器加载.class文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Class对象的构建与内容
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 实例化对象的过程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 反射API与对象调用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. 示例代码
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BC%82%E5%B8%B8/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    异常
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B3%9B%E5%9E%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    泛型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E6%B3%A8%E8%A7%A3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    注解
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    算法第四版
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            算法第四版
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    排序
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            排序
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    希尔排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    归并排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    插入排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E7%89%88/%E6%8E%92%E5%BA%8F/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    选择排序
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    苍穹外卖
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            苍穹外卖
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E8%8B%8D%E7%A9%B9%E5%A4%96%E5%8D%96/%E6%9E%B6%E6%9E%84/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    架构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-rtti" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. RTTI 与反射
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Class 类
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 类加载机制
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 反射核心组件与使用
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 反射核心组件与使用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-constructor" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1 Constructor 类（构造方法）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-field" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2 Field 类（成员变量）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-method" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3 Method 类（方法）
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 反射操作流程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 注意事项与扩展
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-classclass" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 从.class文件到Class对象
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 从.class文件到Class对象">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class" class="md-nav__link">
+    <span class="md-ellipsis">
+      类加载器加载.class文件
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Class对象的构建与内容
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 实例化对象的过程
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 反射API与对象调用
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. 示例代码
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>反射</h1>
+
+<h2 id="1-rtti">1. RTTI 与反射</h2>
+<ul>
+<li><strong>RTTI（Run-Time Type Identification）</strong>：运行时类型识别，用于在程序运行时确定对象的类型。</li>
+<li><strong>反射</strong>：将 Java 类中的各种成分（成员变量、方法、构造器、包等）映射成对应的 Java 对象，通过这些对象可以动态查看或操作类的内部结构。</li>
+<li>两种获取对象类型信息的方式：<ul>
+<li>“传统的”RTTI：编译时已知所有类型。</li>
+<li>反射机制：运行时动态发现和使用类的信息。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-class">2. Class 类</h2>
+<ul>
+<li><strong>Class 类</strong>位于 <code>java.lang</code> 包中，每个 Java 类都会在 JVM 中有一个唯一的 Class 对象，存储该类的类型信息。</li>
+<li><strong>获取 Class 对象的主要方式</strong>：<ul>
+<li>直接通过类：<code>类名.class</code></li>
+<li>通过对象：<code>对象.getClass()</code></li>
+<li>通过全限定类名：<code>Class.forName("包名.类名")</code></li>
+</ul>
+</li>
+<li><strong>常用方法</strong>：<ul>
+<li><code>getName()</code>：返回全限定类名（包括包名）。</li>
+<li><code>getSimpleName()</code>：返回类名，不含包名。</li>
+<li><code>newInstance()</code>：调用无参构造器实例化对象（要求类必须有无参构造器）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3">3. 类加载机制</h2>
+<ul>
+<li><strong>类加载流程</strong>：源代码先被编译成字节码，再由类加载子系统加载到 JVM 中，生成对应的 Class 对象。</li>
+<li><strong>双亲委托机制</strong>：确保加载过程有序且安全，避免重复加载。</li>
+</ul>
+<h2 id="4">4. 反射核心组件与使用</h2>
+<h3 id="41-constructor">4.1 Constructor 类（构造方法）</h3>
+<ul>
+<li><strong>作用</strong>：表示类的构造方法，可以在运行时动态创建对象。</li>
+<li><strong>常用方法</strong>：<ul>
+<li><code>getConstructor(…)</code> / <code>getDeclaredConstructor(…)</code>：获取构造器对象（区别在于是否包含私有构造器）。</li>
+<li><code>newInstance(…)</code>：用构造器创建新实例。</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-field">4.2 Field 类（成员变量）</h3>
+<ul>
+<li><strong>作用</strong>：表示类的字段（包括静态字段与实例字段）。</li>
+<li><strong>获取方式</strong>：<ul>
+<li><code>getField(…)</code>：获取公共字段（包含父类）。</li>
+<li><code>getDeclaredField(…)</code>：获取当前类中声明的字段（包括 private、protected）。</li>
+</ul>
+</li>
+<li><strong>常用操作</strong>：<ul>
+<li><code>set(Object obj, Object value)</code>：动态设置字段的值。</li>
+<li><code>get(Object obj)</code>：获取字段的值。</li>
+<li>注意：对于 private 字段，需调用 <code>setAccessible(true)</code> 以绕过访问限制。</li>
+</ul>
+</li>
+</ul>
+<h3 id="43-method">4.3 Method 类（方法）</h3>
+<ul>
+<li><strong>作用</strong>：表示类中的方法，可通过反射调用方法。</li>
+<li><strong>获取方式</strong>：<ul>
+<li><code>getMethod(…)</code>：获取公共方法（包括继承方法）。</li>
+<li><code>getDeclaredMethod(…)</code>：获取当前类中声明的方法（包括私有方法）。</li>
+</ul>
+</li>
+<li><strong>调用方法</strong>：<ul>
+<li><code>invoke(Object obj, Object... args)</code>：在指定对象上调用该方法。</li>
+<li>若调用私有方法，同样需要 <code>setAccessible(true)</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="5">5. 反射操作流程</h2>
+<ol>
+<li><strong>获取 Class 对象</strong>：可以通过上述三种方式中的任意一种。</li>
+<li><strong>获取反射组件</strong>：<ul>
+<li>构造器、字段、方法均通过 Class 对象提供的 API 获取。</li>
+</ul>
+</li>
+<li><strong>动态操作</strong>：<ul>
+<li>通过 Constructor.newInstance() 创建对象。</li>
+<li>通过 Field.set() / Field.get() 修改或读取字段值。</li>
+<li>通过 Method.invoke() 调用方法。</li>
+</ul>
+</li>
+</ol>
+<h2 id="6">6. 注意事项与扩展</h2>
+<ul>
+<li><strong>访问控制</strong>：反射可以访问私有成员，但需调用 <code>setAccessible(true)</code>；对于 final 修饰的字段，即使反射修改，其实际值也不会改变。</li>
+<li><strong>性能问题</strong>：反射相比直接调用具有较低的运行时性能，需在合理的场景中使用，如动态代理、依赖注入和插件框架。</li>
+<li><strong>类加载器</strong>：Class 对象由 JVM 通过类加载器加载，了解加载顺序和双亲委托机制对理解反射原理有帮助。</li>
+</ul>
+<h2 id="7-classclass">7. 从.class文件到Class对象</h2>
+<ul>
+<li>.class文件保存了类的所有信息，这些信息底层以0101（二进制）存储。</li>
+<li>通过不同的解读规则，.class文件可以表现为人类可读的源码或机器可执行的字节码。</li>
+</ul>
+<h4 id="class">类加载器加载.class文件</h4>
+<ul>
+<li>**类加载器（ClassLoader）负责将.class文件加载到内存中，并生成对应的<code>Class</code>对象。</li>
+<li>加载过程大致分为以下三个步骤：<ol>
+<li><strong>检查是否已加载</strong>：首先检查当前虚拟机中是否已存在该类，避免重复加载。</li>
+<li><strong>父优先规则（双亲委派）</strong>：如果缓存中没有，则按照父加载器优先的原则尝试加载。</li>
+<li><strong>调用<code>findClass()</code></strong>：如果以上步骤都未加载成功，调用子类重写的<code>findClass()</code>方法，通过IO读取字节数据，再调用<code>defineClass()</code>将字节数组转换为<code>Class</code>对象。</li>
+</ol>
+</li>
+<li>经典的<code>loadClass</code>方法流程如下：
+    ```java
+    protected Class&lt;?&gt; loadClass(String name, boolean resolve)
+            throws ClassNotFoundException {
+        synchronized (getClassLoadingLock(name)) {
+            // 检查是否已经加载
+            Class&lt;?&gt; c = findLoadedClass(name);
+            if (c == null) {
+                try {
+                    // 遵循双亲委派机制
+                    if (parent != null) {
+                        c = parent.loadClass(name, false);
+                    } else {
+                        c = findBootstrapClassOrNull(name);
+                    }
+                } catch (ClassNotFoundException e) {
+                    // 父加载器未能加载，继续
+                }<pre><code>        if (c == null) {
+            // 调用findClass()进行加载
+            c = findClass(name);
+        }
+    }
+    if (resolve) {
+        resolveClass(c);
+    }
+    return c;
+}
+</code></pre>
+<p>}
+<code>- 其中，子类必须重写`findClass()`方法，定义读取.class文件（例如通过IO解析字节数组）的逻辑，并调用`defineClass()`生成Class对象：</code>java
+@Override
+public Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+    try {
+        byte[] datas = getClassData(name);
+        if(datas == null) {
+            throw new ClassNotFoundException("类没有找到：" + name);
+        }
+        return defineClass(name, datas, 0, datas.length);
+    } catch (IOException e) {
+        e.printStackTrace();
+        throw new ClassNotFoundException("类找不到：" + name);
+    }
+}
+```</p>
+</li>
+</ul>
+<h2 id="8-class">8. Class对象的构建与内容</h2>
+<ul>
+<li>
+<p><strong>Class对象</strong>是对一个.class文件的完整抽象。JVM在加载.class文件后，会生成一个对应的<code>Class</code>对象，其中包含的信息有：</p>
+<ul>
+<li><strong>字段、方法、构造器</strong>信息（为了详细描述这些信息，JDK定义了<code>Field</code>、<code>Method</code>、<code>Constructor</code>等类）</li>
+<li><strong>注解</strong>、<strong>泛型信息</strong> 等</li>
+<li>Class对象的构造器是私有的，只有JVM可以创建，保证了同一个类在内存中只对应一个Class对象。</li>
+<li>通过<code>Class.forName()</code>等API可以获得Class对象。</li>
+</ul>
+<h2 id="9">9. 实例化对象的过程</h2>
+</li>
+</ul>
+<p>当在main方法中执行如下代码：</p>
+<pre><code class="language-java">Person p = new Person();
+</code></pre>
+<p>实际经过以下步骤：</p>
+<ol>
+<li><strong>调用new操作符</strong>：<ul>
+<li>new操作符会触发JVM为该对象在堆中分配内存，并初始化对象头（包括类型信息、锁信息等）。</li>
+</ul>
+</li>
+<li><strong>获取Class对象</strong>：<ul>
+<li>无论是通过new操作还是反射，由于最终都依赖于<code>Class</code>对象，因此JVM首先要确定所引用的<code>Class</code>（可以通过编译时或运行时加载来获取Class对象）。</li>
+</ul>
+</li>
+<li><strong>调用构造器</strong>：<ul>
+<li>对象的实例化本质上依赖于构造器。<code>Class.newInstance()</code>方法（或通过反射获取其他构造器的<code>newInstance()</code>）在内部调用的是对应构造器对象。</li>
+<li>如果类没有无参构造器，调用<code>newInstance()</code>方法时会抛出异常，这也是为什么反射实例化对象需要保证有可用的构造函数的原因。</li>
+</ul>
+</li>
+</ol>
+<h2 id="10-api">10. 反射API与对象调用</h2>
+<ul>
+<li>反射API的两个主要目的：<ol>
+<li><strong>动态创建实例</strong>：通过<code>Class</code>对象的<code>newInstance()</code>或者通过获取特定构造器后调用<code>Constructor.newInstance()</code>。</li>
+<li><strong>反射调用方法</strong>：通过<code>Method.invoke()</code>来动态调用对象的方法。</li>
+</ol>
+</li>
+<li>重点理解：实际上<code>Class.newInstance()</code>底层也是调用的构造器的<code>newInstance()</code>。因此，如果希望通过反射创建实例，编写类时需要提供无参构造器（或者必须显式使用有参构造器）。</li>
+<li>当对象调用方法时，JVM除了将方法共用外，还通过隐式传递当前调用对象参数的机制来保证方法操作的是正确的对象数据。</li>
+<li>在反射调用中，通过<code>method.invoke(obj, args)</code>，第一个参数指定了目标对象，从而确定具体调用哪个对象的实例方法（静态方法则不需要传入目标对象）。</li>
+<li><strong>类加载流程</strong>：从字节码文件（.class）到加载器将字节数据转成Class对象；Class对象中包含了所有类的详细信息（字段、方法、构造器、注解、泛型等）。</li>
+<li><strong>实例化过程</strong>：JVM为对象在堆中分配内存，并使用构造器（通过反射API或new操作符）初始化对象。</li>
+<li><strong>反射与构造器</strong>：反射机制通过获取到的Class对象内部的Constructor对象来创建实例，反射API在调用方法时，总是显式传入目标实例以解决数据调用的对应关系。</li>
+</ul>
+<h2 id="11">11. 示例代码</h2>
+<pre><code class="language-java">
+package com.example;
+
+import java.lang.reflect.Method;
+
+public class HelloReflect {
+    public static void main(String[] args) throws Exception {
+        // 1. 获取 Class 对象的三种方式
+        Class&lt;?&gt; clazz1 = MyClass.class;
+        Class&lt;?&gt; clazz2 = new MyClass().getClass();
+        Class&lt;?&gt; clazz3 = Class.forName(&quot;com.example.MyClass&quot;);
+
+        // 2. 实例化对象（要求类有无参构造器）
+        MyClass instance = (MyClass) clazz3.newInstance();
+
+        // 3. 获取方法并调用
+        Method method = clazz3.getMethod(&quot;sayHello&quot;, String.class);
+        method.invoke(instance, &quot;反射调用&quot;);
+    }
+}
+</code></pre>
+<pre><code class="language-java">package com.example;
+
+public class MyClass {
+    public void sayHello(String name) {
+        System.out.println(&quot;Hello, &quot; + name);
+    }
+}
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>
