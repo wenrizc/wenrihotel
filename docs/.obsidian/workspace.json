@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "5c9dae342d84cd75",
+    "id": "0565eeca3828032b",
     "type": "split",
     "children": [
       {
-        "id": "05eb82175488b7a1",
+        "id": "bb762f0b8e338b5b",
         "type": "tabs",
         "children": [
           {
-            "id": "3ce2e35c36371319",
+            "id": "e8cde35a3f7f556c",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -23,15 +23,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "f835dbd418deebe5",
+    "id": "1df0dd30916f364b",
     "type": "split",
     "children": [
       {
-        "id": "d571ccc34d9e22d9",
+        "id": "e370ff9c652e2ee2",
         "type": "tabs",
         "children": [
           {
-            "id": "a86fdb0bd4f1495b",
+            "id": "c636aa4ede8b3daa",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,7 +44,7 @@
             }
           },
           {
-            "id": "e77bfa1cede889cb",
+            "id": "e2f2ce06a77736ca",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -61,7 +61,7 @@
             }
           },
           {
-            "id": "20b73cd26d6a6030",
+            "id": "5d137fe34712b805",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -74,23 +74,22 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5
+    "width": 300
   },
   "right": {
-    "id": "fff8a72030cb26a2",
+    "id": "ae3a00bff485c1ff",
     "type": "split",
     "children": [
       {
-        "id": "e1f03924e55c9d95",
+        "id": "7eda2f4a7f9a3a3c",
         "type": "tabs",
         "children": [
           {
-            "id": "e6e35788293aea05",
+            "id": "98614a3faaede21e",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "算法第四版/排序/希尔排序.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,25 +99,24 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "希尔排序 的反向链接列表"
+              "title": "反向链接"
             }
           },
           {
-            "id": "483ab46b660e5a8d",
+            "id": "d8bc4f66a1b5b8cb",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "算法第四版/排序/希尔排序.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "希尔排序 的出链列表"
+              "title": "出链"
             }
           },
           {
-            "id": "5f9f9b82541efe0f",
+            "id": "6b168deed5c42caa",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -133,18 +131,17 @@
             }
           },
           {
-            "id": "ba416def3db9804e",
+            "id": "9547db5266cd87b6",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "算法第四版/排序/希尔排序.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "希尔排序 的大纲"
+              "title": "大纲"
             }
           }
         ]
@@ -164,31 +161,8 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3ce2e35c36371319",
+  "active": "e8cde35a3f7f556c",
   "lastOpenFiles": [
-    "java/基础/注解.md",
-    "java/基础/反射.md",
-    "java/基础/泛型.md",
-    "java/基础/异常.md",
-    "算法第四版/排序/归并排序.md",
-    "算法第四版/排序/选择排序.md",
-    "PA实验笔记/PA2/指令周期.md",
-    "PA实验笔记/PA2/静态指令与动态指令.md",
-    "苍穹外卖/架构.md",
-    "cang.md",
-    "临时.md",
-    "苍穹外卖",
-    "算法第四版/排序/希尔排序.md",
-    "java/基础",
-    "java/未命名.md",
-    "java",
-    "算法第四版/排序/插入排序.md",
-    "算法第四版/排序",
-    "算法第四版/未命名.md",
-    "suanfa.md",
-    "算法第四版",
-    "PA实验笔记/PA2",
-    "PA实验笔记",
-    "欢迎.md"
+    "index.md"
   ]
 }
