@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "8fb1aedd75edc42c",
+        "id": "e4ac1f338b3f4672",
         "type": "tabs",
         "children": [
           {
-            "id": "616d3c072e643438",
+            "id": "5a6419775758445f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java/基础/SPI机制.md",
+                "file": "java/并发/线程.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "SPI机制"
+              "title": "线程"
             }
           }
         ]
@@ -94,17 +94,17 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "java/基础/SPI机制.md",
+                "file": "java/并发/线程.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "SPI机制 的反向链接列表"
+              "title": "线程 的反向链接列表"
             }
           },
           {
@@ -155,8 +155,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -168,10 +167,43 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "616d3c072e643438",
+  "active": "5a6419775758445f",
   "lastOpenFiles": [
-    "java/基础/SPI机制.md",
-    "java/基础/反射.md",
-    "index.md"
+    "java/并发/锁.md",
+    "PA实验笔记/PA3/CTE.md",
+    "PA实验笔记/PA3/文件系统实现.md",
+    "PA实验笔记/PA3/问题.md",
+    "PA实验笔记/PA3/异常.md",
+    "PA实验笔记/PA3/ELF 文件.md",
+    "PA实验笔记/PA3/操作系统的起源.md",
+    "spring/优化.md",
+    "PA实验笔记/PA3/ELF（Executable and Linkable Format）文件如何组织和加载程序.md",
+    "PA实验笔记/PA3/异常处理机制.md",
+    "PA实验笔记/PA3/异常响应机制.md",
+    "PA实验笔记/PA3/上下文管理.md",
+    "PA实验笔记/PA3/根据 ELF 文件中 segment 的属性将其加载到内存中.md",
+    "PA实验笔记/PA2/AM裸机运行时环境.md",
+    "PA实验笔记/PA2/抽象层.md",
+    "PA实验笔记/PA2/静态指令与动态指令.md",
+    "PA实验笔记/PA2/DiffTest.md",
+    "PA实验笔记/PA2/输入输出.md",
+    "PA实验笔记/PA2/问题.md",
+    "PA实验笔记/PA2/运行时环境.md",
+    "PA实验笔记/PA2/指令周期.md",
+    "PA实验笔记/PA2/AM - 裸机运行时环境.md",
+    "PA实验笔记/PA2/利用参考实现 (REF) 验证待测设计 (DUT).md",
+    "PA实验笔记/PA1/程序的结束过程.md",
+    "PA实验笔记/PA1/问题.md",
+    "PA实验笔记/PA1/断点对NEMU执行效率影响.md",
+    "项目/旅购宝",
+    "项目/JVM",
+    "java/JVM",
+    "spring",
+    "java/IO",
+    "面经/未命名 1",
+    "面经/未命名",
+    "操作系统",
+    "项目/旅购宝/黑马点评/订单流程",
+    "算法第四版/图"
   ]
 }

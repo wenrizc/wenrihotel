@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "05eb82175488b7a1",
+        "id": "7f9a978c3e7ea2f6",
         "type": "tabs",
         "children": [
           {
-            "id": "3ce2e35c36371319",
+            "id": "92f52a8d3e5a8f21",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "docs/面经/java/spring/谈谈对于 Spring IoC 的了解.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "谈谈对于 Spring IoC 的了解"
             }
           }
         ]
@@ -74,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 299.5
+    "width": 416.49999618530273
   },
   "right": {
     "id": "fff8a72030cb26a2",
@@ -90,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "算法第四版/排序/希尔排序.md",
+                "file": "docs/面经/java/spring/谈谈对于 Spring IoC 的了解.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "希尔排序 的反向链接列表"
+              "title": "谈谈对于 Spring IoC 的了解 的反向链接列表"
             }
           },
           {
@@ -133,26 +137,25 @@
             }
           },
           {
-            "id": "ba416def3db9804e",
+            "id": "04d7cb29bdbb4eb8",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "算法第四版/排序/希尔排序.md",
+                "file": "temp.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "希尔排序 的大纲"
+              "title": "temp 的大纲"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -164,31 +167,46 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3ce2e35c36371319",
+  "active": "92f52a8d3e5a8f21",
   "lastOpenFiles": [
-    "java/基础/注解.md",
-    "java/基础/反射.md",
-    "java/基础/泛型.md",
-    "java/基础/异常.md",
-    "算法第四版/排序/归并排序.md",
-    "算法第四版/排序/选择排序.md",
-    "PA实验笔记/PA2/指令周期.md",
-    "PA实验笔记/PA2/静态指令与动态指令.md",
-    "苍穹外卖/架构.md",
-    "cang.md",
-    "临时.md",
-    "苍穹外卖",
-    "算法第四版/排序/希尔排序.md",
-    "java/基础",
-    "java/未命名.md",
-    "java",
-    "算法第四版/排序/插入排序.md",
-    "算法第四版/排序",
-    "算法第四版/未命名.md",
-    "suanfa.md",
-    "算法第四版",
-    "PA实验笔记/PA2",
-    "PA实验笔记",
-    "欢迎.md"
+    "docs/面经/java/spring/Bean的生命周期是如何管理的？请详细描述从Bean创建到销毁的完整过程，包括各个扩展点。.md",
+    "docs/面经/java/spring/谈谈对于 Spring IoC 的了解.md",
+    "docs/面经/java/JVM/垃圾回收器介绍.md",
+    "docs/面经/java/JUC/synchronized 底层原理是什么，可重入锁原理是什么.md",
+    "docs/面经/java/JUC/synchronized 和 Reentranlock 详细介绍，哪些情况优先使用后者，或者说为什么解决什么问题而存在.md",
+    "docs/面经/java/基础/StringBuffer和StringBuilder是什么，区别是什么.md",
+    "docs/面经/java/JVM/JVM的垃圾回收机制.md",
+    "docs/面经/java/基础/aop实现方式.md",
+    "docs/面经/java/JVM/双亲委派机制是什么.md",
+    "docs/面经/java/基础/什么是自动拆箱装箱？.md",
+    "docs/面经/java/基础/什么是泛型？有什么作用？.md",
+    "docs/面经/java/基础/深拷贝和浅拷贝区别.md",
+    "docs/面经/java/基础/如何理解 Java 的跨平台性.md",
+    "docs/面经/java/JUC/如何创建线程.md",
+    "docs/面经/java/JVM/垃圾回收算法介绍.md",
+    "docs/面经/java/垃圾回收和标记-清除算法是什么.md",
+    "docs/面经/java/基础/封装继承多态是什么，有什么联系.md",
+    "docs/面经/java/基础/==和 equals 的区别？.md",
+    "docs/面经/java/基础",
+    "docs/面经/java/JUC",
+    "docs/面经/java/JVM",
+    "docs/面经/java/JVM/JVM的内存模型.md",
+    "docs/面经/java/JVM/JVM的内存区域有什么.md",
+    "docs/面经/java/JVM/类载入过程 JVM 会做什么.md",
+    "docs/面经/java/JVM/对象创建的过程是什么.md",
+    "docs/面经/java/JUC/说说线程的生命周期和状态？.md",
+    "temp.md",
+    "docs/项目/旅购宝/问题/简历/中间件/请介绍在项目中实现的Canal+RabbitMQ数据同步整体架构，以及为什么选择这种方案而不是其他替代方案？.md",
+    "java-thread-x-key-schronized-3.webp",
+    "docs/项目/旅购宝/问题/简历/mq.md",
+    "docs/项目/旅购宝/问题/简历/搜索功能",
+    "docs/项目/旅购宝/问题/简历/中间件",
+    "docs/项目/街机游戏对战平台",
+    "docs/计算机网络/CS144",
+    "docs/面经/redis/未命名",
+    "docs/面经/功能设计/未命名.canvas",
+    "docs/项目/旅购宝/问题/简历/技术实现",
+    "docs/面经/sql场景题",
+    "docs/面经/java/未命名.canvas"
   ]
 }

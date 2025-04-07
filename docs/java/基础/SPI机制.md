@@ -46,10 +46,9 @@
 - **ServiceLoader 机制**
     - JDK6 引入了 `ServiceLoader`，它会扫描 `META-INF/services/` 目录中以接口全限定名命名的文件，加载对应的实现类。
     - 例如：一个 `Search` 接口可以有多种实现（文件搜索、数据库搜索），只需在配置文件中列出具体的实现类。
-#### Spring 
-- **自动装配与组件扫描**
+- **Spring 自动装配与组件扫描**
     - 通过 `component-scan` 和注解（如 `@Service`、`@Controller`）来动态识别并加载实现，降低耦合。
-- **扩展机制**
+- **Spring 扩展机制**
     - Spring 提供插件化扩展入口，如自定义 Scope、自定义标签和属性编辑器，框架通过预定义规则让用户提供具体实现，而不感知其内部细节。
 
 ## 5. SPI与API的区别
