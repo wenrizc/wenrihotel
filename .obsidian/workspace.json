@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "7f9a978c3e7ea2f6",
+        "id": "cf0b2e462a64b415",
         "type": "tabs",
         "children": [
           {
-            "id": "92f52a8d3e5a8f21",
+            "id": "bf0703229578dfff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/面经/java/spring/谈谈对于 Spring IoC 的了解.md",
+                "file": "项目/游戏对战平台/备忘录.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "谈谈对于 Spring IoC 的了解"
+              "title": "备忘录"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/面经/java/spring/谈谈对于 Spring IoC 的了解.md",
+                "file": "项目/游戏对战平台/备忘录.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "谈谈对于 Spring IoC 的了解 的反向链接列表"
+              "title": "备忘录 的反向链接列表"
             }
           },
           {
@@ -167,46 +167,46 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "92f52a8d3e5a8f21",
+  "active": "bf0703229578dfff",
   "lastOpenFiles": [
-    "docs/面经/java/spring/Bean的生命周期是如何管理的？请详细描述从Bean创建到销毁的完整过程，包括各个扩展点。.md",
-    "docs/面经/java/spring/谈谈对于 Spring IoC 的了解.md",
-    "docs/面经/java/JVM/垃圾回收器介绍.md",
-    "docs/面经/java/JUC/synchronized 底层原理是什么，可重入锁原理是什么.md",
-    "docs/面经/java/JUC/synchronized 和 Reentranlock 详细介绍，哪些情况优先使用后者，或者说为什么解决什么问题而存在.md",
-    "docs/面经/java/基础/StringBuffer和StringBuilder是什么，区别是什么.md",
-    "docs/面经/java/JVM/JVM的垃圾回收机制.md",
-    "docs/面经/java/基础/aop实现方式.md",
-    "docs/面经/java/JVM/双亲委派机制是什么.md",
-    "docs/面经/java/基础/什么是自动拆箱装箱？.md",
-    "docs/面经/java/基础/什么是泛型？有什么作用？.md",
-    "docs/面经/java/基础/深拷贝和浅拷贝区别.md",
-    "docs/面经/java/基础/如何理解 Java 的跨平台性.md",
-    "docs/面经/java/JUC/如何创建线程.md",
-    "docs/面经/java/JVM/垃圾回收算法介绍.md",
-    "docs/面经/java/垃圾回收和标记-清除算法是什么.md",
-    "docs/面经/java/基础/封装继承多态是什么，有什么联系.md",
-    "docs/面经/java/基础/==和 equals 的区别？.md",
+    "docs/项目/游戏对战平台/ui.md",
+    "docs/项目/游戏对战平台/客户端重构计划.md",
+    "docs/项目/游戏对战平台/客户端设计文档.md",
+    "docs/项目/游戏对战平台/功能设计.md",
+    "temp.md",
+    "docs/面经/java/spring/不同依赖注入方式有哪些及其区别.md",
+    "docs/面经/java/JUC/线程安全的数据结构有哪些.md",
+    "docs/面经/java/基础/HashMap的基本原理是什么？在什么时候进行resize？ HashMap扩容的时候，是在原数据结构上扩容还是申请一个新的内存块？在复制过程中，HashMap如何处理添加和查询数据？ HashMap是线程安全的吗？为什么线程不安全？.md",
+    "docs/面经/数据库/间隙锁锁住的时候还可以读吗？间隙锁可能会造成死锁吗？如果锁住很大范围的间隙，怎么解决性能上的问题？怎么解决间隙锁之间的锁冲突？.md",
+    "docs/项目/游戏对战平台/设计思路.md",
+    "docs/项目/游戏对战平台/问题.md",
+    "docs/面经/数据库/聚簇索引和非聚簇索引是什么？他们分别用在什么场景？ 回表是什么？非聚簇索引一定会回表吗？.md",
+    "docs/面经/数据库/事务的隔离级别介绍.md",
+    "docs/面经/中间件/ES的分页是什么？如何实现深度翻页？.md",
+    "docs/面经/中间件/为什么要保证消息只消费一次，重复消费会怎么样.md",
+    "docs/面经/中间件/ES的写入流程是什么样的？发请求首先是发到哪个节点上的？如果发起一个写请求，写请求都会到主节点上吗？只要写一个主分片成功后，请求就结束了吗？副本分片是否需要保证完全写入？ES是最终一致性还是强一致性？.md",
+    "docs/面经/中间件/ES 原理是什么，搜索功能是如何实现的.md",
+    "docs/面经/中间件/为什么要使用ES，MySQL不能解决问题吗？.md",
+    "docs/面经/中间件/ES有哪些节点？ES的主节点有多少个？.md",
+    "docs/项目/旅购宝/问题/简历/搜索功能/为什么要使用ES，MySQL不能解决问题吗？.md",
+    "docs/项目/旅购宝/问题/简历/搜索功能/为什么选择 IK 分词器而不是其他中文分词器？对比过其他分词器吗？.md",
+    "docs/项目/旅购宝/问题/简历/搜索功能/Elasticsearch是如何实现搜索功能的.md",
+    "docs/项目/旅购宝/问题/简历/搜索功能/Elasticsearch 与主数据库之间的数据同步是如何实现的？.md",
+    "docs/项目/旅购宝/问题/简历/中间件/Sentinel的限流规则是固定的还是动态调整的？基于什么指标？.md",
+    "docs/项目/旅购宝/问题/简历/mq.md",
+    "docs/项目/旅购宝/问题/简历/中间件/限流算法选择了哪种？为什么选择这种算法？ 多级保护策略（限流、熔断、降级）之间如何协同工作？.md",
+    "docs/数据库",
+    "docs/项目/n2n",
     "docs/面经/java/基础",
     "docs/面经/java/JUC",
     "docs/面经/java/JVM",
-    "docs/面经/java/JVM/JVM的内存模型.md",
-    "docs/面经/java/JVM/JVM的内存区域有什么.md",
-    "docs/面经/java/JVM/类载入过程 JVM 会做什么.md",
-    "docs/面经/java/JVM/对象创建的过程是什么.md",
-    "docs/面经/java/JUC/说说线程的生命周期和状态？.md",
-    "temp.md",
-    "docs/项目/旅购宝/问题/简历/中间件/请介绍在项目中实现的Canal+RabbitMQ数据同步整体架构，以及为什么选择这种方案而不是其他替代方案？.md",
     "java-thread-x-key-schronized-3.webp",
-    "docs/项目/旅购宝/问题/简历/mq.md",
     "docs/项目/旅购宝/问题/简历/搜索功能",
     "docs/项目/旅购宝/问题/简历/中间件",
-    "docs/项目/街机游戏对战平台",
+    "docs/项目/游戏对战平台",
     "docs/计算机网络/CS144",
     "docs/面经/redis/未命名",
     "docs/面经/功能设计/未命名.canvas",
-    "docs/项目/旅购宝/问题/简历/技术实现",
-    "docs/面经/sql场景题",
     "docs/面经/java/未命名.canvas"
   ]
 }
