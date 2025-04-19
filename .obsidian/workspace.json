@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "项目/游戏对战平台/备忘录.md",
+                "file": "docs/面经/中间件/ES的写入流程是什么样的？.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "备忘录"
+              "title": "ES的写入流程是什么样的？"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "项目/游戏对战平台/备忘录.md",
+                "file": "docs/面经/中间件/ES的写入流程是什么样的？.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "备忘录 的反向链接列表"
+              "title": "ES的写入流程是什么样的？ 的反向链接列表"
             }
           },
           {
@@ -169,6 +169,10 @@
   },
   "active": "bf0703229578dfff",
   "lastOpenFiles": [
+    "docs/面经/java/基础/HashMap的基本原理是什么？.md",
+    "docs/面经/java/基础/JAVA的包装类？为什么要把基本数据类型包装成类？.md",
+    "docs/面经/java/基础/StringBuffer和StringBuilder是什么，区别是什么.md",
+    "项目/游戏对战平台/备忘录.md",
     "docs/项目/游戏对战平台/ui.md",
     "docs/项目/游戏对战平台/客户端重构计划.md",
     "docs/项目/游戏对战平台/客户端设计文档.md",
@@ -176,7 +180,6 @@
     "temp.md",
     "docs/面经/java/spring/不同依赖注入方式有哪些及其区别.md",
     "docs/面经/java/JUC/线程安全的数据结构有哪些.md",
-    "docs/面经/java/基础/HashMap的基本原理是什么？在什么时候进行resize？ HashMap扩容的时候，是在原数据结构上扩容还是申请一个新的内存块？在复制过程中，HashMap如何处理添加和查询数据？ HashMap是线程安全的吗？为什么线程不安全？.md",
     "docs/面经/数据库/间隙锁锁住的时候还可以读吗？间隙锁可能会造成死锁吗？如果锁住很大范围的间隙，怎么解决性能上的问题？怎么解决间隙锁之间的锁冲突？.md",
     "docs/项目/游戏对战平台/设计思路.md",
     "docs/项目/游戏对战平台/问题.md",
@@ -184,7 +187,7 @@
     "docs/面经/数据库/事务的隔离级别介绍.md",
     "docs/面经/中间件/ES的分页是什么？如何实现深度翻页？.md",
     "docs/面经/中间件/为什么要保证消息只消费一次，重复消费会怎么样.md",
-    "docs/面经/中间件/ES的写入流程是什么样的？发请求首先是发到哪个节点上的？如果发起一个写请求，写请求都会到主节点上吗？只要写一个主分片成功后，请求就结束了吗？副本分片是否需要保证完全写入？ES是最终一致性还是强一致性？.md",
+    "docs/面经/中间件/ES的写入流程是什么样的？.md",
     "docs/面经/中间件/ES 原理是什么，搜索功能是如何实现的.md",
     "docs/面经/中间件/为什么要使用ES，MySQL不能解决问题吗？.md",
     "docs/面经/中间件/ES有哪些节点？ES的主节点有多少个？.md",
@@ -192,9 +195,6 @@
     "docs/项目/旅购宝/问题/简历/搜索功能/为什么选择 IK 分词器而不是其他中文分词器？对比过其他分词器吗？.md",
     "docs/项目/旅购宝/问题/简历/搜索功能/Elasticsearch是如何实现搜索功能的.md",
     "docs/项目/旅购宝/问题/简历/搜索功能/Elasticsearch 与主数据库之间的数据同步是如何实现的？.md",
-    "docs/项目/旅购宝/问题/简历/中间件/Sentinel的限流规则是固定的还是动态调整的？基于什么指标？.md",
-    "docs/项目/旅购宝/问题/简历/mq.md",
-    "docs/项目/旅购宝/问题/简历/中间件/限流算法选择了哪种？为什么选择这种算法？ 多级保护策略（限流、熔断、降级）之间如何协同工作？.md",
     "docs/数据库",
     "docs/项目/n2n",
     "docs/面经/java/基础",
