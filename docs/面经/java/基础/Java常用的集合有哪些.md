@@ -1,95 +1,144 @@
 
-Java SE 的集合框架（Java Collections Framework, JCF）位于 java.util 包，提供了一组接口和类，用于存储和操作一组对象。主要包括 **List**（有序、可重复）、**Set**（无序、不可重复）、**Map**（键值对）和 **Queue**（队列），底层实现基于数组、链表、哈希表或树等数据结构。
+Java常用的集合主要分为两大体系：`Collection` 和 `Map` 。
 
-1. **核心接口**：
-    - **Collection**：单列集合的根接口。
-        - **List**：有序、可重复。
-        - **Set**：无序、不可重复。
-        - **Queue**：队列/双端队列。
-    - **Map**：键值对集合。
-2. **常用实现类**：
-    - **List**：ArrayList、LinkedList。
-    - **Set**：HashSet、TreeSet。
-    - **Map**：HashMap、TreeMap。
-    - **Queue**：PriorityQueue、LinkedList（实现 Deque）。
-3. **特点**：
-    - 动态大小（对比数组）。
-    - 泛型支持（JDK 5+）。
-    - 线程安全需额外处理（如 Collections.synchronizedList）。
+### 1. Collection
 
-### 核心接口与实现详解
+`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又主要派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。
 
-#### 1. List（列表）
 
-- **特点**：有序（按插入顺序），允许重复元素。
-- **实现**：
-    - **ArrayList**：
-        - 底层：动态数组。
-        - 查询快 O(1)，增删慢 O(n)。
-    - **LinkedList**：
-        - 底层：双向链表。
-        - 增删快 O(1)，查询慢 O(n)。
+`List` 接口的特点是：元素有序，且可以重复。它通过索引来访问和操作元素。
 
-#### 2. Set（集合）
+常用的实现类有：
 
-- **特点**：无序（或特定顺序），元素唯一。
-- **实现**：
-    - **HashSet**：
-        - 底层：哈希表（HashMap）。
-        - 增删查 O(1)，无序。
-    - **TreeSet**：
-        - 底层：红黑树。
-        - 增删查 O(log n)，有序。
+1. **ArrayList**:
+    
+    - 底层数据结构：动态数组（`Object[]`）。
+        
+    - 特点：查询和修改（通过索引 `get`/`set`）速度非常快，时间复杂度是O(1)。但是，在数组中间或开头进行插入和删除操作较慢，因为需要移动后续所有元素，时间复杂度是O(n)。
+        
+    - 适用场景：适合读多写少的场景，特别是需要频繁进行随机访问的场景。它是最常用的List实现。
+        
+    - 线程安全性：非线程安全。
+        
+2. **LinkedList**:
+    
+    - 底层数据结构：双向链表。
+        
+    - 特点：插入和删除操作非常快，尤其是在列表的头尾，时间复杂度是O(1)。但是查询和修改（通过索引）速度较慢，需要从头或尾开始遍历，时间复杂度是O(n)。
+        
+    - 适用场景：适合写多读少的场景，特别是需要频繁进行头尾增删的场景。它也实现了`Deque`接口，可以作为栈或队列使用。
+        
+    - 线程安全性：非线程安全。
+        
+3. **Vector**:
+    
+    - 底层数据结构：与`ArrayList`类似，也是动态数组。
+        
+    - 特点：它是`ArrayList`的线程安全版本，其所有公开方法都由`synchronized`修饰，性能开销较大。
+        
+    - 适用场景：如今已很少使用，通常会被`Collections.synchronizedList()`或者`java.util.concurrent`包下的并发集合替代。
+        
 
-#### 3. Map（映射）
 
-- **特点**：键值对，键唯一。
-- **实现**：
-    - **HashMap**：
-        - 底层：哈希表（数组 + 链表/红黑树，JDK 8+）。
-        - 增删查 O(1)，无序。
-    - **TreeMap**：
-        - 底层：红黑树。
-        - 增删查 O(log n)，键有序。
+`Set` 接口的特点是：元素无序（通常情况下），且不允许重复。它主要用于去重和判断某个元素是否存在。
 
-#### 4. Queue（队列）
+常用的实现类有：
 
-- **特点**：先进先出（FIFO）或优先级排序。
-- **实现**：
-    - **PriorityQueue**：
-        - 底层：堆（二叉堆）。
-        - 出队按优先级 O(log n)。
-    - **LinkedList**（实现 Deque）：
-        - 支持双端队列，增删 O(1)。
+1. **HashSet**:
+    
+    - 底层数据结构：基于`HashMap`实现。它只使用`HashMap`的键（Key）来存储元素，值（Value）部分则是一个固定的虚拟对象。
+        
+    - 特点：存取速度快，不保证元素的存储顺序。判断元素是否存在非常高效。
+        
+    - 线程安全性：非线程安全。
+        
+2. **LinkedHashSet**:
+    
+    - 底层数据结构：基于`LinkedHashMap`实现。
+        
+    - 特点：它在`HashSet`的基础上，额外维护了一个链表来记录元素的插入顺序。因此，遍历`LinkedHashSet`时，元素会按照插入的顺序输出。
+        
+    - 线程安全性：非线程安全。
+        
+3. **TreeSet**:
+    
+    - 底层数据结构：红黑树（基于`TreeMap`实现）。
+        
+    - 特点：元素会自动排序。存入`TreeSet`的元素必须实现`Comparable`接口，或者在创建`TreeSet`时传入一个`Comparator`比较器。
+        
+    - 适用场景：需要一个能自动排序的、且不允许重复的集合。
+        
+    - 线程安全性：非线程安全。
+        
 
-### 数据结构与性能
 
-|集合类型|实现类|底层结构|增删复杂度|查询复杂度|特点|
-|---|---|---|---|---|---|
-|**List**|ArrayList|动态数组|O(n)|O(1)|查询快|
-||LinkedList|双向链表|O(1)|O(n)|增删快|
-|**Set**|HashSet|哈希表|O(1)|O(1)|无序唯一|
-||TreeSet|红黑树|O(log n)|O(log n)|有序唯一|
-|**Map**|HashMap|哈希表|O(1)|O(1)|无序键值|
-||TreeMap|红黑树|O(log n)|O(log n)|有序键值|
-|**Queue**|PriorityQueue|堆|O(log n)|O(1)|优先级出队|
+`Queue` 接口模拟了队列的数据结构，即先进先出（FIFO）。
 
-### 延伸与面试角度
+常用的实现类有：
 
-- **线程安全**：
-    - 默认非线程安全。
-    - 解决：Collections.synchronizedList 或 ConcurrentHashMap。
-- **JDK 8+ 改进**：
-    - HashMap：链表过长转红黑树（桶内 > 8）。
-    - Stream API：集合操作更简洁。
-- **实际应用**：
-    - ArrayList：频繁查询。
-    - HashMap：键值存储。
-    - PriorityQueue：任务调度。
-- **面试点**：
-    - 问“选择依据”时，提复杂度与场景。
-    - 问“线程安全”时，提并发集合。
+1. **LinkedList**: 如前所述，它实现了`Deque`（双端队列）接口，因此可以作为标准的队列使用。
+    
+2. **PriorityQueue**:
+    
+    - 底层数据结构：二叉堆。
+        
+    - 特点：它不是一个标准的先进先出队列，而是一个优先队列。元素出队的顺序是根据其自然顺序或者构造时传入的比较器决定的，每次出队的都是优先级最高的元素。
+        
+    - 线程安全性：非线程安全。
+        
 
-### 总结
+### 2. Map
 
-Java SE 集合框架包括 List（ArrayList、LinkedList）、Set（HashSet、TreeSet）、Map（HashMap、TreeMap）和 Queue（PriorityQueue），基于数组、链表、哈希表、红黑树实现，满足不同需求。面试时，可结合代码示例或复杂度分析，展示掌握程度。
+`Map` 接口用于存储键值对（Key-Value），它的键是唯一的，每个键都映射到一个值。它不继承自`Collection`接口，是自成一体的体系。
+
+常用的实现类有：
+
+1. **HashMap**:
+    
+    - 底层数据结构：数组 + 链表 / 红黑树。
+        
+    - 特点：最常用的Map实现，存取速度快，但不保证键值对的顺序。键和值都允许为`null`。
+        
+    - 线程安全性：非线程安全。
+        
+2. **LinkedHashMap**:
+    
+    - 底层数据结构：在`HashMap`的基础上，增加了一个双向链表来维护插入顺序或访问顺序。
+        
+    - 特点：遍历时可以按照插入顺序输出键值对。
+        
+    - 适用场景：需要保持插入顺序的Map，或实现LRU缓存等。
+        
+    - 线程安全性：非线程安全。
+        
+3. **TreeMap**:
+    
+    - 底层数据结构：红黑树。
+        
+    - 特点：键会自动排序。键必须实现`Comparable`接口或在构造时传入`Comparator`。
+        
+    - 适用场景：需要对键进行排序的Map。
+        
+    - 线程安全性：非线程安全。
+        
+4. **Hashtable**:
+    
+    - 底层数据结构：数组 + 链表。
+        
+    - 特点：`HashMap`的古老线程安全版本，方法由`synchronized`修饰。它不允许键或值为`null`。
+        
+    - 适用场景：与`Vector`一样，基本已被淘汰，通常由`ConcurrentHashMap`替代。
+        
+
+### 3. 并发集合
+
+除了上述集合，`java.util.concurrent`包下还提供了一系列为并发环境设计的高性能集合，是多线程编程时的首选。
+
+- `ConcurrentHashMap`: 线程安全的`HashMap`，通过分段锁（Java 7）或CAS加`synchronized`（Java 8）等技术实现高效并发，性能远超`Hashtable`。
+    
+- `CopyOnWriteArrayList`: 线程安全的`ArrayList`，读操作不加锁，写操作时会复制整个底层数组。适合读多写极少的场景。
+    
+- `CopyOnWriteArraySet`: 基于`CopyOnWriteArrayList`实现的线程安全Set。
+    
+- `BlockingQueue`接口及其实现（如`ArrayBlockingQueue`, `LinkedBlockingQueue`）：用于生产者-消费者模型的阻塞队列。
+    
