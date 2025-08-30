@@ -28,7 +28,7 @@ Spring的三级缓存由三个Map对象组成，它们在`DefaultSingletonBeanRe
     - 作用: 这是一个“单例工厂”缓存。它存放的不是Bean的实例，而是一个能够创建Bean实例的工厂对象（`ObjectFactory`）。当一个Bean被创建且支持循环依赖时，Spring会提前生成一个该Bean的`ObjectFactory`并放入三级缓存。这个工厂的主要作用是，当其他Bean需要依赖这个尚未完全创建的Bean时，通过调用这个工厂的`getObject()`方法来获取一个“半成品”的Bean实例。这个过程是获取早期引用的关键，特别是当Bean需要被AOP代理时，工厂会返回代理对象而不是原始对象。
         
 
-三、三级缓存解决循环依赖的流程
+三级缓存解决循环依赖的流程
 
 我们以一个最简单的例子来说明：Bean A依赖Bean B，同时Bean B也依赖Bean A。
 
@@ -112,4 +112,3 @@ Spring的三级缓存由三个Map对象组成，它们在`DefaultSingletonBeanRe
     因为构造器注入要求在对象实例化阶段就必须提供所有依赖的参数。当A的构造器需要B，Spring去创建B，而B的构造器又需要A时，A的对象实例本身都无法通过new关键字创建出来，更谈不上后续的缓存和暴露了。这是一个“先有鸡还是先有蛋”的问题，Spring无法解决。
     
 
-以上就是我对Spring三级缓存机制的理解。

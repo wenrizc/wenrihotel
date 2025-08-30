@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "c6290b73031457e6",
+        "id": "127215a3e03f195d",
         "type": "tabs",
         "children": [
           {
-            "id": "541e37937a221f1f",
+            "id": "2cafe49934fde2ed",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "待修改.md",
+                "file": "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "待修改"
+              "title": "syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍"
             }
           }
         ]
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "flowchart",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 310.49999618530273
+    "width": 362.5
   },
   "right": {
     "id": "fff8a72030cb26a2",
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "待修改.md",
+                "file": "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "待修改 的出链列表"
+              "title": "syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍 的出链列表"
             }
           },
           {
@@ -160,6 +160,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:创建新数据库": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "switcher:打开快速切换": false,
@@ -168,46 +169,46 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "541e37937a221f1f",
+  "active": "2cafe49934fde2ed",
   "lastOpenFiles": [
+    "docs/面经/数据库/mysql事务是如何实现的.md",
+    "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
+    "docs/面经/数据库/什么样的情况需要设置索引.md",
+    "docs/面经/数据库/什么是事务，事务有哪几种特性.md",
+    "docs/面经/数据库/除了参数化查询，还有哪些有效防止SQL注入的手段.md",
+    "docs/面经/数据库/WAL机制是什么.md",
+    "docs/面经/数据库/mvcc介绍.md",
+    "docs/面经/数据库/Undo Log介绍.md",
+    "docs/面经/数据库/Redo Log介绍.md",
+    "自我介绍.md",
+    "话术.md",
     "提示词.md",
-    "待修改.md",
-    "项目/history/需求.md",
-    "未命名 1.md",
-    "未命名.md",
-    "项目/history/数据库/sql.md",
-    "项目/history/数据库/未命名.md",
-    "项目/history/技术栈.md",
-    "项目/history/具体方案/RAG.md",
-    "docs/面经/java/spring/spring中有哪些依赖注入方式.md",
-    "docs/面经/java/spring/spring启动阶段会发生什么.md",
-    "docs/面经/java/spring/spring中事务是如何传播的，事务出错时如何实现回滚.md",
-    "docs/面经/java/spring/Spring IoC是什么，底层实现思路是什么.md",
-    "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
-    "docs/面经/java/spring/Spring的事务什么情况下会失效？.md",
-    "docs/面经/java/spring/Spring AOP实现原理是什么.md",
-    "docs/面经/java/JUC/threadLocal是如何实现的.md",
-    "docs/面经/java/JUC/Synchronized底层是如何实现的.md",
-    "docs/面经/java/JUC/JVM中锁升级的流程是什么.md",
-    "docs/面经/java/JUC/偏向锁，轻量级锁和重量级锁都是什么，有什么区别.md",
-    "docs/面经/java/JUC/创建线程的方式有几种，区别是什么，线程的生命周期和状态是什么.md",
-    "项目/history/需求/关系图谱.md",
-    "项目/history/接口.md",
-    "项目/history/前端/智能人物关系图谱.md",
-    "项目/history/前端/总体思路.md",
-    "项目/history/具体方案/动态多维时间轴.md",
+    "docs/面经/并发/进程间通信的方式有什么.md",
+    "docs/面经/数据库/explain是什么.md",
+    "docs/面经/数据库/Binlog详细介绍.md",
+    "docs/面经/数据库/inplace DDL是什么.md",
+    "docs/面经/数据库/事务的各个隔离级别是如何实现的.md",
+    "docs/面经/数据库/数据库范式.md",
+    "docs/面经/数据库/索引介绍.md",
+    "docs/面经/数据库/同步、异步IO，以及和阻塞、非阻塞IO的区别和联系.md",
+    "docs/面经/redis/redis集群介绍.md",
+    "docs/面经/数据库/B+树、B树和红黑树的特点及区别.md",
+    "docs/面经/redis/在redis的rdb快照记录时会堵塞吗.md",
+    "docs/面经/redis/Redis的线程模型介绍.md",
+    "docs/面经/场景题/一个数据库表t中包含有3个int字段A,B,C，请问怎样建索引最合适.md",
+    "docs/面经/场景题/有a, b两个文件，分别存放10亿条左右的URL，每个URL大概是64B, 请找出a, b两个文件共同的URL，机器的内存限制是1G.md",
+    "笔记/高并发/基础架构",
+    "笔记/高并发",
+    "笔记/设计",
+    "笔记/java",
+    "docs/面经/数据库/未命名",
+    "docs/面经/java/JVM/未命名",
+    "docs/笔记/书籍/高并发系统设计40问",
+    "docs/笔记/书籍",
+    "笔记/数据库/未命名",
+    "docs/面经/rag",
     "未命名.canvas",
-    "项目/history/数据库/未命名",
-    "项目/history/数据库",
-    "agent/优化/工程化方案",
-    "agent/优化",
-    "agent",
-    "项目/history/优化",
-    "代办",
-    "项目/history/prompt",
-    "项目/history/需求",
     "图片/1346871-20240730112327521-241140105.svg",
-    "spring ai",
     "docs/面经/未命名.canvas",
     "docs/面经/image/解约函2.png",
     "docs/面经/image/解约函1.png",
