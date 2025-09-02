@@ -3,7 +3,7 @@ Java常用的集合主要分为两大体系：`Collection` 和 `Map` 。
 
 ### 1. Collection
 
-`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又主要派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。
+`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。
 
 
 `List` 接口的特点是：元素有序，且可以重复。它通过索引来访问和操作元素。

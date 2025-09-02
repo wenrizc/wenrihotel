@@ -4,24 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "127215a3e03f195d",
+        "id": "1637653e03246ba3",
         "type": "tabs",
         "children": [
           {
-            "id": "2cafe49934fde2ed",
+            "id": "8f00b39c072a0c0c",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
+          },
+          {
+            "id": "5a9ead423ebaced6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
+                "file": "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍"
+              "title": "Spring的三级缓存机制是什么"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -113,12 +124,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
+                "file": "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍 的出链列表"
+              "title": "Spring的三级缓存机制是什么 的出链列表"
             }
           },
           {
@@ -169,34 +180,34 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "2cafe49934fde2ed",
+  "active": "5a9ead423ebaced6",
   "lastOpenFiles": [
-    "docs/面经/数据库/mysql事务是如何实现的.md",
+    "docs/面经/java/spring/Bean 是怎么加载和使用的，循环依赖怎么解决.md",
+    "docs/面经/java/spring/springboot容器启动过程.md",
+    "docs/面经/计算机网络/简述TCP三次握手四次挥手，为什么握手是三次，挥手是四次.md",
+    "docs/面经/计算机网络/解释 DNS 的作用和工作原理.md",
+    "docs/面经/java/spring/spring启动阶段会发生什么.md",
+    "docs/面经/java/spring/Spring aop是什么， 有哪些应用场景.md",
+    "docs/面经/java/spring/Spring IoC是什么，底层实现思路是什么.md",
+    "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
+    "docs/面经/java/spring/Spring AOP是如何实现的.md",
+    "docs/面经/java/spring/bean的生命周期介绍.md",
+    "docs/面经/java/spring/什么情况下@Trancational注解会失效.md",
+    "docs/面经/agent/agent介绍.md",
+    "docs/面经/agent/rag向量化是怎么实现的.md",
+    "docs/index.md",
     "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
-    "docs/面经/数据库/什么样的情况需要设置索引.md",
-    "docs/面经/数据库/什么是事务，事务有哪几种特性.md",
-    "docs/面经/数据库/除了参数化查询，还有哪些有效防止SQL注入的手段.md",
-    "docs/面经/数据库/WAL机制是什么.md",
-    "docs/面经/数据库/mvcc介绍.md",
-    "docs/面经/数据库/Undo Log介绍.md",
-    "docs/面经/数据库/Redo Log介绍.md",
-    "自我介绍.md",
-    "话术.md",
-    "提示词.md",
+    "docs/面经/并发/自旋锁是什么.md",
+    "docs/面经/并发/如何设计分布式锁，比如key,value的设计，怎么避免死锁？.md",
+    "docs/面经/并发/什么是线程上下文切换.md",
+    "docs/面经/并发/内存屏障是什么.md",
+    "docs/面经/并发/进程线程和协程的区别是什么.md",
     "docs/面经/并发/进程间通信的方式有什么.md",
-    "docs/面经/数据库/explain是什么.md",
-    "docs/面经/数据库/Binlog详细介绍.md",
-    "docs/面经/数据库/inplace DDL是什么.md",
-    "docs/面经/数据库/事务的各个隔离级别是如何实现的.md",
-    "docs/面经/数据库/数据库范式.md",
-    "docs/面经/数据库/索引介绍.md",
-    "docs/面经/数据库/同步、异步IO，以及和阻塞、非阻塞IO的区别和联系.md",
-    "docs/面经/redis/redis集群介绍.md",
-    "docs/面经/数据库/B+树、B树和红黑树的特点及区别.md",
-    "docs/面经/redis/在redis的rdb快照记录时会堵塞吗.md",
-    "docs/面经/redis/Redis的线程模型介绍.md",
-    "docs/面经/场景题/一个数据库表t中包含有3个int字段A,B,C，请问怎样建索引最合适.md",
-    "docs/面经/场景题/有a, b两个文件，分别存放10亿条左右的URL，每个URL大概是64B, 请找出a, b两个文件共同的URL，机器的内存限制是1G.md",
+    "docs/面经/并发/多线程和多进程使用场景分别介绍.md",
+    "docs/面经/数据库/MySQL有什么页.md",
+    "docs/面经/数据库/mysql数据库是如何实现持久化的.md",
+    "docs/面经/数据库/Undo Log介绍.md",
+    "docs/面经/数据库/WAL机制是什么.md",
     "笔记/高并发/基础架构",
     "笔记/高并发",
     "笔记/设计",
@@ -206,7 +217,7 @@
     "docs/笔记/书籍/高并发系统设计40问",
     "docs/笔记/书籍",
     "笔记/数据库/未命名",
-    "docs/面经/rag",
+    "docs/面经/agent",
     "未命名.canvas",
     "图片/1346871-20240730112327521-241140105.svg",
     "docs/面经/未命名.canvas",
