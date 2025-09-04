@@ -8,31 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "8f00b39c072a0c0c",
-            "type": "leaf",
-            "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
-            }
-          },
-          {
             "id": "5a9ead423ebaced6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
+                "file": "docs/笔记/高并发/基础架构.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Spring的三级缓存机制是什么"
+              "title": "基础架构"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -124,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
+                "file": "docs/笔记/高并发/基础架构.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "Spring的三级缓存机制是什么 的出链列表"
+              "title": "基础架构 的出链列表"
             }
           },
           {
@@ -182,34 +171,35 @@
   },
   "active": "5a9ead423ebaced6",
   "lastOpenFiles": [
-    "docs/面经/java/spring/Bean 是怎么加载和使用的，循环依赖怎么解决.md",
-    "docs/面经/java/spring/springboot容器启动过程.md",
-    "docs/面经/计算机网络/简述TCP三次握手四次挥手，为什么握手是三次，挥手是四次.md",
-    "docs/面经/计算机网络/解释 DNS 的作用和工作原理.md",
-    "docs/面经/java/spring/spring启动阶段会发生什么.md",
-    "docs/面经/java/spring/Spring aop是什么， 有哪些应用场景.md",
-    "docs/面经/java/spring/Spring IoC是什么，底层实现思路是什么.md",
-    "docs/面经/java/spring/Spring的三级缓存机制是什么.md",
-    "docs/面经/java/spring/Spring AOP是如何实现的.md",
-    "docs/面经/java/spring/bean的生命周期介绍.md",
-    "docs/面经/java/spring/什么情况下@Trancational注解会失效.md",
-    "docs/面经/agent/agent介绍.md",
-    "docs/面经/agent/rag向量化是怎么实现的.md",
+    "docs/笔记/高并发/高并发系统.md",
     "docs/index.md",
-    "docs/面经/操作系统/syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
-    "docs/面经/并发/自旋锁是什么.md",
-    "docs/面经/并发/如何设计分布式锁，比如key,value的设计，怎么避免死锁？.md",
-    "docs/面经/并发/什么是线程上下文切换.md",
-    "docs/面经/并发/内存屏障是什么.md",
-    "docs/面经/并发/进程线程和协程的区别是什么.md",
-    "docs/面经/并发/进程间通信的方式有什么.md",
-    "docs/面经/并发/多线程和多进程使用场景分别介绍.md",
-    "docs/面经/数据库/MySQL有什么页.md",
-    "docs/面经/数据库/mysql数据库是如何实现持久化的.md",
-    "docs/面经/数据库/Undo Log介绍.md",
-    "docs/面经/数据库/WAL机制是什么.md",
+    "docs/面经/redis/Sorted Set是什么，其底层是如何实现的.md",
+    "docs/面经/redis/Redis中的大Key与热Key问题.md",
+    "docs/面经/redis/Redis异常排查思路.md",
+    "docs/面经/redis/redis是如何实现数据持久化的.md",
+    "docs/面经/redis/Redis为什么快.md",
+    "docs/面经/redis/Redis如何实现分布式锁的.md",
+    "docs/面经/redis/redis内存淘汰策略介绍.md",
+    "docs/面经/redis/redis集群介绍.md",
+    "docs/面经/redis/redis的rdb快照记录时会堵塞吗.md",
+    "docs/面经/redis/Redis的线程模型介绍.md",
+    "docs/面经/redis/Redis的数据类型介绍.md",
+    "docs/面经/redis/Redis的使用场景.md",
+    "docs/面经/redis/Redis的过期删除策略.md",
+    "docs/面经/redis/Redis的底层数据结构有什么.md",
+    "docs/面经/redis/redis LRU策略是如何实现的.md",
+    "docs/面经/redis/redis LFU策略是如何实现的.md",
+    "docs/面经/redis/怎么判断 Redis 某个节点是否正常工作.md",
+    "docs/面经/redis/为什么 Redis 这么快？.md",
+    "docs/面经/redis/如何保证Redis与MySQL的数据一致性.md",
+    "docs/面经/redis/排查redis线上命中率暴跌的问题.md",
+    "docs/面经/redis/缓存穿透、缓存击穿、缓存雪崩.md",
+    "docs/面经/java/JVM/常用垃圾回收器介绍.md",
+    "docs/面经/java/JVM/垃圾回收算法介绍.md",
+    "docs/面经/java/JVM/双亲委派机制是什么.md",
+    "课程",
     "笔记/高并发/基础架构",
-    "笔记/高并发",
+    "docs/笔记/高并发",
     "笔记/设计",
     "笔记/java",
     "docs/面经/数据库/未命名",
@@ -217,7 +207,6 @@
     "docs/笔记/书籍/高并发系统设计40问",
     "docs/笔记/书籍",
     "笔记/数据库/未命名",
-    "docs/面经/agent",
     "未命名.canvas",
     "图片/1346871-20240730112327521-241140105.svg",
     "docs/面经/未命名.canvas",

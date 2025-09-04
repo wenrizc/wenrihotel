@@ -1,6 +1,4 @@
 
-### Minor GC、Major GC 和 Full GC
-
 在Java虚拟机（JVM）中，堆内存被划分为不同的区域，以便更有效地管理对象生命周期。最常见的分代垃圾回收策略将堆分为新生代（Young Generation）和老年代（Old Generation）。
 
 *   **新生代（Young Generation）**: 这是大多数新对象被创建的地方。新生代内部又分为一个伊甸园区（Eden Space）和两个幸存区（Survivor Spaces, 通常称为S0和S1）。
