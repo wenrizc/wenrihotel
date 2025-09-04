@@ -1,0 +1,7039 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://wenrizc.github.io/wenrihotel/%E7%AC%94%E8%AE%B0/%E9%AB%98%E5%B9%B6%E5%8F%91/%E5%9F%BA%E7%A1%80%E6%9E%B6%E6%9E%84/">
+      
+      
+        <link rel="prev" href="../../redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E7%BC%96%E7%A0%81%E5%AF%B9%E5%BA%94/">
+      
+      
+        <link rel="next" href="../%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.18">
+    
+    
+      
+        <title>基础架构 - 文日小栈</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="文日小栈" class="md-header__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            文日小栈
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              基础架构
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="文日小栈" class="md-nav__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    文日小栈
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    欢迎
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    笔记
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            笔记
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Java
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/AQS%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AQS原理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/G1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    G1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/GC%20%E8%B0%83%E4%BC%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GC 调优
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM%20%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM 内存结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/Java%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java 内存模型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/Java%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E5%B9%B6%E5%8F%91/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java 内存模型并发
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/Java%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java 类加载机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/Java%20%E7%B1%BB%E5%AD%97%E8%8A%82%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java 类字节码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%20%28JMM%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java内存模型 (JMM)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/Synchronized%20%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Synchronized 锁
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/ZGC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ZGC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%20%28GC%29/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    垃圾回收 (GC)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    锁
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Redis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Redis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis事件机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E4%BA%8B%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis事务
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E5%AF%B9%E8%B1%A1%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis对象机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis持久化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis数据类型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis数据结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%85%B6%E7%BC%96%E7%A0%81%E5%AF%B9%E5%BA%94/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据类型及其编码对应
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    高并发
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            高并发
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    基础架构
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    基础架构
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      单机房的内部架构
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      客户端连接机房的技术：DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      接入层的技术演进
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="接入层的技术演进">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nginx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvs-linux-virtual-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      LVS (Linux Virtual Server)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvsnginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      LVS+Nginx接入层架构
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务发现
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rpc-remote-procedure-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPC服务 (Remote Procedure Call)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：MySQL优势
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：Redis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="存储层技术：Redis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gossip" class="md-nav__link">
+    <span class="md-ellipsis">
+      中心化集群架构 (解决Gossip风暴)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lsm-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：LSM Tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：NoSQL数据库
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      消息中间件技术
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="消息中间件技术">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kafka
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kafka_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kafka的高可用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      多机房：主备机房
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      多机房：同城双活
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      多机房：异地多活
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多机房：异地多活">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql-drc" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL DRC的原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis-drc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redis DRC的原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      分流策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据复制链路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E9%AB%98%E5%B9%B6%E5%8F%91%E7%B3%BB%E7%BB%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    高并发系统
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    面经
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            面经
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Agent
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Agent
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/agent/agent%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Agent介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/agent/rag%E5%90%91%E9%87%8F%E5%8C%96%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rag向量化是怎么实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Java
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Java
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JUC
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            JUC
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/AQS%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    AQS介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/CAS%E5%92%8Csynchronized%E4%BB%8B%E7%BB%8D%EF%BC%8C%E4%B8%A4%E8%80%85%E5%AD%98%E5%9C%A8%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CAS和synchronized介绍，两者存在什么不同
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/CLH%E9%98%9F%E5%88%97%E9%94%81%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CLH队列锁介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/Synchronized%E5%BA%95%E5%B1%82%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Synchronized底层是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/synchnize%E9%94%81%E5%92%8Cretrentlock%E9%94%81%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Synchnize锁和retrentlock锁区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/volatile%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Volatile有什么用
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/wait%E5%92%8Csleep%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Wait和sleep的区别是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%87%A0%E7%A7%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    创建线程的方式有几种
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%A0%B8%E5%BF%83%E5%8F%82%E6%95%B0%E6%9C%89%E4%BB%80%E4%B9%88%EF%BC%8C%E6%8B%92%E7%BB%9D%E7%AD%96%E7%95%A5%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    线程池核心参数有什么，拒绝策略有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JUC/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    线程的生命周期介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    JVM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            JVM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/G1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8%E7%9B%B8%E6%AF%94%E4%BA%8ECMS%E6%9C%89%E5%93%AA%E4%BA%9B%E5%85%B3%E9%94%AE%E4%BC%98%E5%8A%BF%EF%BC%9F%E5%AE%83%E7%9A%84Region%E5%88%92%E5%88%86%E5%92%8CRSet%E8%AE%BE%E8%AE%A1%E8%B5%B7%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    G1垃圾收集器相比于CMS有哪些关键优势？它的Region划分和RSet设计起到了什么作用？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%20gc%20roots%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM gc roots有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E4%B8%AD%E5%86%85%E5%AD%98%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%86%E9%85%8D%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM中内存是如何分配的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E4%B8%AD%E9%94%81%E5%8D%87%E7%BA%A7%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM中锁升级的流程是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%B1%BB%E5%9E%8B%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM垃圾回收类型有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E7%94%B1%E4%BB%80%E4%B9%88%E7%BB%84%E6%88%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM由什么组成
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM的垃圾回收机制
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E7%9B%91%E8%A7%86%E5%99%A8%E9%94%81%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM监视器锁是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/JVM%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JVM调优思路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java内存模型介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/gc%E7%B1%BB%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gc类型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/javac%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Javac编译过程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/java%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E7%9A%84%E8%BF%87%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java对象创建的过程介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/jvm%E5%9E%83%E5%9C%BE%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%A4%E5%AE%9A%E6%A0%87%E5%87%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jvm垃圾对象的判定标准
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    双亲委派机制是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    垃圾回收算法介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E5%B8%B8%E7%94%A8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用垃圾回收器介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E7%B1%BB%E8%BD%BD%E5%85%A5%E8%BF%87%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    类载入过程介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E7%BB%93%E5%90%88JVM%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E8%AE%B2%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E8%83%BD%E5%8F%91%E7%94%9F%E9%94%99%E8%AF%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    结合JVM的内存结构讲解多线程为什么可能发生错误
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E8%AE%BE%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%A4%B4%E8%BF%87%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    设置对象头过程介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/JVM/%E8%AF%B7%E6%8F%8F%E8%BF%B0%E4%B8%80%E6%AC%A1%E4%BD%A0%E4%BD%BF%E7%94%A8%E8%BF%87%E7%9A%84JVM%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    请描述一次你使用过的JVM监控和诊断工具分析和解决问题的过程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_3" id="__nav_3_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Spring
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Spring
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/Bean%20%E6%98%AF%E6%80%8E%E4%B9%88%E5%8A%A0%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%8C%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bean 是怎么加载和使用的，循环依赖怎么解决
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/Spring%20AOP%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring AOP是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/Spring%20IoC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring IoC是什么，底层实现思路是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/Spring%20aop%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%20%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring aop是什么， 有哪些应用场景
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/Spring%E7%9A%84%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring的三级缓存机制是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/Spring%E7%9A%84%E4%BA%8B%E5%8A%A1%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring的事务什么情况下会失效？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bean的生命周期介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/springboot%E5%81%9A%E5%87%BA%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Springboot做出了哪些优化
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/springboot%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Springboot容器启动过程
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/spring%E4%B8%AD%E4%BA%8B%E5%8A%A1%E6%98%AF%E5%A6%82%E4%BD%95%E4%BC%A0%E6%92%AD%E7%9A%84%EF%BC%8C%E4%BA%8B%E5%8A%A1%E5%87%BA%E9%94%99%E6%97%B6%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%9B%9E%E6%BB%9A/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring中事务是如何传播的，事务出错时如何实现回滚
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/spring%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring中有哪些依赖注入方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/spring%E4%BA%8B%E5%8A%A1%EF%BC%8Ca%E8%B0%83%E7%94%A8b%EF%BC%8Cb%E8%B0%83%E7%94%A8c%EF%BC%8C%E6%80%BB%E5%85%B1%E6%9C%89%E5%87%A0%E4%B8%AA%E4%BA%8B%E5%8A%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring事务，a调用b，b调用c，总共有几个事务
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/spring%E5%90%AF%E5%8A%A8%E9%98%B6%E6%AE%B5%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Spring启动阶段会发生什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/spring/%E4%BB%80%E4%B9%88%E6%83%85%E5%86%B5%E4%B8%8B%40Trancational%E6%B3%A8%E8%A7%A3%E4%BC%9A%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    什么情况下@Trancational注解会失效
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_4" id="__nav_3_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    基础
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            基础
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/%E5%9F%BA%E7%A1%80/HashMap%E5%92%8CConcurrentHashMap%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    HashMap和ConcurrentHashMap介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Java常用的集合有哪些
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/%E5%9F%BA%E7%A1%80/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    什么是反射
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/%E5%9F%BA%E7%A1%80/%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    什么是泛型
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/java/%E5%9F%BA%E7%A1%80/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    深拷贝和浅拷贝区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Redis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Redis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E4%B8%AD%E7%9A%84%E5%A4%A7Key%E4%B8%8E%E7%83%ADKey%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis中的大Key与热Key问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E4%B8%BA%E4%BB%80%E4%B9%88%E5%BF%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis为什么快
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis如何实现分布式锁的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E5%BC%82%E5%B8%B8%E6%8E%92%E6%9F%A5%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis异常排查思路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis的使用场景
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis的底层数据结构有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis的数据类型介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis的线程模型介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Redis%E7%9A%84%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis的过期删除策略
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/Sorted%20Set%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%85%B6%E5%BA%95%E5%B1%82%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sorted Set是什么，其底层是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/redis%20LFU%E7%AD%96%E7%95%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    redis LFU策略是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/redis%20LRU%E7%AD%96%E7%95%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    redis LRU策略是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/redis%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis内存淘汰策略介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/redis%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%95%B0%E6%8D%AE%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis是如何实现数据持久化的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/redis%E7%9A%84rdb%E5%BF%AB%E7%85%A7%E8%AE%B0%E5%BD%95%E6%97%B6%E4%BC%9A%E5%A0%B5%E5%A1%9E%E5%90%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis的rdb快照记录时会堵塞吗
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis集群介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/%E4%B8%BA%E4%BB%80%E4%B9%88%20Redis%20%E8%BF%99%E4%B9%88%E5%BF%AB%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    为什么 Redis 这么快？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    如何保证Redis与MySQL的数据一致性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/%E6%80%8E%E4%B9%88%E5%88%A4%E6%96%AD%20Redis%20%E6%9F%90%E4%B8%AA%E8%8A%82%E7%82%B9%E6%98%AF%E5%90%A6%E6%AD%A3%E5%B8%B8%E5%B7%A5%E4%BD%9C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    怎么判断 Redis 某个节点是否正常工作
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/%E6%8E%92%E6%9F%A5redis%E7%BA%BF%E4%B8%8A%E5%91%BD%E4%B8%AD%E7%8E%87%E6%9A%B4%E8%B7%8C%E7%9A%84%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    排查redis线上命中率暴跌的问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/redis/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    缓存穿透、缓存击穿、缓存雪崩
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    中间件
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            中间件
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E4%B8%8D%E4%B8%A2%E5%A4%B1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ如何保证消息不丢失
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ%E6%AD%BB%E4%BF%A1%E6%9C%BA%E5%88%B6%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ死信机制介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ%E6%B6%88%E6%81%AF%E5%A0%86%E7%A7%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ消息堆积如何处理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ的持久化机制介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/RabbitMQ%E9%87%8D%E8%AF%95%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RabbitMQ重试是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/rabbitmq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rabbitmq
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/rabbitmq%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E9%99%90%E6%B5%81%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rabbitmq是如何实现限流的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E4%B8%BB%E6%B5%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%BB%8B%E7%BB%8D%EF%BC%8Crabbitmq%E7%9B%B8%E6%AF%94%E5%85%B6%E4%BD%99%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%A3%E5%8A%BF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    主流消息队列介绍，rabbitmq相比其余消息队列有什么优劣势
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E4%B8%AD%E9%97%B4%E4%BB%B6/%E5%A6%82%E6%9E%9C%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B4%A9%E6%BA%83%E7%AD%89%E6%83%85%E5%86%B5%E5%AF%BC%E8%87%B4%E6%B6%88%E8%B4%B9%E8%80%85%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E6%B6%88%E8%B4%B9%E6%B6%88%E6%81%AF%EF%BC%8Crabbitmq%E4%BC%9A%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    如果数据库崩溃等情况导致消费者无法正常消费消息，rabbitmq会如何处理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    分布式
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            分布式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%88%86%E5%B8%83%E5%BC%8F/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    雪花算法介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    场景题
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            场景题
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/JWT%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JWT介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/JWT%E6%98%AF%E6%97%A0%E7%8A%B6%E6%80%81%E7%9A%84%EF%BC%8C%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%A6%82%E4%BD%95%E4%B8%BB%E5%8A%A8%E8%AE%A9%E4%B8%80%E4%B8%AA%E5%B7%B2%E7%AD%BE%E5%8F%91%E7%9A%84JWT%E5%A4%B1%E6%95%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    JWT是无状态的，服务端如何主动让一个已签发的JWT失效
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/RBAC%E6%9D%83%E9%99%90%E7%B3%BB%E7%BB%9F%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RBAC权限系统怎么设计
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/redis%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%8F%B7%E5%99%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redis实现发号器
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/reids%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Reids和数据库的一致性问题
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93%E8%A1%A8t%E4%B8%AD%E5%8C%85%E5%90%AB%E6%9C%893%E4%B8%AAint%E5%AD%97%E6%AE%B5A%2CB%2CC%EF%BC%8C%E8%AF%B7%E9%97%AE%E6%80%8E%E6%A0%B7%E5%BB%BA%E7%B4%A2%E5%BC%95%E6%9C%80%E5%90%88%E9%80%82/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    一个数据库表t中包含有3个int字段A,B,C，请问怎样建索引最合适
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E4%B8%80%E6%AC%A1%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%8F%AF%E8%83%BD%E7%BB%8F%E5%8E%86%E5%87%A0%E6%AC%A1%E7%A3%81%E7%9B%98IO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    一次数据查询可能经历几次磁盘IO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%87%87%E7%94%A8redis%E5%AE%9E%E7%8E%B0%E5%8F%91%E5%8F%B7%E5%99%A8%EF%BC%8C%E8%80%8C%E4%B8%8D%E9%87%87%E7%94%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E8%87%AA%E5%A2%9Eid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    为什么采用redis实现发号器，而不采用数据库自增id
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E5%9C%BA%E6%99%AF%E9%A2%98%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    场景题思路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E5%A6%82%E4%BD%95%E5%AD%98%E5%82%A8%E5%A4%A7%E9%87%8F%E7%9A%84ip%E5%9C%B0%E5%9D%80/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    如何存储大量的ip地址
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E5%AF%B91%E4%B8%AA%E4%BA%BF%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%EF%BC%8C%E5%86%85%E5%AD%98%E5%8F%AA%E6%9C%8910M%E5%BA%94%E8%AF%A5%E4%BD%BF%E7%94%A8%E4%BB%80%E4%B9%88%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    对1个亿数据进行排序，内存只有10M应该使用什么算法
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%8A%9F%E8%83%BD%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    排行榜功能怎么实现
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E6%9C%89a%2C%20b%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%EF%BC%8C%E5%88%86%E5%88%AB%E5%AD%98%E6%94%BE10%E4%BA%BF%E6%9D%A1%E5%B7%A6%E5%8F%B3%E7%9A%84URL%EF%BC%8C%E6%AF%8F%E4%B8%AAURL%E5%A4%A7%E6%A6%82%E6%98%AF64B%2C%20%E8%AF%B7%E6%89%BE%E5%87%BAa%2C%20b%E4%B8%A4%E4%B8%AA%E6%96%87%E4%BB%B6%E5%85%B1%E5%90%8C%E7%9A%84URL%EF%BC%8C%E6%9C%BA%E5%99%A8%E7%9A%84%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6%E6%98%AF1G/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    有a, b两个文件，分别存放10亿条左右的URL，每个URL大概是64B, 请找出a, b两个文件共同的URL，机器的内存限制是1G
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E8%8B%A5%E7%BC%93%E5%AD%98%E6%95%B0%E6%8D%AE%E4%B8%A2%E5%A4%B1%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E5%BA%94%E5%AF%B9%E6%96%B9%E6%A1%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    若缓存数据丢失，有哪些应对方案
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%9F%AD%E9%93%BE%E7%B3%BB%E7%BB%9F%EF%BC%8C%20%E6%AF%8F%E6%97%A5%E5%86%99%E5%85%A5%E9%87%8F%E7%99%BE%E4%B8%87%EF%BC%8C%E8%AE%BF%E9%97%AE%E9%87%8F%E5%8D%83%E4%B8%87%20%EF%BC%8C%E8%A6%81%E6%B1%82%E9%80%9A%E8%BF%87%E7%9F%AD%E9%93%BE%E6%89%BE%E5%88%B0%E9%95%BF%E9%93%BE%2010ms%E5%86%85%EF%BC%8C%E5%90%8C%E6%97%B6%E4%B8%8D%E8%83%BD%E9%87%8D%E5%A4%8D%E6%8F%92%E5%85%A5%E9%95%BF%E9%93%BE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    设计一个短链系统， 每日写入量百万，访问量千万 ，要求通过短链找到长链 10ms内，同时不能重复插入长链
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%B1%BB%E4%BC%BC%E5%BE%AE%E5%8D%9A%E6%88%96%E8%80%85%E6%9C%8B%E5%8F%8B%E5%9C%88%E7%9A%84%E2%80%9CFeed%E6%B5%81%E2%80%9D%E7%B3%BB%E7%BB%9F%EF%BC%8C%E5%BA%94%E5%BD%93%E6%80%8E%E4%B9%88%E8%AE%BE%E8%AE%A1%EF%BC%8C%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E5%93%AA%E4%BA%9B%E6%96%B9%E9%9D%A2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    设计一个类似微博或者朋友圈的“Feed流”系统，应当怎么设计，需要考虑哪些方面
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E5%9C%BA%E6%99%AF%E9%A2%98/%E9%99%90%E6%B5%81%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    限流思路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    操作系统
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            操作系统
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/syncorized%E5%92%8Ccas%E5%AD%98%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B7%AE%E5%88%AB%EF%BC%8C%E5%90%84%E4%B8%AA%E6%96%B9%E9%9D%A2%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3%EF%BC%8C%E6%80%A7%E8%83%BD%E4%B8%8A%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3%EF%BC%8C%E5%90%8C%E6%97%B6%E4%BB%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A7%92%E5%BA%A6%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Syncorized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E4%BB%8B%E7%BB%8D%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    介绍虚拟内存和物理内存
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    内存屏障是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%8F%8C%E9%87%8D%E5%88%A4%E5%AE%9A%E9%94%81%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    双重判定锁是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5IO%EF%BC%8C%E4%BB%A5%E5%8F%8A%E5%92%8C%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9EIO%E7%9A%84%E5%8C%BA%E5%88%AB%E5%92%8C%E8%81%94%E7%B3%BB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    同步、异步IO，以及和阻塞、非阻塞IO的区别和联系
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%88%86%E5%88%AB%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    多线程和多进程使用场景分别介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    死锁的原因是什么，如何解决死锁
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%E7%9A%84%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    用户态和内核态是如何切换的？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    线程上下文切换介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%87%AA%E6%97%8B%E9%94%81%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    自旋锁是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    虚拟内存介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%8D%8F%E7%A8%8B%E7%9A%84%E5%8C%BA%E5%88%AB%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    进程线程和协程的区别是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    进程间通信的方式有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E9%A1%B5%E5%BC%8F%E5%92%8C%E6%AE%B5%E5%BC%8F%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    页式和段式内存管理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    数据库
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_8">
+            <span class="md-nav__icon md-icon"></span>
+            数据库
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/B%2B%E6%A0%91%E3%80%81B%E6%A0%91%E5%92%8C%E7%BA%A2%E9%BB%91%E6%A0%91%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    B+树、B树和红黑树介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/B%2B%E6%A0%91%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    B+树介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%20%E6%95%B0%E6%8D%AE%E9%87%8F%E8%BF%87%E5%A4%A7%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL 数据量过大如何处理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL两阶段提交详解
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E6%9C%89%E4%BB%80%E4%B9%88%E9%A1%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MySQL有什么页
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/Redo%20Log%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Redo Log介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/Undo%20Log%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Undo Log介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/explain%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explain是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/inplace%20DDL%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    inplace DDL是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mvcc%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mvcc介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%97%A5%E5%BF%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mysql中有哪些日志
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mysql中有哪些锁
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BA%8B%E5%8A%A1%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mysql事务是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E5%B4%A9%E6%BA%83%E4%BB%A5%E5%90%8E%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B%EF%BC%9Fmysql%E5%B4%A9%E6%BA%83%E4%B9%8B%E5%90%8E%E6%9C%AA%E6%8F%90%E4%BA%A4%E7%9A%84%E4%BA%8B%E5%8A%A1%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mysql崩溃以后恢复流程？mysql崩溃之后未提交的事务怎么办？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mysql数据库是如何实现持久化的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%9C%89%E5%93%AA%E4%BA%9B%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mysql有哪些索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/sql%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sql查询的执行过程是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%B8%80%E5%BC%A0%E5%A4%A7%E8%A1%A8%E5%8A%A0%E4%B8%80%E4%B8%AA%E5%AD%97%E6%AE%B5%E9%9C%80%E8%A6%81%E8%80%83%E8%99%91%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    一张大表加一个字段需要考虑什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%B8%A4%E6%AE%B5%E9%94%81%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    两段锁协议
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%B8%BA%E4%BB%80%E4%B9%88%20MySQL%20%E9%87%87%E7%94%A8%20B%2B%20%E6%A0%91%E4%BD%9C%E4%B8%BA%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    为什么 MySQL 采用 B+ 树作为索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%90%84%E4%B8%AA%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    事务的各个隔离级别是如何实现的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    事务的隔离级别有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BC%9A%E5%88%9B%E5%BB%BA%E4%B8%B4%E6%97%B6%E8%A1%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    什么时候会创建临时表
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%EF%BC%8C%E4%BA%8B%E5%8A%A1%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%89%B9%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    什么是事务，事务有哪几种特性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E6%83%85%E5%86%B5%E9%9C%80%E8%A6%81%E8%AE%BE%E7%BD%AE%E7%B4%A2%E5%BC%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    什么样的情况需要设置索引
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E5%AD%98%E5%9C%A8%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%8C%E5%A6%82%E4%BD%95%E6%94%B9%E8%BF%9B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    分页查询存在什么问题，如何改进
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%93%AA%E4%BA%9B%E5%AD%97%E6%AE%B5%E9%80%82%E5%90%88%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%93%AA%E4%BA%9B%E4%B8%8D%E9%80%82%E5%90%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    哪些字段适合加索引，哪些不适合
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%AE%9E%E7%8E%B0%E4%B9%90%E8%A7%82%E9%94%81%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88%EF%BC%9F%E5%9C%A8%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%82%E9%9D%A2%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    实现乐观锁的方式有什么？在数据库层面如何实现？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%AF%B9%E8%B1%A1%E5%85%B3%E7%B3%BB%E6%98%A0%E5%B0%84%EF%BC%88ORM%EF%BC%89%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    对象关系映射（ORM）框架介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%84%8F%E5%90%91%E9%94%81%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    意向锁介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%85%A2%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    慢查询优化思路
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    数据库范式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    索引介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95%E5%A4%B1%E6%95%88%E7%9A%84%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    索引失效的场景
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%AF%BB%E5%B7%B2%E6%8F%90%E4%BA%A4%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E4%B8%8B%E5%A6%82%E4%BD%95%E8%AF%BB%E5%8F%96%E6%95%B0%E6%8D%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    读已提交隔离级别下如何读取数据
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%97%B4%E9%9A%99%E9%94%81%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    间隙锁介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/%E9%99%A4%E4%BA%86%E5%8F%82%E6%95%B0%E5%8C%96%E6%9F%A5%E8%AF%A2%EF%BC%8C%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%E6%9C%89%E6%95%88%E9%98%B2%E6%AD%A2SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E6%89%8B%E6%AE%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    除了参数化查询，还有哪些有效防止SQL注入的手段
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    杂项
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_9">
+            <span class="md-nav__icon md-icon"></span>
+            杂项
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/RBAC%E6%A8%A1%E5%9E%8B%E5%92%8CABAC%E6%A8%A1%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RBAC模型和ABAC模型是什么，有什么区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E6%8E%AA%E6%96%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    介绍一下布隆过滤器，以及优化措施
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/%E5%B8%B8%E7%94%A8%E7%9A%84Linux%E5%91%BD%E4%BB%A4%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用的Linux命令有什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用设计模式介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/%E6%B6%88%E8%B4%B9%E9%98%9F%E5%88%97%E7%9A%84%E5%B8%B8%E8%A7%81%E8%AF%AD%E4%B9%89/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    消费队列的常见语义
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/%E9%99%A4%E4%BA%86%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%EF%BC%8C%E4%BD%A0%E8%BF%98%E4%BA%86%E8%A7%A3%E5%93%AA%E4%BA%9B%E5%85%B6%E4%BB%96%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%A7%A3%E8%80%A6%E6%96%B9%E6%B3%95%EF%BC%9F%E5%AE%83%E4%BB%AC%E5%90%84%E8%87%AA%E9%80%82%E7%94%A8%E4%BA%8E%E4%BB%80%E4%B9%88%E5%9C%BA%E6%99%AF%EF%BC%8C%E4%BC%98%E7%BC%BA%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    除了消息队列，你还了解哪些其他的系统解耦方法？它们各自适用于什么场景，优缺点是什么？
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E6%9D%82%E9%A1%B9/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9A%84%E4%B8%89%E5%A4%A7%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    面向对象编程的三大基本特性
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    算法
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_10">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E7%AE%97%E6%B3%95/%E5%B8%B8%E7%94%A8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用排序算法介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_11" id="__nav_3_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    计算机网络
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_11">
+            <span class="md-nav__icon md-icon"></span>
+            计算机网络
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Https%E7%9A%84%E5%8A%A0%E5%AF%86%E6%96%B9%E5%BC%8F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Https的加密方式介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/Http%E8%AF%B7%E6%B1%82%E6%9C%89%E5%93%AA%E4%BA%9B%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Http请求有哪些请求方式
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E6%8B%A5%E5%A1%9E%E7%AA%97%E5%8F%A3%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TCP拥塞窗口是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/TCP%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    TCP是如何实现可靠传输的
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/VPN%E5%8E%9F%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VPN原理是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/https%20%E5%92%8C%20http%20%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Https 和 http 区别
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/http%E5%93%8D%E5%BA%94%E7%A0%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Http响应码
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp%20udp%E4%BB%8B%E7%BB%8D%E5%B9%B6%E8%AF%B4%E6%98%8E%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tcp udp介绍并说明使用场景
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/tcp%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tcp滑动窗口是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/websocket%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Websocket是什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BB%8E%E8%BE%93%E5%85%A5%20URL%20%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    从输入 URL 到页面展示到底发生了什么
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%AE%80%E8%BF%B0TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8F%A1%E6%89%8B%E6%98%AF%E4%B8%89%E6%AC%A1%EF%BC%8C%E6%8C%A5%E6%89%8B%E6%98%AF%E5%9B%9B%E6%AC%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    简述TCP三次握手四次挥手，为什么握手是三次，挥手是四次
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E7%9A%84%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    网络的分层结构
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%A7%A3%E9%87%8A%20DNS%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    解释 DNS 的作用和工作原理
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_12" id="__nav_3_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    设计模式
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_12">
+            <span class="md-nav__icon md-icon"></span>
+            设计模式
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../%E9%9D%A2%E7%BB%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    常用的设计模式介绍
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      单机房的内部架构
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      客户端连接机房的技术：DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      HTTP DNS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      接入层的技术演进
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="接入层的技术演进">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nginx
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvs-linux-virtual-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      LVS (Linux Virtual Server)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lvsnginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      LVS+Nginx接入层架构
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      服务发现
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rpc-remote-procedure-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      RPC服务 (Remote Procedure Call)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：MySQL优势
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：Redis
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="存储层技术：Redis">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gossip" class="md-nav__link">
+    <span class="md-ellipsis">
+      中心化集群架构 (解决Gossip风暴)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lsm-tree" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：LSM Tree
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nosql" class="md-nav__link">
+    <span class="md-ellipsis">
+      存储层技术：NoSQL数据库
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      消息中间件技术
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="消息中间件技术">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kafka" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kafka
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kafka_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Kafka的高可用
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      多机房：主备机房
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      多机房：同城双活
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      多机房：异地多活
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="多机房：异地多活">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql-drc" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL DRC的原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#redis-drc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Redis DRC的原理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      分流策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据复制链路
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>基础架构</h1>
+
+<h3 id="_1">单机房的内部架构</h3>
+<p><strong>单机房典型架构角色功能：</strong></p>
+<ol>
+<li><strong>DNS服务器</strong>：域名映射为公网IP（机房入口）。</li>
+<li><strong>LVS (Linux Virtual Server)</strong>：提供公网IP作为机房入口，作为四层负载均衡器分发请求到Nginx集群。</li>
+<li><strong>Nginx</strong>：七层负载均衡器，根据HTTP(S)协议头/URL路径转发请求到对应的业务HTTP服务器。</li>
+<li><strong>业务服务层 (HTTP服务)</strong>：处理用户请求，根据URL向RPC服务发送业务逻辑处理请求。</li>
+<li><strong>业务服务层 (RPC服务)</strong>：执行核心业务逻辑，访问数据层或调用其他RPC服务。</li>
+<li><strong>存储层</strong>：所有存储系统的集合，包括分布式缓存（如Redis）、关系型数据库（如MySQL）、NoSQL数据库。</li>
+<li><strong>服务发现</strong>：保存每个服务的动态访问地址列表，供其他服务查找（功能与DNS相似）。</li>
+<li><strong>消息中间件</strong>：请求异步执行、服务间解耦、请求削峰填谷。</li>
+</ol>
+<h3 id="dns">客户端连接机房的技术：DNS</h3>
+<ul>
+<li><strong>TCP/IP通信基础</strong>：IP地址（标识设备、网络寻址）。</li>
+<li><strong>域名</strong>：易读易记的字符型地址方案，DNS实现域名到IP的翻译。</li>
+<li><strong>DNS意义</strong>：<ul>
+<li>互联网公司创建易记域名。</li>
+<li>通过多IP映射实现负载均衡。</li>
+<li>架构升级/IP变更时，仅修改DNS，对用户无干扰。</li>
+<li>可实现灵活负载均衡策略（如剔除宕机IP）。</li>
+</ul>
+</li>
+<li><strong>域名结构</strong>：层次化树形结构，根 -&gt; 顶级域名 (TLD) -&gt; 二级域名 -&gt; 三级域名等。</li>
+<li><strong>域名服务器类型</strong>：<ol>
+<li><strong>根域名服务器</strong>：全球互联网中枢，掌握全部顶级域名名称与IP映射。</li>
+<li><strong>顶级域名服务器</strong>：管理顶级域名下的二级域名解析，寻找二级域名服务器IP。</li>
+<li><strong>权威域名服务器</strong>：对特定域名进行解析，最终决定域名解析到哪个IP（DNS核心）。</li>
+<li><strong>本地域名服务器 (本地DNS)</strong>：不属层级结构，但对DNS重要（缓存），由网络运营商提供，主机查询时首先查询。</li>
+</ol>
+</li>
+<li><strong>域名解析过程 (递归查询)</strong>：<ol>
+<li>客户端查询<strong>本地缓存</strong>（浏览器缓存、Hosts文件）。</li>
+<li>无则向<strong>本地域名服务器</strong>发起请求。</li>
+<li>本地域名服务器向<strong>根域名服务器</strong>请求。</li>
+<li>根返回<strong>顶级域名服务器</strong>地址。</li>
+<li>本地域名服务器向<strong>顶级域名服务器</strong>请求。</li>
+<li>顶级返回<strong>权威域名服务器</strong>地址（或直接返回IP）。</li>
+<li>本地域名服务器向<strong>权威域名服务器</strong>请求。</li>
+<li>权威返回最终IP，本地域名服务器缓存并返回给客户端。</li>
+</ol>
+</li>
+<li><strong>DNS解析记录格式</strong>：Domain (域名), TTL (生存周期), Class (协议类型，IN-因特网), Type (记录类型，A-IPv4, AAAA-IPv6), Rdata (记录数据)。</li>
+</ul>
+<h3 id="http-dns">HTTP DNS</h3>
+<ul>
+<li><strong>DNS存在的问题</strong>：<ul>
+<li><strong>访问延迟高</strong>：递归查询耗时。</li>
+<li><strong>调度精准性差</strong>：本地域名服务器 IP 不准确定位客户端地理位置，可能返回非最优节点。</li>
+<li><strong>域名转发</strong>：运营商为节约资源转请求到其他运营商DNS，导致IP不符，访问慢。</li>
+<li><strong>DNS劫持</strong>：攻击方式，解析到错误或恶意IP (运营商劫持、黑客篡改Hosts)。</li>
+</ul>
+</li>
+<li><strong>HTTP DNS原理</strong>：<ol>
+<li>客户端指定HTTP DNS服务器IP（固定IP），使用HTTP调用域名解析接口，传入域名和客户端IP。</li>
+<li>HTTP DNS服务器向权威DNS服务器发起解析请求，返回最优IP。</li>
+<li>客户端获取IP后，直接向此IP发送业务请求。</li>
+</ol>
+</li>
+<li><strong>HTTP DNS解决的问题</strong>：<ul>
+<li><strong>降低域名解析延迟</strong>：直接访问，缩短解析链路。</li>
+<li><strong>防止域名劫持</strong>：绕过运营商本地DNS。</li>
+<li><strong>调度精准性更高</strong>：获取真实客户端IP，基于精确位置/运营商信息解析到更近/最优IP。</li>
+<li><strong>快速生效</strong>：不受传统DNS多级缓存影响，更新更快覆盖全量客户端。</li>
+</ul>
+</li>
+<li><strong>HTTP DNS实践</strong>：<ul>
+<li><strong>容灾策略（重要）</strong>：<ol>
+<li>先尝试HTTP DNS。</li>
+<li>失败则降级到本地DNS。</li>
+<li>再失败则使用预留的域名兜底IP地址。</li>
+</ol>
+</li>
+<li><strong>安全策略</strong>：使用HTTPS。</li>
+<li><strong>IP地址选取策略</strong>：HTTP DNS下发多个最优IP，客户端依次校验连通性。</li>
+<li><strong>批量拉取策略</strong>：冷启动/网络切换时批量拉取映射数据并缓存。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_2">接入层的技术演进</h3>
+<ul>
+<li><strong>早期架构问题</strong>：业务HTTP服务器直接绑定公网IP。<ul>
+<li><strong>可用性低</strong>：DNS无法高效感知实例宕机。</li>
+<li><strong>可扩展性差</strong>：扩容需额外配置DNS，生效慢。</li>
+<li><strong>安全风险高</strong>：业务IP暴露公网。</li>
+</ul>
+</li>
+<li><strong>解决方案</strong>：引入中间层 (Nginx)。</li>
+</ul>
+<h4 id="nginx">Nginx</h4>
+<ul>
+<li><strong>代理分类</strong>：<ul>
+<li><strong>正向代理</strong>：代理客户端（如VPN），客户端知道自己访问的是代理。</li>
+<li><strong>反向代理</strong>：代理服务器（如Nginx），客户端不知道访问的是代理，对外表现为目标服务器。</li>
+</ul>
+</li>
+<li><strong>Nginx作为反向代理</strong>：<ul>
+<li>强大的基于域名和HTTP URL的路由转发功能。</li>
+<li>通过<code>nginx.conf</code>配置<code>worker_processes</code> (工作进程数), <code>worker_connections</code> (连接数), <code>http</code>块 (包含<code>server</code>和<code>upstream</code>)。</li>
+<li><code>server</code>块：<code>listen</code> (监听端口), <code>server_name</code> (虚拟主机名), <code>location</code> (URL路径处理规则), <code>proxy_pass</code> (反向代理目标)。</li>
+<li><code>upstream</code>块：定义服务池，包含<code>server</code>实例地址。</li>
+</ul>
+</li>
+<li><strong>Nginx负载均衡策略</strong>：<ul>
+<li><strong>轮询 (默认)</strong>：按时间顺序分发，故障自动剔除。</li>
+<li><strong>加权轮询</strong>：按权重分配请求，权重高更容易被访问。</li>
+<li><strong>ip_hash</strong>：根据客户端IP哈希，确保同一IP请求访问同一实例 (不保证负载均衡)。</li>
+<li><strong>least_conn</strong>：转发给连接数最少的服务器 (适用于请求响应时间长，实现更好负载均衡)。</li>
+<li><strong>url_hash (第三方)</strong>：对URL哈希，提高相同请求缓存命中率。</li>
+<li><strong>fair (第三方)</strong>：根据响应时间、失败数、请求量综合选择最空闲服务器。</li>
+</ul>
+</li>
+<li><strong>Nginx作为七层负载均衡器</strong>：基于HTTP协议（OSI第七层）。</li>
+<li><strong>Nginx实时感知业务服务地址变更</strong>：<ul>
+<li>问题：业务频繁迭代扩容导致<code>upstream</code>配置频繁变更。</li>
+<li>解决方案：<ul>
+<li><code>ngx_lua</code>模块：嵌入Lua脚本。</li>
+<li><code>ngx_http_dyups_module</code>模块：Nginx无需重启热更新<code>upstream</code>配置。</li>
+<li>流程：定期从服务注册中心获取最新地址列表 -&gt; 生成最新<code>upstream</code>配置 -&gt; 通过<code>ngx_http_dyups_module</code>更新。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Nginx优势</strong>：<ul>
+<li>DNS指向Nginx，业务服务器IP切换无需配置DNS。</li>
+<li>实现客户端与业务服务器间的负载均衡。</li>
+<li>对外只暴露一个公网IP，节约IP资源。</li>
+<li>保护业务服务器，增强安全性。</li>
+<li>增强系统可扩展性，准实时生效。</li>
+<li>提高业务服务器可用性（实例故障自动迁移）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="lvs-linux-virtual-server">LVS (Linux Virtual Server)</h4>
+<ul>
+<li><strong>定义</strong>：Linux虚拟服务器集群系统，Linux内核一部分，运行于操作系统层面。</li>
+<li><strong>LVS vs. Nginx</strong>：<ul>
+<li><strong>Nginx</strong>：OSI七层（应用层），异步转发，强调“代理”，支持失败转移，功能强大。</li>
+<li><strong>LVS</strong>：OSI四层（网络层），同步转发，强调“转发”，性能更高（免去应用层解析）。</li>
+</ul>
+</li>
+<li><strong>常用名词</strong>：<ul>
+<li><strong>DS (Director Server)</strong>：四层负载均衡器节点 (LVS服务器)。</li>
+<li><strong>RS (Real Server)</strong>：DS请求转发目的地 (真实工作服务器)。</li>
+<li><strong>VIP (Virtual Server IP)</strong>：客户端请求目的IP (DS的公网IP)。</li>
+<li><strong>DIP (Director Server IP)</strong>：DS与RS通信IP (DS的内网IP)。</li>
+<li><strong>RIP (Real Server IP)</strong>：后端服务器IP。</li>
+<li><strong>CIP (Client IP)</strong>：客户端IP。</li>
+</ul>
+</li>
+<li><strong>LVS转发模式</strong>：<ol>
+<li><strong>NAT模式 (Network Address Translation)</strong>：<ul>
+<li>原理：修改请求报文的目标IP/端口。</li>
+<li>特点：请求/响应均经过DS重写，DS是RS网关。</li>
+<li>条件：DS需两块网卡，DS与RS同局域网，DS为网关。</li>
+<li>缺点：响应数据大，DS易成性能瓶颈。</li>
+</ul>
+</li>
+<li><strong>FULLNAT模式 (Full NAT)</strong>：<ul>
+<li>原理：在NAT基础上再次进行源IP地址转换（将CIP改为DIP）。</li>
+<li>特点：不要求DS与RS同局域网或DS为网关。</li>
+<li>缺点：请求到达RS后丢失客户端IP地址。</li>
+<li><strong>推荐模式</strong>：网络环境适应性强。</li>
+</ul>
+</li>
+<li><strong>TUN模式 (IP隧道模式)</strong>：<ul>
+<li>原理：DS将请求报文封装到新数据包，目的IP为RS的RIP，通过IP隧道发送。RS解密原数据包，直接响应客户端。</li>
+<li>特点：DIP/RIP不一定同网络，RS/DS网络需支持IP隧道。RS需配置VIP绑定到lo网卡。</li>
+<li>优点：DS只转发请求，RS直接响应，性能高于NAT。</li>
+</ul>
+</li>
+<li><strong>DR模式 (Direct Routing)</strong>：<ul>
+<li>原理：DS改写请求报文的MAC地址将请求转发到RS，RS直接通过网关返回响应给客户端。</li>
+<li>特点：DS/RS需同物理网络。RS需配置VIP绑定到lo网卡。</li>
+<li>优点：性能最好（不涉及IP隧道加密/解密）。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>模式优劣势总结</strong>：<ul>
+<li>NAT：RS无需VIP，DS作网关，性能一般。</li>
+<li>FULLNAT：RS无需VIP，网络要求低，丢失客户端IP，性能一般。</li>
+<li>TUN：性能好，服务器需支持IP隧道，RS需配置VIP。</li>
+<li>DR：性能好，DS/RS同物理网络，RS需配置VIP。</li>
+</ul>
+</li>
+<li><strong>选择</strong>：强网络适应性选FULLNAT，高性能选DR。</li>
+</ul>
+<h4 id="lvsnginx">LVS+Nginx接入层架构</h4>
+<ul>
+<li><strong>组合优势</strong>：<ul>
+<li>LVS性能高，便于Nginx集群化，提高Nginx可扩展性 (LVS作为Nginx的四层负载均衡)。</li>
+<li>Nginx功能强大，作为业务HTTP服务器的七层负载均衡器，提高业务服务高可用/可扩展性。</li>
+</ul>
+</li>
+<li><strong>单点问题</strong>：LVS是单点故障。</li>
+<li><strong>LVS高可用方案</strong>：<strong>Keepalived + VIP</strong> (主从热备)。<ul>
+<li>Keepalived：主节点A和从节点B。主节点通过ARP告知VIP对应的MAC为MAC-A。</li>
+<li>故障切换：从节点B监听到主节点A宕机后，代替主节点A回复ARP，告知VIP对应的MAC为MAC-B，流量转向B。</li>
+</ul>
+</li>
+<li><strong>LVS性能瓶颈</strong>：单台LVS有上限。</li>
+<li><strong>LVS水平扩展</strong>：多台LVS对外提供服务，配置N个VIP，客户端依赖<strong>DNS轮询</strong>决定访问哪台LVS。</li>
+<li><strong>最终完备架构特点</strong>：<ul>
+<li>DNS轮询扩展LVS性能。</li>
+<li>Keepalived保证LVS高可用。</li>
+<li>LVS扩展Nginx性能。</li>
+<li>Nginx作为七层负载均衡器，提高业务HTTP服务的高可用/可扩展性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_3">服务发现</h3>
+<ul>
+<li><strong>定义</strong>：为每个服务提供可以自动发现下游服务地址列表的能力。</li>
+<li><strong>服务注册中心</strong>：管理每个服务的地址列表 (注册) 和将某服务的地址告知调用者 (发现)。</li>
+<li><strong>注册与发现流程</strong>：<ol>
+<li>服务实例启动后，将地址信息注册到服务注册中心。</li>
+<li>调用者向服务注册中心查询服务地址。</li>
+<li>服务注册中心返回地址列表。</li>
+<li>调用者向任意实例发起调用。</li>
+</ol>
+</li>
+<li><strong>通信方式</strong>：主动查询 或 订阅推送 (服务注册中心主动推送最新地址列表)。</li>
+<li><strong>业界组件</strong>：Spring Cloud Eureka, CNCF CoreDNS。</li>
+<li><strong>可用地址管理</strong>：<ul>
+<li>服务实例启动注册，退出注销。</li>
+<li><strong>探活能力</strong>（关键）：<ul>
+<li><strong>主动探活</strong>：服务注册中心周期性探测（效率低，不适合大规模）。</li>
+<li><strong>心跳探活 (推荐)</strong>：服务实例定期发送心跳包，服务注册中心更新最近心跳时间，超时则认为不可用并摘除。</li>
+</ul>
+</li>
+<li><strong>摘除保护策略</strong>：若已摘除地址数超阈值（如30%），停止摘除并报警，防止过度摘除导致服务不可用。</li>
+</ul>
+</li>
+<li><strong>地址变更推送</strong>：<ul>
+<li><strong>推送风暴问题</strong>：大规模推送会占用大量网络带宽。</li>
+<li><strong>解决方案</strong>：<ul>
+<li>推送<strong>增量数据</strong>而非全量。</li>
+<li>服务注册中心<strong>部署大量实例</strong>，分摊推送压力。</li>
+<li><strong>推拉结合</strong>：少量节点推送，其他节点周期性拉取。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>服务发现的价值</strong>：调用者无需关心被调用者地址，服务可弹性伸缩，真正为微服务带来弹性。</li>
+</ul>
+<h3 id="rpc-remote-procedure-call">RPC服务 (Remote Procedure Call)</h3>
+<ul>
+<li><strong>定位</strong>：<ul>
+<li><strong>HTTP服务</strong>：服务于后台外部，与用户请求交互（校验、打包响应），更像业务服务层的“网关”。</li>
+<li><strong>RPC服务</strong>：服务于后台内部，实现核心业务逻辑，强调“微服务”。</li>
+</ul>
+</li>
+<li><strong>RPC目标</strong>：屏蔽网络编程细节，像调用本地方法一样调用远程方法。</li>
+<li><strong>RPC通信流程</strong>：<ol>
+<li><strong>序列化</strong>：方法输入参数对象转化为二进制数据。</li>
+<li><strong>编码</strong>：二进制数据编码为约定协议格式的数据包。</li>
+<li><strong>网络发送</strong>。</li>
+<li><strong>解码</strong>：被调用方将数据包解码。</li>
+<li><strong>反序列化</strong>：得到方法名和输入参数。</li>
+<li><strong>执行方法</strong>。</li>
+<li><strong>结果返回</strong>：同样流程返回给调用方。</li>
+</ol>
+</li>
+<li><strong>RPC框架</strong>：gRPC, Thrift等，可利用协议定义文件生成脚手架代码。</li>
+<li><strong>RPC与HTTP关系</strong>：RPC是一种设计，与HTTP不是对立概念，RPC底层网络通信可使用TCP或HTTP实现。</li>
+<li><strong>HTTP服务调用RPC服务</strong>：HTTP服务通过服务发现获取RPC服务地址，再通过RPC协议进行通信。</li>
+</ul>
+<h3 id="mysql">存储层技术：MySQL优势</h3>
+<ul>
+<li><strong>关系型数据库</strong>：采用关系模型组织数据，以行和列形式存储数据（二维表），使用SQL操作数据。<ul>
+<li><strong>主键</strong>：唯一标识行记录的属性组。</li>
+</ul>
+</li>
+<li><strong>MySQL优势</strong>：<ul>
+<li>易用、功能强大（事务、触发器、存储过程），管理工具多。</li>
+<li>支持千万级数据记录的大型数据库。</li>
+<li>GPL开源协议，可自由定制。</li>
+<li>InnoDB事务性存储引擎符合ACID模型，保证完整可靠存储。</li>
+</ul>
+</li>
+<li><strong>高可用架构1：主从模式</strong><ul>
+<li><strong>组成</strong>：一台Master（处理写请求），若干Slave（从库）。</li>
+<li><strong>数据一致性</strong>：Master与Slave通过主从复制技术保持。</li>
+<li><strong>高可用</strong>：Master故障时，Slave提升为Master。</li>
+<li><strong>主从复制原理</strong>：<ol>
+<li>Master数据变更写入<strong>binlog (二进制日志文件)</strong>。</li>
+<li>Slave启动I/O线程与Master建立连接，读取binlog。</li>
+<li>I/O线程将日志保存到<strong>relay log (中继日志文件)</strong>。</li>
+<li>Slave启动SQL线程从relay log获取日志，本地重新执行SQL回放数据。</li>
+</ol>
+</li>
+<li><strong>异步复制</strong>：Master提交事务不等待Slave确认，可能导致数据丢失。</li>
+<li><strong>半同步复制 (MySQL 5.5+)</strong>：Master提交事务前等待至少一个Slave确认接收binlog (写入relay log)，减少数据丢失风险，但影响写性能。</li>
+<li><strong>复制风暴</strong>：过多Slave直接复制Master导致压力倍增，可采用级联复制 (Slave向Slave复制)。</li>
+</ul>
+</li>
+<li><strong>高可用架构2：MHA (Master High Availability)</strong><ul>
+<li><strong>目标</strong>：10-30s内完成MySQL主从集群自动故障检测和切换，最大程度保证数据一致性。</li>
+<li><strong>组成</strong>：<ul>
+<li><strong>MHA Manager (管理节点)</strong>：决策层，负责故障检测、切换。</li>
+<li><strong>MHA Node (数据节点)</strong>：部署在每台MySQL服务器上，修复主从数据差异。</li>
+</ul>
+</li>
+<li><strong>故障转移流程</strong>：<ol>
+<li>MHA Manager周期探测Master心跳，失联则认为宕机。</li>
+<li>MHA Manager判断哪个Slave的binlog最接近Master。</li>
+<li>MHA Node尝试SSH访问Master，若可达则获取binlog，对比Slave数据并补齐差异；若不可达则对比Slave间relay log差异并补齐。</li>
+<li>MHA Manager构建新主从关系，备选Slave提升为Master。</li>
+</ol>
+</li>
+<li><strong>优势</strong>：与半同步复制结合可大幅降低数据丢失风险。</li>
+</ul>
+</li>
+<li><strong>高可用架构3：MMM (Multi-Master Replication Manager for MySQL)</strong><ul>
+<li><strong>目标</strong>：MySQL双主故障切换和管理。</li>
+<li><strong>组成</strong>：Master 1 (写请求)，Master 2 (备用，与Master 1互复制，一般半同步)，若干Slave (异步复制Master 1)，mmm-monitor (检测、决策)，mmm-agent (节点代理)，write vip (对外写IP，绑定其中一个Master)，read vip (对外读IP，绑定Slave)。</li>
+<li><strong>故障转移流程</strong>：agent/monitor检测Master 1宕机 -&gt; monitor要求Master 1移除write vip -&gt; monitor要求Master 2绑定write vip成为Master -&gt; monitor要求Slave向Master 2复制数据。</li>
+<li><strong>缺点</strong>：较古老，不支持MySQL GTID，社区不活跃，处于无人维护状态。</li>
+</ul>
+</li>
+<li><strong>高可用架构4：MGR (MySQL Group Replication)</strong><ul>
+<li><strong>版本</strong>：MySQL 5.7.17+。</li>
+<li><strong>特性</strong>：<ul>
+<li><strong>一致性高</strong>：基于分布式共识算法Paxos，保证多节点数据一致性。</li>
+<li><strong>容错性高</strong>：只要不超过一半节点宕机，即可对外服务。</li>
+<li><strong>灵活性强</strong>：支持单主模式（自动选主）和多主模式（每个节点可处理写请求）。</li>
+</ul>
+</li>
+<li><strong>组成</strong>：至少3个MySQL节点组成复制组。事务提交需超过一半节点决议通过。</li>
+<li><strong>多主模式</strong>：写请求高并发场景易产生事务冲突，导致大量回滚。官方推荐单主模式。</li>
+<li><strong>单主模式</strong>：MGR自动选Master， Master故障时自动根据权重/ID选主。</li>
+<li><strong>优势</strong>：强一致性（数据不丢失），高容错性。</li>
+<li><strong>缺点</strong>：每个写请求涉及与复制组内多数节点通信，写性能不及异步/半同步复制。适合高一致性要求、写请求量不大的场景。</li>
+</ul>
+</li>
+</ul>
+<h3 id="redis">存储层技术：Redis</h3>
+<ul>
+<li><strong>Redis特性</strong>：<ul>
+<li>基于内存，性能高。</li>
+<li>支持丰富数据类型（String, List, Hash, Set, ZSet）。</li>
+<li>支持分布式（主从、哨兵、集群），可无限扩展。</li>
+<li>单线程事件驱动，数据操作原子性。</li>
+</ul>
+</li>
+<li><strong>应用场景</strong>：缓存系统、计数器、限流、排行榜、社交网络等。</li>
+<li><strong>高可用架构1：主从模式</strong><ul>
+<li><strong>组成</strong>：1 Master + 若干 Slave。</li>
+<li><strong>复制流程</strong>：<ol>
+<li>Slave连接Master，发送PSYNC命令。</li>
+<li>Master执行BGSAVE生成RDB快照，并创建缓冲区记录数据变更命令。</li>
+<li>Master发送RDB快照给Slave。</li>
+<li>Slave加载RDB到内存，接收Master数据变更命令。</li>
+<li>Master发送缓冲区中记录的变更命令。</li>
+<li>Slave执行命令，保持数据一致。</li>
+</ol>
+</li>
+<li><strong>问题</strong>：Master向过多Slave复制数据会导致“复制风暴”。</li>
+</ul>
+</li>
+<li><strong>高可用架构2：哨兵模式 (Sentinel)</strong><ul>
+<li><strong>目标</strong>：Master宕机后自动竞选新Master，实现自动主从切换。</li>
+<li><strong>组成</strong>：主从模式基础 + 若干Sentinel服务器。</li>
+<li><strong>Sentinel角色</strong>：监控Master/Slave心跳。当超过N个Sentinel节点认为Master宕机，则协商选举Slave为新Master。</li>
+<li><strong>客户端访问</strong>：先访问Sentinel集群获取Master地址，Master故障时从Sentinel获取新Master地址。</li>
+<li><strong>优势</strong>：无需人工干预主从切换，客户端自动获取新Master地址。</li>
+</ul>
+</li>
+<li><strong>高可用架构3：集群模式 (Redis Cluster)</strong><ul>
+<li><strong>目标</strong>：分布式存储，解决单个Master内存/QPS限制。</li>
+<li><strong>组成</strong>：多个Redis节点（Master + 若干 Slave组成节点组，代表一个数据分片）。</li>
+<li><strong>要求</strong>：至少3个Master，每个Master至少1个Slave。节点间可相互通信。</li>
+<li><strong>数据分片</strong>：基于<strong>哈希槽 (Hash Slot)</strong>，共16384个槽位，Master瓜分。<ul>
+<li>计算公式：<code>slot = CRC16(Key) mod 16384</code>。</li>
+</ul>
+</li>
+<li><strong>客户端访问流程</strong>：<ol>
+<li>客户端连接任一节点，获取槽位与Master映射关系并缓存。</li>
+<li>读/写数据时，根据Key计算槽位。</li>
+<li>根据槽位在本地缓存定位Master地址，发送请求。</li>
+</ol>
+</li>
+<li><strong>Gossip协议</strong>：用于集群元信息（节点加入、扩缩容、故障转移）的灵活自动变更，最终一致性协议。<ul>
+<li><strong>消息类型</strong>：meet, ping, pong, fail。</li>
+<li><strong>节点故障转移</strong>：<ul>
+<li><strong>主观下线</strong>：节点A认为节点B下线。</li>
+<li><strong>客观下线</strong>：集群中超过一半节点认为B主观下线。</li>
+<li>B客观下线后，其从节点接管槽位，提升为Master。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>优势</strong>：去中心化架构，槽位管理便捷，可扩展性强，自动故障发现/恢复，Redis官方出品。</li>
+<li><strong>缺点</strong>：集群节点数量多时（上千个），Gossip协议会造成大量网络通信，形成“Gossip风暴”，严重占用网络带宽。</li>
+</ul>
+</li>
+</ul>
+<h4 id="gossip">中心化集群架构 (解决Gossip风暴)</h4>
+<ul>
+<li><strong>思路</strong>：舍弃去中心化，拥抱中心化，使用中间代理维护集群节点元信息。</li>
+<li><strong>Twemproxy (Twitter开源)</strong>：<ul>
+<li><strong>原理</strong>：客户端请求 -&gt; Twemproxy -&gt; Redis节点。Twemproxy根据路由规则转发。</li>
+<li><strong>优势</strong>：客户端透明，减少连接数，Twemproxy集中路由。</li>
+<li><strong>不足</strong>：无友好管理后台，不支持平滑扩缩容（主要痛点）。</li>
+</ul>
+</li>
+<li><strong>Codis (豌豆荚开源)</strong>：<ul>
+<li><strong>数据划分</strong>：N个槽位（默认1024），<code>slot = CRC32(Key) mod N</code>。</li>
+<li><strong>核心组件</strong>：<ul>
+<li><strong>Codis Server</strong>：二次开发Redis服务器，支持数据迁移。</li>
+<li><strong>Codis Proxy</strong>：中间代理，接收/转发客户端请求。</li>
+<li><strong>ZooKeeper集群</strong>：保存Redis集群元信息（槽位、节点地址、Proxy地址），提供服务发现。</li>
+<li><strong>Codis Dashboard/Codis Fe</strong>：集群运维管理工具（扩缩容、槽位迁移、Web操作页面）。</li>
+</ul>
+</li>
+<li><strong>架构</strong>：每个数据分片定义为Redis Server Group (Master + 若干 Slave)。</li>
+<li><strong>客户端访问流程</strong>：<ol>
+<li>客户端从ZooKeeper获取Codis Proxy列表，选择连接。</li>
+<li>客户端向Codis Proxy发送请求。</li>
+<li>Codis Proxy根据Key计算槽位，通过ZooKeeper定位负责槽位的Redis Server Group。</li>
+<li>Codis Proxy转发请求到Redis节点。</li>
+<li>Redis节点处理，结果返回给Codis Proxy。</li>
+<li>Codis Proxy返回给客户端。</li>
+</ol>
+</li>
+<li><strong>平滑扩缩容 (槽位迁移)</strong>：A节点将槽位S关联数据复制到B，期间A继续对外服务。若请求数据D属于S，且正在迁移，则A强制D迁移到B再转发请求到B。</li>
+<li><strong>故障宕机</strong>：新版本Codis建议每个Redis Server Group引入Sentinel节点处理。</li>
+<li><strong>推荐</strong>：Redis集群节点较多时（上千），推荐使用Codis类中心化架构。</li>
+</ul>
+</li>
+</ul>
+<h3 id="lsm-tree">存储层技术：LSM Tree</h3>
+<ul>
+<li><strong>特性</strong>：对高并发写友好，兼顾查询效率。NoSQL数据库（如BigTable, HBase, Cassandra, TiDB）核心数据结构。</li>
+<li><strong>原理</strong>：基于“磁盘/内存顺序读/写性能远高于随机读/写性能”结论。</li>
+<li><strong>组成部分</strong>：<ol>
+<li><strong>MemTable (内存中)</strong>：保存最新更新数据，按Key字典序有序组织 (红黑树/跳跃表)。<ul>
+<li>写请求直接在MemTable处理：新增、修改、删除（标记为tombstone）。</li>
+<li><strong>预写日志 (WAL)</strong>：数据修改命令提交MemTable前先追加记录到磁盘WAL文件，保证可靠性。</li>
+</ul>
+</li>
+<li><strong>Immutable MemTable (只读内存)</strong>：MemTable达到一定大小后转为只读，后台线程将其持久化为SSTable。</li>
+<li><strong>SSTable (Sorted String Table, 磁盘文件)</strong>：持久化的、有序且不可变的键值对存储结构。<ul>
+<li>Key-Value连续存储，文件尾部存储稀疏索引（提高查找速度）。</li>
+<li><strong>合并操作 (Compaction)</strong>：周期性对SSTable进行合并，清除冗余记录。<ul>
+<li>使用<strong>Leveled Compaction Strategy (LCS)</strong>：SSTable分Level层级，Level N文件合并下沉到Level N+1。</li>
+<li>LCS保证：所有Level SSTable大小一致（如160MB），每个Level限制文件总大小，单个/同Level内SSTable之间数据有序且无Key重叠。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>读/写数据流程</strong>：<ul>
+<li><strong>写流程</strong>：WAL -&gt; MemTable -&gt; (满) Immutable MemTable -&gt; SSTable (Level 0) -&gt; (满) 合并下沉到Level 1 -&gt; ... -&gt; Level N+1。</li>
+<li><strong>读流程</strong>：按数据新旧程度，MemTable -&gt; Immutable MemTable -&gt; Level 0 SSTable (最新) -&gt; Level 1 SSTable -&gt; ... -&gt; Level N SSTable。</li>
+</ul>
+</li>
+</ul>
+<h3 id="nosql">存储层技术：NoSQL数据库</h3>
+<ol>
+<li><strong>文档数据库 (MongoDB, CouchDB)</strong>：<ul>
+<li><strong>特点</strong>：采用JSON格式存储数据，解决关系型数据库Schema扩展不便问题。</li>
+<li><strong>适用场景</strong>：数据量大/增长快，字段定义不明确/变化快（如商品参数）。</li>
+<li><strong>不适用场景</strong>：需事务（无法保证多文档原子性），需复杂查询（如join）。</li>
+</ul>
+</li>
+<li><strong>列式数据库 (BigTable, HBase)</strong>：<ul>
+<li><strong>特点</strong>：按列存储数据，而非行式。</li>
+<li><strong>优势</strong>：统计查询效率高（只读取关注列），存储空间利用率高（字典表压缩）。</li>
+<li><strong>适用场景</strong>：海量数据插入、极少修改（如用户行为收集），数据分析（离线统计）。</li>
+<li><strong>不适用场景</strong>：高频删除/修改，不适合在线用户，需事务。</li>
+</ul>
+</li>
+<li><strong>全文搜索数据库 (Elasticsearch)</strong>：<ul>
+<li><strong>问题</strong>：关系型数据库模糊查询效率低（LIKE语句全量扫描）。</li>
+<li><strong>原理</strong>：建立单词到文档的索引关系作为“倒排索引”。</li>
+<li><strong>优势</strong>：高效关键词搜索，海量数据复杂查询，数据统计/聚合。</li>
+<li><strong>不适用场景</strong>：高频更新数据（实际是删除旧数据+创建新数据），需事务。</li>
+</ul>
+</li>
+<li><strong>图数据库 (Neo4j, Titan)</strong>：<ul>
+<li><strong>特点</strong>：以“图”这种数据结构存储数据（节点-实体，关系-节点间关联）。</li>
+<li><strong>优势</strong>：直观数据模型，易查询节点间关系，解决关系型数据库不擅长处理实体关系问题。</li>
+<li><strong>适用场景</strong>：强调关系、需复杂关系查询/分析的业务（如社交网络、知识图谱）。</li>
+</ul>
+</li>
+<li><strong>NewSQL数据库 (Google Spanner, TiDB, CockroachDB)</strong>：<ul>
+<li><strong>定位</strong>：结合关系型数据库和NoSQL两者优点。</li>
+<li><strong>底层</strong>：使用分布式键值存储系统（LSM Tree模型）。</li>
+<li><strong>革新</strong>：放弃NoSQL主从复制，以更小粒度数据分片作为高可用单位，通过Paxos/Raft等分布式共识算法复制数据，采用分布式事务。</li>
+<li><strong>优势</strong>：保留NoSQL可扩展性，提供关系型数据库事务能力。</li>
+<li><strong>现状</strong>：数据库领域后起之秀，但仍是小众产品，需更多考验。</li>
+</ul>
+</li>
+</ol>
+<h3 id="_4">消息中间件技术</h3>
+<ul>
+<li><strong>定义</strong>：生产者创建消息投递到队列，消费者从队列读取消息，完成通信。</li>
+<li><strong>通信模式优点</strong>：<ul>
+<li>生产者单方面完成消息通信，无需等待消费者。</li>
+<li>消费者根据自身能力拉取新消息，灵活。</li>
+</ul>
+</li>
+<li><strong>核心用途</strong>：<ol>
+<li><strong>异步化</strong>：将非核心业务逻辑异步处理，大幅降低用户请求响应时间。</li>
+<li><strong>流量削峰</strong>：消费者根据自身处理能力灵活读取消息，平滑高并发流量，提高服务稳定性。</li>
+<li><strong>解耦</strong>：服务间通过消息队列通信，消除直接依赖，利于职责分离，减少事故。</li>
+</ol>
+</li>
+</ul>
+<h4 id="kafka">Kafka</h4>
+<ul>
+<li><strong>定义</strong>：分布式、高性能、高可扩展性的消息队列系统，主要用于日志收集和消息中间件。</li>
+<li><strong>整体架构组件</strong>：<ol>
+<li><strong>Producer (生产者)</strong>：生产消息。</li>
+<li><strong>Consumer (消费者)</strong>：消费消息。</li>
+<li><strong>Topic (主题)</strong>：消息类型。</li>
+<li><strong>Partition (分区)</strong>：Topic消息分布式存储在多个Partition中，实现负载均衡。每个Partition消息有序，不同Partition间消息无序。由Broker管理。</li>
+<li><strong>Broker</strong>：Kafka核心，接收/存储消息到Partition，处理消费者消费逻辑。多个Broker组成Kafka集群。</li>
+<li><strong>Consumer Group (消费者组)</strong>：多个消费者实例组成，一个Topic对应一个或多个Consumer Group。<ul>
+<li>规定：一个Partition消息只能被Consumer Group中一个消费者实例消费。</li>
+</ul>
+</li>
+<li><strong>ZooKeeper (Kafka 0.9+)</strong>：负责Kafka集群元信息管理。<ul>
+<li>Broker注册、Topic元信息管理 (Partition与Broker关联)。</li>
+<li>生产者负载均衡 (消息写入Partition)。</li>
+<li>消费者负载均衡 (记录“哪个消费者实例消费哪个Partition”，宕机后Rebalance)。</li>
+<li>消费进度Offset记录 (Kafka 0.9+版本已改为Broker本地磁盘保存，提升写性能)。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><strong>生产者发送消息流程</strong>：<ul>
+<li>指定Partition则直接使用。</li>
+<li>未指定但有Key则对Key哈希选Partition。</li>
+<li>既未指定Partition也未指定Key则轮询选择Partition。</li>
+<li>发送到选定的Partition对应Broker，Broker顺序写入磁盘。</li>
+</ul>
+</li>
+<li><strong>消费者消费消息</strong>：<ul>
+<li>以Consumer Group方式工作。</li>
+<li>一个Consumer Group可消费多个Topic，一个Topic也可被多个Consumer Group消费。</li>
+<li><strong>拉取(pull)模式</strong>：消费者主动控制消费速度，实现削峰。</li>
+</ul>
+</li>
+</ul>
+<h4 id="kafka_1">Kafka的高可用</h4>
+<ul>
+<li><strong>Partition多副本</strong>：每个Partition有1个Leader和若干Follower。<ul>
+<li>Leader处理生产者写入和消费者读取。</li>
+<li>Follower周期性向Leader请求消息复制，作为Leader数据备份。</li>
+<li>副本存储在不同Broker上，防止Broker宕机导致Partition不可用。</li>
+</ul>
+</li>
+<li><strong>ISR (In-Sync Replica) 机制</strong>：Leader维护与自己数据一致的Follower列表。<ul>
+<li>Follower长时间未复制或数据落后过多，则从ISR移除。</li>
+<li>只有ISR中所有Follower都确认收到消息，Leader才认为消息写入成功。</li>
+<li><strong>特点</strong>：同步复制和异步复制的折中，避免Follower宕机对性能/可用性影响，保证多副本数据一致性。</li>
+</ul>
+</li>
+<li><strong>故障恢复</strong>：<ul>
+<li><strong>Controller角色</strong>：Kafka集群中选举一个Controller（借助ZooKeeper分布式锁），负责Partition Leader选举和副本重分配。</li>
+<li><strong>故障恢复流程</strong>：<ol>
+<li>Broker故障，与ZooKeeper断连。</li>
+<li>ZooKeeper通知Controller。</li>
+<li>Controller查询受影响的Partition (Leader由故障Broker负责)。</li>
+<li>Controller从每个Partition Leader ISR中选择一个Follower提升为Leader。</li>
+<li>Controller通知相关Broker。</li>
+<li>被选举的Follower变为Leader，其他Follower转而向新Leader复制数据。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_5">多机房：主备机房</h3>
+<ul>
+<li><strong>问题</strong>：单机房是单点故障（人为破坏、自然灾害、断电、火灾等）。</li>
+<li><strong>方案</strong>：在主机房所在城市建设一个备机房，完全复制主机房架构。<ul>
+<li><strong>正常情况</strong>：仅主机房工作。</li>
+<li><strong>存储层</strong>：备机房数据库作为主机房从库，通过<strong>专线</strong>进行数据复制。</li>
+</ul>
+</li>
+<li><strong>故障切换</strong>：主机房故障时，备机房：<ul>
+<li>存储层从库提升为主库。</li>
+<li>修改DNS解析地址指向备机房。</li>
+</ul>
+</li>
+<li><strong>“同城灾备”特点</strong>：<ul>
+<li><strong>优点</strong>：架构搭建简单。</li>
+<li><strong>缺点</strong>：<ul>
+<li><strong>资源浪费</strong>：备机房大部分时间空闲。</li>
+<li><strong>可用性存疑</strong>：备机房无实战经验，关键时刻可能掉链子。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="_6">多机房：同城双活</h3>
+<ul>
+<li><strong>动机</strong>：解决主备机房资源浪费和可用性存疑问题。</li>
+<li><strong>改造</strong>：将两个机房的接入层IP地址都配置到DNS，实现“双活”，两个机房都能处理部分用户请求。</li>
+<li><strong>存储层改造</strong>：<ul>
+<li>一个机房作为<strong>主库机房</strong>（如A机房）。</li>
+<li>另一个机房（如B机房）的所有写数据请求<strong>跨机房访问A机房对应的主库</strong>。</li>
+<li>读数据请求依赖各存储系统自带的主从复制功能，在本地处理。</li>
+<li><strong>优点</strong>：写请求延迟增大但可接受（同城距离近，专线延迟5ms左右），写请求占比较低。可将“同城双活”视为单机房使用。</li>
+</ul>
+</li>
+<li><strong>灵活实施</strong>：<ul>
+<li><strong>“同城”不局限行政区域</strong>：强调物理距离近，以缓解跨机房访问延迟，同时避免物理距离过近导致单点失效。</li>
+<li><strong>“同城双活”可扩展为“同城多活”</strong>：可部署更多机房，但存储层需选出唯一主库机房。</li>
+</ul>
+</li>
+<li><strong>分流与故障切流</strong>：<ul>
+<li><strong>分流策略</strong>：根据用户ID/DeviceID哈希映射到不同机房。推荐DeviceID（未登录用户）。</li>
+<li><strong>分流环节</strong>：<ul>
+<li><strong>DNS分流 (粗糙)</strong>：解析结果不确定，同一用户可能路由到不同机房，策略变更生效慢。</li>
+<li><strong>客户端分流 (推荐)</strong>：<ul>
+<li><strong>分流配置平台</strong>：部署在各机房，工程师配置域名分流比例 (如<code>sharding</code>, <code>idc</code>包含<code>lower</code>/<code>upper</code>范围和<code>domain</code>专用域名)。</li>
+<li><strong>客户端流程</strong>：发起请求时若有分流配置，则DeviceID哈希取模，根据范围选择专用域名发送请求。</li>
+<li><strong>准实时生效</strong>：Nginx响应Header带最新分流配置版本号，客户端若发现本地版本旧，则主动拉取最新配置。</li>
+<li><strong>客户端主动容灾</strong>：连续N次访问A机房失败 -&gt; 猜测A不可用 -&gt; 尝试拉取A机房配置 (若失败) -&gt; 转而向B机房拉取配置 -&gt; 应用最新配置切流到B机房。</li>
+</ul>
+</li>
+<li><strong>HTTP DNS或其他接入层组件</strong>：也可支持分流。</li>
+</ul>
+</li>
+<li><strong>切流操作</strong>：若故障机房是主库，需将备机房存储层数据库提升为主库。</li>
+</ul>
+</li>
+<li><strong>两地三中心</strong>：<ul>
+<li>在“同城双活”基础上增加一个异地备机房（距离较远）。</li>
+<li>备机房只做数据备份，不对外提供服务。</li>
+<li><strong>笔者看法</strong>：投入产出比低，多数场景下“同城双活”足够。</li>
+</ul>
+</li>
+</ul>
+<h3 id="_7">多机房：异地多活</h3>
+<ul>
+<li><strong>适用场景</strong>：服务于全球用户的世界级应用（如Facebook, Instagram）。</li>
+<li><strong>“同城双活”对全球应用的问题</strong>：<ul>
+<li><strong>用户访问延迟</strong>：跨国访问物理距离远，延迟高。</li>
+<li><strong>数据合规问题</strong>：各国要求本国用户数据独立存储。</li>
+<li><strong>灾难问题</strong>：部署国战争、暴乱、自然灾害可能导致全球应用不可用。</li>
+</ul>
+</li>
+<li><strong>“异地多活”架构要点</strong>：<ol>
+<li><strong>每个机房都在本机房内处理写数据请求</strong>：由于异地机房间网络延迟巨大，无法跨机房写主库。每个机房独立部署各存储层主库，存储层间无主从关系。</li>
+<li><strong>数据互通</strong>：每个机房将本机房写入的数据复制到其他机房，实现全球数据可见。<ul>
+<li>通过<strong>DRC (Data Replicate Center)</strong> 工具实现存储系统间的<strong>双向数据复制 (主主复制)</strong>。</li>
+<li>业界项目：阿里巴巴 (Otter, RedisShake, MongoShake), 携程 (XPipe)。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="mysql-drc">MySQL DRC的原理</h4>
+<ul>
+<li><strong>DRC工具结构</strong>：<ul>
+<li><strong>Sync-out</strong>：伪从，模拟MySQL从库，从本地主库获取binlog数据变更记录，实时传输到远端Sync-in。</li>
+<li><strong>Sync-in</strong>：扮演数据库客户端，收到远端数据后还原SQL语句并在本机房主库执行。</li>
+</ul>
+</li>
+<li><strong>断点续传与数据防重</strong>：<ul>
+<li>使用<strong>GTID (Global Transaction Identifier)</strong>：MySQL对每个已提交事务的全局唯一编号。</li>
+<li>Sync-out记录最新传输成功的GTID，故障恢复后从GTID位置继续传输。</li>
+<li>Sync-in保存已写入数据GTID集合，收到数据前检查是否已存在，实现数据防重。</li>
+</ul>
+</li>
+<li><strong>防止数据回环</strong>：<ul>
+<li>在主库创建辅助表，记录来自其他机房的数据变更事务。</li>
+<li>Sync-in写入数据时，同时在辅助表插入记录。</li>
+<li>Sync-out解析binlog，若发现事务有写辅助表，则说明来自其他机房，不传输此数据。</li>
+</ul>
+</li>
+<li><strong>数据冲突</strong>：<ul>
+<li><strong>难以解决</strong>：在不同机房几乎同时修改同一数据。</li>
+<li><strong>LWW (Last Write Wins) 策略</strong>：最后写入者胜利（基于修改时间戳），但不同机房时间戳可能不一致，不准确。</li>
+<li><strong>避免冲突</strong>：<ul>
+<li>业务逻辑不依赖数据库自增主键，采用分布式唯一ID。</li>
+<li>机房分流尽量保证不同用户被分流到不同机房，避免同一用户数据在多机房同时修改。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>总结</strong>：MySQL DRC技术核心要点包括伪从、断点续传、数据防重、防止数据回环和数据冲突。</li>
+</ul>
+<h4 id="redis-drc">Redis DRC的原理</h4>
+<ul>
+<li><strong>伪从</strong>：Sync-out模拟Redis从库，向Redis主库复制写命令，暂存到本地。</li>
+<li><strong>断点续传和数据防重</strong>：<ul>
+<li>Redis无GTID，需<strong>自定义递增唯一ID</strong>绑定到每个写命令。</li>
+<li>Sync-out保存已传输写命令ID，恢复后继续传输。</li>
+<li>Sync-in保存最近成功写入的写命令ID，若收到ID小于等于此ID则丢弃。</li>
+</ul>
+</li>
+<li><strong>防止数据回环</strong>：<ul>
+<li><strong>思路1 (不推荐)</strong>：改造Redis写命令格式携带机房信息（维护成本高）。</li>
+<li><strong>思路2 (推荐)</strong>：Redis主库识别客户端角色。增加<code>REDIS_SYNC_IN</code>标志，若写命令来自Sync-in，则不复制给Sync-out。</li>
+</ul>
+</li>
+<li><strong>数据冲突</strong>：<ul>
+<li>比MySQL更复杂，Redis命令丰富，难实现统一防冲突数据结构。</li>
+<li>同样建议<strong>尽量避免数据冲突</strong>，通过用户分区等方式。</li>
+</ul>
+</li>
+</ul>
+<h4 id="_8">分流策略</h4>
+<ul>
+<li><strong>全球应用分流要求</strong>：必须考虑用户地理位置。</li>
+<li><strong>DNS地域解析</strong>：为不同国家用户配置不同机房接入层IP，多数用户可直达目标机房。</li>
+<li><strong>DNS分流缺点</strong>：用户网络环境（VPN, 非本国SIM卡, 出国旅行）可能干扰解析结果。</li>
+<li><strong>固定用户所在国方案 (推荐)</strong>：<strong>用户注册国策略</strong>。<ul>
+<li>新用户注册时客户端携带国家信息作为注册国，后台保存。</li>
+<li>用户登录时，根据注册国映射到预配置的机房，即使出国/使用VPN也固定访问此机房。</li>
+<li><strong>优化</strong>：监控用户访问请求国家维度，若连续较长时间与注册国不同，可修改注册国，提升体验。</li>
+</ul>
+</li>
+</ul>
+<h4 id="_9">数据复制链路</h4>
+<ul>
+<li><strong>全网状结构</strong>：每个机房都与所有其他机房建立双向数据复制链路。<ul>
+<li>链路数：<code>C(N,2) * 2</code>。N个机房时链路数激增（如6个机房15条链路），维护成本高。</li>
+</ul>
+</li>
+<li><strong>星状结构 (推荐)</strong>：约定一个机房为<strong>中心机房</strong>。<ul>
+<li>其他机房主库数据仅复制到中心机房。</li>
+<li>中心机房再将数据复制到所有其他机房。</li>
+<li><strong>优势</strong>：显著降低链路数（N-1 * 2），降低架构复杂度。</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.92b07e13.min.js"></script>
+      
+    
+  </body>
+</html>
