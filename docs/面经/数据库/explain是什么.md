@@ -1,7 +1,8 @@
+# explain是什么
 
 `EXPLAIN` 是 SQL 中一个非常强大的诊断工具，当你在一个 SQL 查询语句（如 `SELECT`, `INSERT`, `UPDATE`, `DELETE` 等）前加上 `EXPLAIN` 关键字时，数据库并不会真正执行这条语句，而是会返回它将如何执行这条语句的详细计划。 这个执行计划揭示了数据库访问数据的方式，例如表的连接顺序、使用了哪些索引、数据是如何被扫描和排序的等等。
 
-### EXPLAIN 能得到什么结果
+## 1. EXPLAIN 能得到什么结果
 
 `EXPLAIN` 的输出通常是一个表格，其中包含了多个列，不同的数据库（如 MySQL, PostgreSQL）输出的列会略有不同，但核心信息是相似的。以下是 MySQL 中 `EXPLAIN` 输出的主要列及其含义：
 
@@ -20,7 +21,7 @@
 | **filtered**      | 表示按表条件过滤后，剩下的行数的百分比。`rows` * `filtered` / 100 可以估算出将与下一张表连接的行数。                                                                                     |
 | **Extra**         | **[重要]** 包含了不适合在其他列中显示但非常重要的额外信息。 例如 `Using filesort`（表示需要进行外部排序，效率低）、`Using temporary`（表示使用了临时表）、`Using index`（表示使用了覆盖索引，性能好）。                     |
 
-### 使用 `EXPLAIN` 排查问题
+## 2. 使用 `EXPLAIN` 排查问题
 
 假设我们有一个用户表 `users`，表结构和数据如下：
 
@@ -43,7 +44,7 @@ SELECT * FROM users WHERE status = 1;
 
 在数据量很大的情况下，我们发现这个查询非常慢。这时就可以使用 `EXPLAIN` 来诊断问题。
 
-#### 第一步：执行 `EXPLAIN`
+### 2.1. 第一步：执行 `EXPLAIN`
 
 在查询前加上 `EXPLAIN` 关键字：
 
@@ -51,7 +52,7 @@ SELECT * FROM users WHERE status = 1;
 EXPLAIN SELECT * FROM users WHERE status = 1;
 ```
 
-#### 第二步：分析 `EXPLAIN` 的输出结果
+### 2.2. 第二步：分析 `EXPLAIN` 的输出结果
 
 你可能会得到类似下面的结果（不同版本的数据库和数据量，结果可能略有差异）：
 
@@ -64,7 +65,7 @@ EXPLAIN SELECT * FROM users WHERE status = 1;
 1.  **`type` 列为 `ALL`**：这是一个非常明确的危险信号，表示数据库正在进行**全表扫描**。 也就是说，即使我们只想要几条 `status = 1` 的记录，数据库也必须检查表中的每一行（估算的 `rows` 为 100 万行）。 这是导致查询缓慢的根本原因。
 2.  **`key` 列为 `NULL`**：这证实了数据库没有使用任何索引来执行这个查询。
 
-#### 第三步：提出优化方案
+### 2.3. 第三步：提出优化方案
 
 为了避免全表扫描，最直接有效的办法是在查询条件涉及的列（这里是 `status` 列）上创建一个索引。
 
@@ -74,7 +75,7 @@ EXPLAIN SELECT * FROM users WHERE status = 1;
 CREATE INDEX idx_status ON users(status);
 ```
 
-#### 第四步：验证优化效果
+### 2.4. 第四步：验证优化效果
 
 现在我们再次对相同的查询执行 `EXPLAIN`：
 
