@@ -1,6 +1,10 @@
-# spring MVC的执行流程
+# Spring MVC的执行流程
 
-## 1. 总体执行流程
+## 1. 结论
+
+在 `doDispatch` 方法中，主要执行了以下关键操作：
+
+## 2. 总体执行流程
 
 1.  **用户请求**：用户的请求首先被发送到前端控制器 `DispatcherServlet`。
 2.  **寻找处理器**：`DispatcherServlet` 收到请求后，会调用 **`HandlerMapping`** (处理器映射器) 来查找能够处理该请求的 `Handler` (通常是 Controller 里的一个方法)。
@@ -12,9 +16,9 @@
 8.  **视图渲染**：`DispatcherServlet` 使用 `View` 对象和 `ModelAndView` 中的模型数据来进行**视图渲染**，即将数据填充到视图模板中。
 9.  **返回响应**：渲染完成后，`DispatcherServlet` 将最终生成的 HTML 页面等响应内容返回给用户。
 
-## 2. 详细流程解析
+## 3. 详细流程解析
 
-### 2.1. **1. DispatcherServlet 收到请求并开始处理**
+### 3.1 **DispatcherServlet 收到请求并开始处理**
 
 - 所有请求首先进入 `DispatcherServlet` 的 `service` 方法，该方法最终会调用 `doService` 方法。
 - `doService` 方法做了一些准备工作后，调用了核心的处理方法 **`doDispatch`**。这个方法是整个流程的“总指挥”。
@@ -27,7 +31,7 @@
 - **`mappedHandler.applyPostHandle(...)`**：在 Controller 方法执行后、视图渲染前，执行所有拦截器的 `postHandle` 方法。
 - **`processDispatchResult(...)`**：处理最终的结果，包括视图渲染和异常处理。
 
-### 2.2. **2. 查找对应的 Handler 对象 (getHandler)**
+### 3.2 **查找对应的 Handler 对象 (getHandler)**
 
 - `DispatcherServlet` 的 `getHandler` 方法会遍历所有已注册的 `HandlerMapping`。
 - 它会调用 `HandlerMapping` 的 `getHandler` 方法，该方法内部会调用 `getHandlerInternal`。
@@ -36,14 +40,14 @@
 - `getHandlerExecutionChain` 方法会创建一个 `HandlerExecutionChain` 对象，将找到的 `HandlerMethod` 放入其中，并遍历所有已配置的拦截器，将与当前 URL 匹配的拦截器也添加到这个执行链中。
 - 最终，一个包含处理器和拦截器的执行链被成功创建并返回。
 
-### 2.3. **3. HandlerAdapter 执行当前的 Handler (handle)**
+### 3.3 **HandlerAdapter 执行当前的 Handler (handle)**
 
 - `DispatcherServlet` 拿到执行链后，通过 `getHandlerAdapter` 方法遍历所有已注册的 `HandlerAdapter`，调用其 `supports` 方法来判断哪个适配器支持当前类型的 `Handler`。对于 `@RequestMapping` 方法，匹配到的会是 **`RequestMappingHandlerAdapter`**。
 - 接着，调用 `RequestMappingHandlerAdapter` 的 `handle` 方法。
 - 该 `handle` 方法内部会调用 `handleInternal`，最终调用 **`invokeHandlerMethod`**。这个方法通过反射来执行我们编写的 Controller 方法 (`testSpringMvc`)。
 - Controller 方法执行后，返回一个字符串 "success"，Spring MVC 会将这个字符串和方法中 `map` 里的数据 (`note="在看转发二连"`) 封装成一个 `ModelAndView` 对象并返回。
 
-### 2.4. **4. 处理最终结果以及渲染 (processDispatchResult & render)**
+### 3.4 **处理最终结果以及渲染 (processDispatchResult & render)**
 
 - `doDispatch` 方法的最后一步是调用 `processDispatchResult`。
 - 该方法负责处理异常，如果没有异常，则调用 **`render(mv, request, response)`** 方法进行视图渲染。
@@ -54,3 +58,10 @@
     4.  最后，调用 `ThymeleafView` 对象的 **`render`** 方法，将 `ModelAndView` 中的模型数据 (`map`里的数据) 填充到 Thymeleaf 模板文件中，生成最终的 HTML。
 - 渲染完成后，`DispatcherServlet` 将生成的响应返回给浏览器，用户最终看到 "在看转发二连" 这段文字。
 - 在整个过程结束后（无论成功还是异常），`triggerAfterCompletion` 会被调用，以执行拦截器的 `afterCompletion` 方法，用于资源清理等工作。
+
+## 4. 常见追问/易错点
+
+- 追问：Spring MVC的执行流程的核心流程或关键点是什么？
+  - 答：核心结论是：在 `doDispatch` 方法中，主要执行了以下关键操作：。展开时可按“总体执行流程、详细流程解析”组织，先概述再逐点展开，保证结构完整。其中总体执行流程侧重**用户请求**：用户的请求首先被发送到前端控制器 `DispatcherServlet`，详细流程解析侧重所有请求首先进入 `DispatcherServlet` 的 `service` 方法，该方法最终会调用 `doService` 方法。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
+- 易错点：Spring MVC的执行流程中最容易混淆或踩坑的点是什么？
+  - 答：常见易错点是忽略步骤顺序或前置条件。比如总体执行流程中提到：**用户请求**：用户的请求首先被发送到前端控制器 `DispatcherServlet`。详细流程解析中还提到：所有请求首先进入 `DispatcherServlet` 的 `service` 方法，该方法最终会调用 `doService` 方法。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。

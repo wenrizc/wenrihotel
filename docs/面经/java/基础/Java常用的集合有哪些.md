@@ -1,8 +1,10 @@
 # Java常用的集合有哪些
 
-Java常用的集合主要分为两大体系：`Collection` 和 `Map` 。
+## 1. 结论
 
-## 1. Collection
+`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。
+
+## 2. Collection
 
 `Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。
 
@@ -82,7 +84,7 @@ Java常用的集合主要分为两大体系：`Collection` 和 `Map` 。
 
     - 线程安全性：非线程安全。
 
-## 2. Map
+## 3. Map
 
 `Map` 接口用于存储键值对（Key-Value），它的键是唯一的，每个键都映射到一个值。它不继承自`Collection`接口，是自成一体的体系。
 
@@ -124,7 +126,7 @@ Java常用的集合主要分为两大体系：`Collection` 和 `Map` 。
 
     - 适用场景：与`Vector`一样，基本已被淘汰，通常由`ConcurrentHashMap`替代。
 
-## 3. 并发集合
+## 4. 并发集合
 
 除了上述集合，`java.util.concurrent`包下还提供了一系列为并发环境设计的高性能集合，是多线程编程时的首选。
 
@@ -135,3 +137,10 @@ Java常用的集合主要分为两大体系：`Collection` 和 `Map` 。
 - `CopyOnWriteArraySet`: 基于`CopyOnWriteArrayList`实现的线程安全Set。
 
 - `BlockingQueue`接口及其实现（如`ArrayBlockingQueue`, `LinkedBlockingQueue`）：用于生产者-消费者模型的阻塞队列。
+
+## 5. 常见追问/易错点
+
+- 追问：Java常用的集合有哪些的核心流程或关键点是什么？
+  - 答：核心结论是：`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。展开时可按“Collection、Map、并发集合”组织，先概述再逐点展开，保证结构完整。其中Collection侧重`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又派生出三个核心的子接口：`List`, `Set`, 和 `Queue`，Map侧重`Map` 接口用于存储键值对（Key-Value），它的键是唯一的，每个键都映射到一个值。它不继承自`Collection`接口，是自成一体的体系。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
+- 易错点：Java常用的集合有哪些中最容易混淆或踩坑的点是什么？
+  - 答：常见易错点是只给结论不讲依据、边界条件与前提不清。比如Collection中提到：`Collection` 接口是所有单列集合的顶层父接口，它定义了单列集合通用的操作方法，如 `add`, `remove`, `contains`, `size` 等。它的下面又派生出三个核心的子接口：`List`, `Set`, 和 `Queue`。Map中还提到：`Map` 接口用于存储键值对（Key-Value），它的键是唯一的，每个键都映射到一个值。它不继承自`Collection`接口，是自成一体的体系。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。
