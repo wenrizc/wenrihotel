@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "1637653e03246ba3",
+        "id": "09ba20cdffc01626",
         "type": "tabs",
         "children": [
           {
-            "id": "5a9ead423ebaced6",
+            "id": "db009ab8c2041a50",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/笔记/高并发/基础架构.md",
+                "file": "待办/待阅读书籍.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "基础架构"
+              "title": "待阅读书籍"
             }
           }
         ]
@@ -44,24 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "文件列表"
-            }
-          },
-          {
-            "id": "e77bfa1cede889cb",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "flowchart",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              },
-              "icon": "lucide-search",
-              "title": "搜索"
+              "title": "Files"
             }
           },
           {
@@ -72,6 +55,23 @@
               "state": {},
               "icon": "lucide-bookmark",
               "title": "书签"
+            }
+          },
+          {
+            "id": "e77bfa1cede889cb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
             }
           }
         ]
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/笔记/高并发/基础架构.md",
+                "file": "待办/待阅读书籍.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "基础架构 的出链列表"
+              "title": "Outgoing links from 待阅读书籍"
             }
           },
           {
@@ -160,53 +160,53 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:创建新数据库": false,
-      "graph:查看关系图谱": false,
-      "canvas:新建白板": false,
-      "switcher:打开快速切换": false,
-      "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
     }
   },
-  "active": "5a9ead423ebaced6",
+  "active": "a86fdb0bd4f1495b",
   "lastOpenFiles": [
-    "docs/笔记/高并发/高并发系统.md",
-    "docs/index.md",
-    "docs/面经/redis/Sorted Set是什么，其底层是如何实现的.md",
-    "docs/面经/redis/Redis中的大Key与热Key问题.md",
-    "docs/面经/redis/Redis异常排查思路.md",
-    "docs/面经/redis/redis是如何实现数据持久化的.md",
-    "docs/面经/redis/Redis为什么快.md",
-    "docs/面经/redis/Redis如何实现分布式锁的.md",
-    "docs/面经/redis/redis内存淘汰策略介绍.md",
-    "docs/面经/redis/redis集群介绍.md",
-    "docs/面经/redis/redis的rdb快照记录时会堵塞吗.md",
-    "docs/面经/redis/Redis的线程模型介绍.md",
-    "docs/面经/redis/Redis的数据类型介绍.md",
-    "docs/面经/redis/Redis的使用场景.md",
-    "docs/面经/redis/Redis的过期删除策略.md",
-    "docs/面经/redis/Redis的底层数据结构有什么.md",
-    "docs/面经/redis/redis LRU策略是如何实现的.md",
-    "docs/面经/redis/redis LFU策略是如何实现的.md",
-    "docs/面经/redis/怎么判断 Redis 某个节点是否正常工作.md",
-    "docs/面经/redis/为什么 Redis 这么快？.md",
-    "docs/面经/redis/如何保证Redis与MySQL的数据一致性.md",
-    "docs/面经/redis/排查redis线上命中率暴跌的问题.md",
-    "docs/面经/redis/缓存穿透、缓存击穿、缓存雪崩.md",
-    "docs/面经/java/JVM/常用垃圾回收器介绍.md",
-    "docs/面经/java/JVM/垃圾回收算法介绍.md",
-    "docs/面经/java/JVM/双亲委派机制是什么.md",
-    "课程",
-    "笔记/高并发/基础架构",
-    "docs/笔记/高并发",
-    "笔记/设计",
-    "笔记/java",
-    "docs/面经/数据库/未命名",
-    "docs/面经/java/JVM/未命名",
-    "docs/笔记/书籍/高并发系统设计40问",
-    "docs/笔记/书籍",
-    "笔记/数据库/未命名",
+    "笔记/DDIA/第八章：分布式系统的麻烦.md",
+    "笔记/DDIA/第十二章：数据系统的未来.md",
+    "笔记/DDIA/第十一章：流处理.md",
+    "笔记/DDIA/第十章：批处理.md",
+    "笔记/DDIA/第九章：一致性与共识.md",
+    "提示词.md",
+    "prompt.md",
+    "agent.md",
+    "自我介绍.md",
+    "项目.md",
+    "IM.md",
+    "JS逆向.md",
+    "面试/小厂5.md",
+    "如何讲好一个项目架构的设计.md",
+    "话术.md",
+    "可能考.md",
+    "Untitled/1.md",
+    "Untitled/5 6 7.md",
+    "Untitled/4.md",
+    "Untitled/3.md",
+    "Untitled/2.md",
+    "Untitled",
+    "exam/ppt_notes/第十四讲：难问题处理策略.md",
+    "exam/ppt_notes/第十三讲：NP完全性.md",
+    "exam/ppt_notes/第十二讲：问题复杂性.md",
+    "exam/ppt_notes/第十一讲：分支限界.md",
+    "exam/ppt_notes/第十讲：回溯.md",
+    "exam/03_动态规划.ipynb",
+    "exam/算法设计与分析-第十二讲-问题复杂性.pptx",
+    "exam/算法设计与分析-第十讲-回溯.pptx",
+    "exam/算法设计与分析-第十四讲-难问题处理策略.pptx",
+    "exam/算法设计与分析-第十三讲-NP完全性.pptx",
+    "exam/算法设计与分析-第十一讲-分支限界.pptx",
+    "exam/算法设计与分析-2025-12-01-第七讲-动态规划（下）(1).pptx",
+    "exam/算法设计与分析-2025-12-08-第九讲-贪心法（下）.pptx",
+    "exam/算法设计与分析-2025-12-03-第八讲-贪心法（上）.pptx",
     "未命名.canvas",
     "图片/1346871-20240730112327521-241140105.svg",
     "docs/面经/未命名.canvas",
