@@ -1,10 +1,4 @@
-# Undo Log介绍
-
-## 1. 结论
-
-要理解 Undo Log 的工作机制，首先必须了解其层级化的组织结构：
-
-## 2. Undo Log 的组织结构
+## 1. Undo Log 的组织结构
 
 要理解 Undo Log 的工作机制，首先必须了解其层级化的组织结构：
 
@@ -14,11 +8,11 @@
 - **Rollback Segment**: 它是 Undo Segment 的一个集合，通常包含 1024 个 Undo Segment 的槽位（Slot）。数据库的并发写事务数受 Rollback Segment 总数的限制。
 - **Undo Tablespace**: 这是存放 Rollback Segment 的物理文件。从 MySQL 8.0 开始，Undo Tablespace 可以独立于系统表空间（ibdata1）存在，这极大地改善了空间管理和回收的灵活性。
 
-## 3. Undo Log 的生命周期：写入、落盘与丢弃机制
+## 2. Undo Log 的生命周期：写入、落盘与丢弃机制
 
 下面我们详细介绍 Undo Log 从生成到最终被清理的整个过程，重点关注其落盘、刷新和丢弃机制。
 
-### 3.1 写入与分配 (Writing)
+### 2.1 写入与分配 (Writing)
 
 当一个写事务首次执行修改操作时，InnoDB 会为其分配一个 Undo Segment。事务执行的每一次数据修改（INSERT, UPDATE, DELETE），都会执行以下步骤：
 
@@ -26,7 +20,7 @@
 2.  **写入 Undo Log**: 将这个新生成的 Undo Record 顺序写入当前事务持有的 Undo Segment 的活动 Undo Log 中。
 3.  **更新数据记录**: 将数据页（Data Page）中的记录进行修改，并将该记录内部的隐藏字段 `rollptr` 指向刚刚写入的 Undo Record。这个指针构成了版本链，是 MVCC 实现的关键。
 
-### 3.2 落盘与刷新机制 (Flushing to Disk)
+### 2.2 落盘与刷新机制 (Flushing to Disk)
 
 这是理解 Undo Log “亦日志亦数据”特性的关键。**Undo Log 本身没有独立的、类似 Redo Log `fsync` 那样的强制刷盘机制**。它的持久化遵循 InnoDB 对所有数据的通用管理方式：
 
@@ -37,7 +31,7 @@
 
 **总结来说，Undo Log 的“落盘”是一个间接过程：其操作的持久性由同步刷新的 Redo Log 保证，而其本身所在的 Undo Page 则由后台线程异步刷入磁盘。**
 
-### 3.3 丢弃与清理机制 (Discarding / Purging)
+### 2.3 丢弃与清理机制 (Discarding / Purging)
 
 当一个事务提交后，它产生的 Undo Log 并不会立即被删除。因为可能还有其他正在运行的读事务需要访问这些 Undo Log 来构建数据快照（MVCC）。只有当系统确认某个 Undo Log 记录的历史版本不再被任何事务所需要时，才能进行清理。这个清理过程由后台的 **Purge 线程** 负责，分为以下几个阶段：
 
@@ -61,7 +55,7 @@
 
 通过这一系列精密的机制，Undo Log 在保证数据库事务特性和高并发性能的同时，也实现了自身高效、安全的全生命周期管理。
 
-## 4. 常见追问/易错点
+## 3. 常见追问/易错点
 
 - 追问：Undo Log介绍的核心流程或关键点是什么？
   - 答：核心结论是：要理解 Undo Log 的工作机制，首先必须了解其层级化的组织结构：。展开时可按“Undo Log 的组织结构、Undo Log 的生命周期：写入、落盘与丢弃机制”组织，先概述再逐点展开，保证结构完整。其中Undo Log 的组织结构侧重要理解 Undo Log 的工作机制，首先必须了解其层级化的组织结构：，Undo Log 的生命周期：写入、落盘与丢弃机制侧重下面我们详细介绍 Undo Log 从生成到最终被清理的整个过程，重点关注其落盘、刷新和丢弃机制。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。

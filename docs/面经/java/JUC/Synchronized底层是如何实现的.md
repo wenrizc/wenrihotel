@@ -1,10 +1,4 @@
-# synchronized底层是如何实现的
-
-## 1. 结论
-
-`synchronized` 在Java中有两种使用形式，它们的字节码实现是不同的。
-
-## 2. Synchronized在字节码层面的实现
+## 1. Synchronized在字节码层面的实现
 
 `synchronized` 在Java中有两种使用形式，它们的字节码实现是不同的。
 
@@ -50,7 +44,7 @@ public void testMethod() {
 
 一个重要的细节是，为了保证即使在同步代码块中发生异常，锁也一定能被释放，编译器实际上会生成两个 `monitorexit` 指令。一个在正常结束路径的末尾，另一个在异常处理路径的末尾（类似于`finally`块的逻辑）。
 
-## 3. 锁的本质：Java对象头与Monitor
+## 2. 锁的本质：Java对象头与Monitor
 
 无论是 `ACC_SYNCHRONIZED` 标志还是 `monitorenter/exit` 指令，它们操作的“锁”到底是什么呢？这个锁的实体，与Java的对象头（Object Header）和Monitor机制密切相关。
 
@@ -58,11 +52,11 @@ public void testMethod() {
 
 - **Monitor（监视器锁）**：每个Java对象都可以唯一地关联一个Monitor。当一个线程想要获取这个对象的锁时，实际上就是想要获取这个对象关联的Monitor的所有权。Monitor可以理解为一个同步工具，它内部包含了等待队列、持有线程等信息。在早期的JDK版本中，Monitor是直接依赖于操作系统底层的互斥量（Mutex）实现的，这种锁被称为“重量级锁”，因为它涉及到用户态和内核态的切换，开销很大。
 
-## 4. 锁优化：锁的升级过程
+## 3. 锁优化：锁的升级过程
 
 为了解决重量级锁的性能问题，从JDK 1.6开始，JVM对`synchronized`引入了一系列优化，核心思想就是“锁升级”。即锁不会一开始就是重量级的，而是会根据竞争情况，从低到高进行升级，以适应不同的并发场景。
 
-## 5. 常见追问/易错点
+## 4. 常见追问/易错点
 
 - 追问：synchronized底层是如何实现的核心流程或关键点是什么？
   - 答：核心结论是：`synchronized` 在Java中有两种使用形式，它们的字节码实现是不同的。展开时可按“Synchronized在字节码层面的实现、锁的本质：Java对象头与Monitor、锁优化：锁的升级过程”组织，先概述再逐点展开，保证结构完整。其中Synchronized在字节码层面的实现侧重`synchronized` 在Java中有两种使用形式，它们的字节码实现是不同的，锁的本质：Java对象头与Monitor侧重无论是 `ACC_SYNCHRONIZED` 标志还是 `monitorenter/exit` 指令，它们操作的“锁”到底是什么呢？这个锁的实体，与Java的对象头（Object Header）和Monitor机制密切相关。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。

@@ -1,14 +1,8 @@
-# HashMap和ConcurrentHashMap介绍
-
-## 1. 结论
+## 1. ConcurrentHashMap
 
 ConcurrentHashMap 是 `java.util.concurrent` 包下的一个类，是 HashMap 的线程安全版本。它提供了比 `Hashtable` 和 `Collections.synchronizedMap()` 更高的并发性能。它允许多个线程同时读写集合，而不会导致数据不一致或抛出异常。
 
-## 2. ConcurrentHashMap
-
-ConcurrentHashMap 是 `java.util.concurrent` 包下的一个类，是 HashMap 的线程安全版本。它提供了比 `Hashtable` 和 `Collections.synchronizedMap()` 更高的并发性能。它允许多个线程同时读写集合，而不会导致数据不一致或抛出异常。
-
-### 2.1 线程安全的实现原理
+### 1.1 线程安全的实现原理
 
 ConcurrentHashMap 的线程安全实现也经历了重要的版本迭代。
 
@@ -22,7 +16,7 @@ ConcurrentHashMap 的线程安全实现也经历了重要的版本迭代。
 
         - **put 操作**：先通过哈希值定位到具体的 `Segment`，然后对该 `Segment` 加锁。加锁成功后，再执行与 HashMap 类似的 `put` 操作。由于锁只作用于单个 `Segment`，其他线程可以同时访问并修改其他 `Segment` 中的数据，从而实现了并发。`Segment` 的数量被称为“并发度”。
 
-        - **get 操作**：`get` 操作大部分时候是不需要加锁的。`HashEntry` 中的 `value` 和 `next` 指针都使用 `volatile` 关键字修饰，这保证了内存可见性。当一个线程修改了某个 `value` 后，其他线程能够立即看到这个修改，从而可以安全地读取。只有在读取到的值为 null 时，才会尝试加锁来保证获取到最新的值。
+        - **get 操作**：`get` 操作不需要加锁，主要依赖 `volatile` 读（如 `value`、`next` 以及相关数组引用的可见性）来保证并发读的正确性与可见性；写入由对应 `Segment` 的锁保护。
 
         - **size 操作**：计算 `size` 时，会先尝试不加锁地累加两次所有 `Segment` 的 `count` 值。如果两次结果一致，就直接返回。如果不一致，则会依次锁住所有的 `Segment` 来进行精确计算。
 
@@ -62,7 +56,7 @@ ConcurrentHashMap 的线程安全实现也经历了重要的版本迭代。
 
         - **更好的性能**：在大多数情况下，尤其是在高并发场景下，性能优于 JDK 1.7 的版本。
 
-## 3. 常见追问/易错点
+## 2. 常见追问/易错点
 
 - 追问：HashMap和ConcurrentHashMap介绍的核心流程或关键点是什么？
   - 答：核心结论是：ConcurrentHashMap 是 `java.util.concurrent` 包下的一个类，是 HashMap 的线程安全版本。它提供了比 `Hashtable` 和 `Collections.synchronizedMap()` 更高的并发性能。展开时可按“ConcurrentHashMap”组织，先概述再逐点展开，保证结构完整。其中ConcurrentHashMap侧重ConcurrentHashMap 是 `java.util.concurrent` 包下的一个类，是 HashMap 的线程安全版本。它提供了比 `Hashtable` 和 `Collections.synchronizedMap()` 更高的并发性能。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。

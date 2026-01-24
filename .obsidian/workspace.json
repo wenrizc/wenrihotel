@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "09ba20cdffc01626",
+        "id": "ecb245905a25f0ae",
         "type": "tabs",
         "children": [
           {
-            "id": "db009ab8c2041a50",
+            "id": "26291ebd90ac7ac0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "待办/待阅读书籍.md",
+                "file": "docs/面经/文档规范.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "待阅读书籍"
+              "title": "文档规范"
             }
           }
         ]
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "待办/待阅读书籍.md",
+                "file": "docs/面经/文档规范.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from 待阅读书籍"
+              "title": "Outgoing links from 文档规范"
             }
           },
           {
@@ -169,34 +169,34 @@
       "bases:Create new base": false
     }
   },
-  "active": "a86fdb0bd4f1495b",
+  "active": "26291ebd90ac7ac0",
   "lastOpenFiles": [
-    "docs/面经/操作系统/synchronized和cas存在什么差别，各个方面详细讲解，性能上详细讲解，同时从操作系统的角度详细介绍.md",
-    "docs/面经/场景题/redis和数据库的一致性问题.md",
-    "docs/面经/redis/redis的rdb快照记录时会阻塞吗.md",
-    "docs/面经/java/spring/什么情况下@Transactional注解会失效.md",
-    "docs/面经/java/JUC/synchronized锁和reentrantlock锁区别.md",
-    "docs/面经/文档规范.md",
-    "笔记/DDIA/第八章：分布式系统的麻烦.md",
-    "笔记/DDIA/第十二章：数据系统的未来.md",
-    "笔记/DDIA/第十一章：流处理.md",
-    "笔记/DDIA/第十章：批处理.md",
-    "笔记/DDIA/第九章：一致性与共识.md",
-    "提示词.md",
-    "prompt.md",
-    "agent.md",
-    "自我介绍.md",
-    "项目.md",
     "IM.md",
-    "JS逆向.md",
-    "面试/小厂5.md",
-    "如何讲好一个项目架构的设计.md",
+    "docs/面经/文档规范.md",
+    "docs/面经/数据库/MySQL中有哪些锁.md",
+    "docs/面经/数据库/分页查询存在什么问题，如何改进.md",
+    "docs/面经/数据库/读已提交隔离级别下如何读取数据.md",
+    "提示词.md",
+    "docs/面经/数据库/间隙锁介绍.md",
+    "docs/面经/数据库/两段锁协议.md",
+    "docs/面经/数据库/对象关系映射（ORM）框架介绍.md",
+    "公司招聘官网.md",
+    "docs/面经/数据库/除了参数化查询，还有哪些有效防止SQL注入的手段.md",
+    "openim/未命名 2.md",
+    "openim/未命名 1.md",
+    "openim/未命名.md",
     "话术.md",
-    "可能考.md",
-    "Untitled/1.md",
-    "Untitled/5 6 7.md",
-    "Untitled/4.md",
-    "Untitled/3.md",
+    "docs/面经/Java/基础/Vector 与 ArrayList 区别.md",
+    "docs/面经/杂项/调用第三方 API 的技术支持与协议坑.md",
+    "docs/面经/Java/基础/Java 单元测试框架介绍.md",
+    "docs/面经/Java/JUC/Java 原生线程与线程池区别及常见坑.md",
+    "docs/面经/Java/Spring/Spring Boot 如何打包成可执行 JAR.md",
+    "docs/面经/Java/基础/Netty客户端收消息流程与Channel介绍.md",
+    "docs/面经/中间件/IM消息收发实现与协议选型.md",
+    "docs/面经/Java 单元测试框架介绍.md",
+    "docs/面经/调用第三方 API 的技术支持与协议坑.md",
+    "docs/面经/Java 原生线程与线程池区别及常见坑.md",
+    "docs/面经/Spring Boot 如何打包成可执行 JAR.md",
     "Untitled",
     "exam/03_动态规划.ipynb",
     "exam/算法设计与分析-第十二讲-问题复杂性.pptx",
