@@ -9,10 +9,10 @@ WebSocket 的通信过程始于一个 HTTP“握手”。客户端向服务器�
 | 特性 | WebSocket | HTTP |
 | --- | --- | --- |
 | **通信方式** | 全双工双向通信 | 单向请求-响应模式 |
-| **连接状态** | 有状态协议，保持持久连接 | 无状态协议，每个请求-响应周期后连接关闭 |
+| **连接形态** | 通常一条 TCP 连接长期保持 | 基于请求-响应，连接可短连接也可 `keep-alive` |
 | **数据发起方** | 客户端和服务器均可主动发送数据 | 只能由客户端发起请求 |
 | **延迟** | 低延迟 | 相对较高的延迟 |
-| **头部开销** | 头部信息少，通常只有2字节左右，节省带宽 | 每个请求都有较大的头部信息 |
+| **头部开销** | 帧头较小（通常为 2～14 字节级别） | 每次请求都有相对较大的 Header |
 | **适用场景** | 实时应用，如在线游戏、聊天室、实时数据更新 | 传统的网页浏览、表单提交和静态资源获取 |
 | **URI 方案** | `ws://` (未加密) 和 `wss://` (加密) | `http://` (未加密) 和 `https://` (加密) |
 
@@ -34,9 +34,37 @@ WebSocket 的实时和双向通信特性使其成为众多现代网络应用的�
 - **实时地理位置跟踪:** 在共享出行或外卖应用中实时更新车辆或配送员的位置。
 - **即时通知:** 向用户推送最新的消息、更新或警报。
 
-## 5. 常见追问/易错点
+## 5. 握手细节：Upgrade 头与状态码 101
 
-- 追问：WebSocket是什么的核心流程或关键点是什么？
-  - 答：核心结论是：WebSocket 的通信过程始于一个 HTTP“握手”。客户端向服务器发送一个特殊的 HTTP 请求，请求将连接升级到 WebSocket。展开时可按“WebSocket 的工作原理、WebSocket 与 HTTP 的主要区别、优势”组织，先概述再逐点展开，保证结构完整。其中WebSocket 的工作原理侧重WebSocket 的通信过程始于一个 HTTP“握手”。客户端向服务器发送一个特殊的 HTTP 请求，请求将连接升级到 WebSocket，WebSocket 与 HTTP 的主要区别侧重| 特性 | WebSocket | HTTP |。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
-- 易错点：WebSocket是什么中最容易混淆或踩坑的点是什么？
-  - 答：常见易错点是只给结论不讲依据、边界条件与前提不清。比如WebSocket 的工作原理中提到：WebSocket 的通信过程始于一个 HTTP“握手”。客户端向服务器发送一个特殊的 HTTP 请求，请求将连接升级到 WebSocket。WebSocket 与 HTTP 的主要区别中还提到：| 特性 | WebSocket | HTTP |。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。
+WebSocket 通过一次 HTTP/1.1 请求把连接升级（Upgrade）为 WebSocket，关键点是 `Connection: Upgrade` 与 `Upgrade: websocket`，服务端返回 `101 Switching Protocols`。
+
+```shell
+GET /ws HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Sec-WebSocket-Version: 13
+```
+
+```shell
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
+```
+
+## 6. 数据帧与控制帧（Ping/Pong/Close）
+
+连接升级后传输的是 WebSocket 帧而不是 HTTP 报文：
+
+- 数据帧：文本（Text）与二进制（Binary）。
+- 控制帧：`Ping` / `Pong` 用于保活，`Close` 用于有序关闭连接。
+- Mask：浏览器到服务端的帧会带掩码（mask），服务端到客户端通常不需要。
+
+## 7. 心跳、重连与负载均衡（工程要点）
+
+- 心跳：很多代理/网关会回收空闲连接，业务层心跳比 TCP keepalive 更可控。
+- 重连：要能处理“重复连接、重复登录、消息重放”，通常依赖会话 `token` 与消息序号。
+- 负载均衡：长连接需要粘性会话（sticky）或把会话路由放到共享存储，否则同一用户的连接状态会漂移。
+

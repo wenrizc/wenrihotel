@@ -43,10 +43,3 @@ Spring Boot 的一个核心特性是自动配置。 在这个阶段，Spring Boo
 整个启动过程中，Spring Boot 会发布一系列的事件，允许开发者通过 `ApplicationListener` 接口在不同的生命周期阶段插入自定义逻辑。 这些事件包括 `ContextRefreshedEvent`、`ContextStartedEvent`、`ContextClosedEvent` 等。
 
 总而言之，Spring Boot 的启动阶段是一个高度自动化和可扩展的过程，它通过自动配置、内嵌服务器和事件驱动的生命周期管理，极大地简化了 Java 应用程序的开发和部署。
-
-## 8. 常见追问/易错点
-
-- 追问：Spring启动阶段会发生什么的核心流程或关键点是什么？
-  - 答：核心结论是：一切始于应用程序主类中的 `main` 方法，其中调用了 `SpringApplication.run()`。这个静态方法是整个 Spring Boot 应用程序的入口点，它负责引导整个启动过程。展开时可按“启动入口：`SpringApplication.run()`、创建和准备 `ApplicationContext`、自动配置与 Bean 的定义”组织，先概述再逐点展开，保证结构完整。其中启动入口：`SpringApplication.run()`侧重一切始于应用程序主类中的 `main` 方法，其中调用了 `SpringApplication.run()`。这个静态方法是整个 Spring Boot 应用程序的入口点，它负责引导整个启动过程，创建和准备 `ApplicationContext`侧重`ApplicationContext` 是 Spring 框架的核心，它是一个控制反转 (IoC) 容器，负责管理应用程序中的所有对象（称为 Bean）。Spring Boot 在启动过程中会创建一个 `ApplicationContext` 实例。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
-- 易错点：Spring启动阶段会发生什么中最容易混淆或踩坑的点是什么？
-  - 答：常见易错点是只给结论不讲依据、边界条件与前提不清。比如启动入口：`SpringApplication.run()`中提到：一切始于应用程序主类中的 `main` 方法，其中调用了 `SpringApplication.run()`。这个静态方法是整个 Spring Boot 应用程序的入口点，它负责引导整个启动过程。创建和准备 `ApplicationContext`中还提到：`ApplicationContext` 是 Spring 框架的核心，它是一个控制反转 (IoC) 容器，负责管理应用程序中的所有对象（称为 Bean）。Spring Boot 在启动过程中会创建一个 `ApplicationContext` 实例。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。

@@ -1,62 +1,64 @@
 ## 1. 作用
 
-1.  域名到IP地址的解析：这是最核心的功能，使得用户可以通过域名访问网站和服务。
-2.  IP地址到域名的反向解析：虽然不常用，但DNS也支持通过IP地址查找对应的域名。
-3.  负载均衡：DNS可以配置将一个域名解析到多个IP地址（对应多台服务器），每次解析时可以根据一定的策略（如轮询、地理位置、服务器负载等）返回不同的IP地址，从而将访问流量分发到不同的服务器上，实现负载均衡。
-4.  邮件路由：邮件交换（MX）记录是DNS的一种记录类型，它指定了负责接收发送到某个域名的电子邮件的邮件服务器。
-5.  服务发现：DNS的SRV记录可以用来发现特定服务（如LDAP、XMPP）在网络中的位置和端口。
+1.  域名到 IP 地址的解析：这是最核心的功能，使得用户可以通过域名访问网站和服务。
+2.  IP 地址到域名的反向解析：虽然不常用，但 DNS 也支持通过 IP 地址查找对应的域名。
+3.  负载均衡：DNS 可以配置将一个域名解析到多个 IP 地址（对应多台服务器），每次解析时可以根据一定的策略（如轮询、地理位置、服务器负载等）返回不同的 IP 地址，从而将访问流量分发到不同的服务器上，实现负载均衡。
+4.  邮件路由：邮件交换（MX）记录是 DNS 的一种记录类型，它指定了负责接收发送到某个域名的电子邮件的邮件服务器。
+5.  服务发现：DNS 的 SRV 记录可以用来发现特定服务（如 LDAP、XMPP）在网络中的位置和端口。
 6.  别名解析（CNAME）：允许一个域名作为另一个域名的别名。
 
 ## 2. 分布式的查询
 
-1.  DNS的层次结构：
-    DNS系统采用树状的层次结构。
-    - 根域名服务器（Root DNS Servers）：位于DNS层次结构的顶端，全球共有13组（逻辑上）根服务器，它们并不直接解析域名，而是告诉查询者去哪里查找顶级域（TLD）服务器。
-    - 顶级域DNS服务器（Top-Level Domain, TLD Servers）：负责管理顶级域名，如 `.com`, `.org`, `.net`, `.cn`, `.uk` 等。它们会指引查询到对应的权威域名服务器。
-    - 权威域名服务器（Authoritative DNS Servers）：真正存储特定域名（如 `example.com`）的DNS记录（如A记录、MX记录、CNAME记录等）的服务器。一个域名可以有多个权威服务器以提高可用性。
+1.  DNS 的层次结构：
 
-2.  DNS查询类型：
-    - 递归查询（Recursive Query）：通常发生在客户端（如用户的PC或手机）与本地DNS服务器（LDNS，通常由ISP提供或用户手动配置，如Google Public DNS `8.8.8.8`）之间。客户端向LDNS发起请求，LDNS有责任返回最终的IP地址或一个错误信息。LDNS会代替客户端去逐级查询。
-    - 迭代查询（Iterative Query）：通常发生在LDNS与其他DNS服务器（根、TLD、权威服务器）之间。当LDNS向一个DNS服务器查询时，如果该服务器没有最终答案，它会返回一个指向下一级更可能知道答案的DNS服务器的地址（或者说，它会告诉LDNS：“我不知道，但你可以去问它”）。LDNS会不断向这些被推荐的服务器发起新的查询，直到找到权威服务器并获得最终结果。
+    DNS 系统采用树状的层次结构。
+    - 根域名服务器（Root DNS Servers）：位于 DNS 层次结构的顶端，全球共有 13 组（逻辑上）根服务器，它们并不直接解析域名，而是告诉查询者去哪里查找顶级域（TLD）服务器。
+    - 顶级域 DNS 服务器（Top-Level Domain, TLD Servers）：负责管理顶级域名，如 `.com`, `.org`, `.net`, `.cn`, `.uk` 等。它们会指引查询到对应的权威域名服务器。
+    - 权威域名服务器（Authoritative DNS Servers）：真正存储特定域名（如 `example.com`）的 DNS 记录（如 A 记录、MX 记录、CNAME 记录等）的服务器。一个域名可以有多个权威服务器以提高可用性。
 
-3.  DNS查询过程（以用户在浏览器输入 `www.example.com` 为例）：
+2.  DNS 查询类型：
+    - 递归查询（Recursive Query）：通常发生在客户端（如用户的 PC 或手机）与本地 DNS 服务器（LDNS，通常由 ISP 提供或用户手动配置，如 Google Public DNS `8.8.8.8`）之间。客户端向 LDNS 发起请求，LDNS 有责任返回最终的 IP 地址或一个错误信息。LDNS 会代替客户端去逐级查询。
+    - 迭代查询（Iterative Query）：通常发生在 LDNS 与其他 DNS 服务器（根、TLD、权威服务器）之间。当 LDNS 向一个 DNS 服务器查询时，如果该服务器没有最终答案，它会返回一个指向下一级更可能知道答案的 DNS 服务器的地址（或者说，它会告诉 LDNS：“我不知道，但你可以去问它”）。LDNS 会不断向这些被推荐的服务器发起新的查询，直到找到权威服务器并获得最终结果。
+
+3.  DNS 查询过程（以用户在浏览器输入 `www.example.com` 为例）：
 
     a.  用户主机检查本地缓存：
-        - 浏览器DNS缓存：浏览器首先检查自身的DNS缓存中是否有 `www.example.com` 的IP地址。
-        - 操作系统DNS缓存：如果浏览器缓存没有，操作系统会检查其DNS缓存（如Windows的DNS Client服务缓存，或Linux的nscd/systemd-resolved缓存）以及本地的 `hosts` 文件。
+        - 浏览器 DNS 缓存：浏览器首先检查自身的 DNS 缓存中是否有 `www.example.com` 的 IP 地址。
+        - 操作系统 DNS 缓存：如果浏览器缓存没有，操作系统会检查其 DNS 缓存（如 Windows 的 DNS Client 服务缓存，或 Linux 的 nscd/systemd-resolved 缓存）以及本地的 `hosts` 文件。
 
-    b.  向本地DNS服务器发起递归查询：
-        - 如果本地缓存都没有找到，用户主机会将DNS查询请求发送给配置的本地DNS服务器（LDNS）。
+    b.  向本地 DNS 服务器发起递归查询：
+        - 如果本地缓存都没有找到，用户主机会将 DNS 查询请求发送给配置的本地 DNS 服务器（LDNS）。
 
-    c.  本地DNS服务器执行迭代查询（如果其缓存中也没有）：
-        i.  LDNS向根域名服务器发起查询，问：“`www.example.com` 的IP地址是什么？”
-        ii. 根服务器回复：“我不知道，但我知道 `.com` TLD服务器的地址，你去问它。” （返回 `.com` TLD服务器的IP列表）
-        iii.LDNS向其中一个 `.com` TLD服务器发起查询，问：“`www.example.com` 的IP地址是什么？”
-        iv. `.com` TLD服务器回复：“我不知道，但我知道 `example.com` 这个域名的权威DNS服务器的地址，你去问它。” （返回 `example.com` 权威服务器的IP列表）
-        v.  LDNS向其中一个 `example.com` 的权威DNS服务器发起查询，问：“`www.example.com` 的IP地址是什么？”
-        vi. `example.com` 的权威DNS服务器在其区域文件中查找 `www.example.com` 的A记录（或其他相关记录），找到对应的IP地址。
-        vii.权威DNS服务器将这个IP地址回复给LDNS。
+    c.  本地 DNS 服务器执行迭代查询（如果其缓存中也没有）：
+        i.  LDNS 向根域名服务器发起查询，问：“`www.example.com` 的 IP 地址是什么？”
+        ii. 根服务器回复：“我不知道，但我知道 `.com` TLD 服务器的地址，你去问它。” （返回 `.com` TLD 服务器的 IP 列表）
+        iii.LDNS 向其中一个 `.com` TLD 服务器发起查询，问：“`www.example.com` 的 IP 地址是什么？”
+        iv. `.com` TLD 服务器回复：“我不知道，但我知道 `example.com` 这个域名的权威 DNS 服务器的地址，你去问它。” （返回 `example.com` 权威服务器的 IP 列表）
+        v.  LDNS 向其中一个 `example.com` 的权威 DNS 服务器发起查询，问：“`www.example.com` 的 IP 地址是什么？”
+        vi. `example.com` 的权威 DNS 服务器在其区域文件中查找 `www.example.com` 的 A 记录（或其他相关记录），找到对应的 IP 地址。
+        vii.权威 DNS 服务器将这个 IP 地址回复给 LDNS。
 
-    d.  本地DNS服务器响应客户端并将结果缓存：
-        - LDNS收到权威服务器返回的IP地址后，将这个解析结果存储在自己的缓存中（设置一个TTL，Time-To-Live，即缓存有效期）。
-        - LDNS将IP地址返回给用户的操作系统。
+    d.  本地 DNS 服务器响应客户端并将结果缓存：
+        - LDNS 收到权威服务器返回的 IP 地址后，将这个解析结果存储在自己的缓存中（设置一个 TTL，Time-To-Live，即缓存有效期）。
+        - LDNS 将 IP 地址返回给用户的操作系统。
 
     e.  操作系统将结果返回给应用程序（浏览器）：
-        - 操作系统接收到IP地址后，也可能将其缓存，并最终将IP地址传递给发起请求的浏览器。
+        - 操作系统接收到 IP 地址后，也可能将其缓存，并最终将 IP 地址传递给发起请求的浏览器。
 
-    f.  浏览器使用IP地址发起HTTP(S)连接：
-        - 浏览器得到IP地址后，就可以向该IP地址对应的服务器发起TCP连接，进而发送HTTP(S)请求。
+    f.  浏览器使用 IP 地址发起 HTTP(S)连接：
+        - 浏览器得到 IP 地址后，就可以向该 IP 地址对应的服务器发起 TCP 连接，进而发送 HTTP(S)请求。
 
-4.  DNS记录类型：
-    DNS不仅仅存储IP地址，还存储多种类型的记录，常见的有：
-    - A记录 (Address Record)：将域名指向一个IPv4地址。
-    - AAAA记录 (IPv6 Address Record)：将域名指向一个IPv6地址。
-    - CNAME记录 (Canonical Name Record)：将一个域名指向另一个域名（别名）。最终解析会追踪到目标域名的A或AAAA记录。
-    - MX记录 (Mail Exchange Record)：指定邮件服务器的地址，用于邮件路由。
-    - NS记录 (Name Server Record)：指定负责某个域的权威DNS服务器。
-    - PTR记录 (Pointer Record)：用于反向DNS查询，将IP地址映射到域名。
-    - TXT记录 (Text Record)：允许管理员为域名存储任意文本信息，常用于SPF（Sender Policy Framework）记录、DKIM（DomainKeys Identified Mail）签名等。
-    - SRV记录 (Service Record)：指定提供特定服务的主机名和端口号。
+4.  DNS 记录类型：
+
+    DNS 不仅仅存储 IP 地址，还存储多种类型的记录，常见的有：
+    - A 记录 (Address Record)：将域名指向一个 IPv4 地址。
+    - AAAA 记录 (IPv6 Address Record)：将域名指向一个 IPv6 地址。
+    - CNAME 记录 (Canonical Name Record)：将一个域名指向另一个域名（别名）。最终解析会追踪到目标域名的 A 或 AAAA 记录。
+    - MX 记录 (Mail Exchange Record)：指定邮件服务器的地址，用于邮件路由。
+    - NS 记录 (Name Server Record)：指定负责某个域的权威 DNS 服务器。
+    - PTR 记录 (Pointer Record)：用于反向 DNS 查询，将 IP 地址映射到域名。
+    - TXT 记录 (Text Record)：允许管理员为域名存储任意文本信息，常用于 SPF（Sender Policy Framework）记录、DKIM（DomainKeys Identified Mail）签名等。
+    - SRV 记录 (Service Record)：指定提供特定服务的主机名和端口号。
 
 ## 3. HTTPDNS
 
@@ -76,10 +78,3 @@ HTTPDNS 的工作原理与传统 DNS 有所不同：
 - **精准调度**：能够根据用户的地理位置和网络状况，提供更精确的解析结果，将用户导向最近、最快的服务器节点。
 - **实时生效**：由于绕过了各级 DNS 服务器的缓存，域名解析记录的修改可以更快地在客户端生效。
 - **提升解析速度**：通过优化的网络路径和协议，可以降低域名解析的延迟。
-
-## 4. 常见追问/易错点
-
-- 追问：解释 DNS 的作用和工作原理的核心流程或关键点是什么？
-  - 答：核心结论是：DNS系统采用树状的层次结构。展开时可按“作用、分层、分布式的查询、HTTPDNS”组织，先概述再逐点展开，保证结构完整。其中作用侧重域名到IP地址的解析：这是最核心的功能，使得用户可以通过域名访问网站和服务，分层、分布式的查询侧重DNS的层次结构：。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
-- 易错点：解释 DNS 的作用和工作原理中最容易混淆或踩坑的点是什么？
-  - 答：常见易错点是只给结论不讲依据、边界条件与前提不清。比如作用中提到：域名到IP地址的解析：这是最核心的功能，使得用户可以通过域名访问网站和服务。分层、分布式的查询中还提到：DNS的层次结构：。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。

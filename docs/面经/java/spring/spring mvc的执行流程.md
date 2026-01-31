@@ -18,6 +18,7 @@
 - `doService` 方法做了一些准备工作后，调用了核心的处理方法 **`doDispatch`**。这个方法是整个流程的“总指挥”。
 
 在 `doDispatch` 方法中，主要执行了以下关键操作：
+
 - **`mappedHandler = getHandler(processedRequest);`**：调用 `getHandler` 方法获取处理器执行链。
 - **`HandlerAdapter ha = getHandlerAdapter(mappedHandler.getHandler());`**：调用 `getHandlerAdapter` 获取能执行该处理器的适配器。
 - **`mappedHandler.applyPreHandle(...)`**：在执行 Controller 方法前，先执行执行链中所有拦截器的 `preHandle` 方法。
@@ -49,13 +50,6 @@
     1.  从 `ModelAndView` 对象中获取逻辑视图名 (即 "success")。
     2.  调用 `resolveViewName` 方法，该方法会遍历所有配置的 `ViewResolver` (视图解析器)。
     3.  在本例中，`ThymeleafViewResolver` 会匹配成功，并根据前缀和后缀规则，将逻辑视图名 "success" 解析成一个具体的 `ThymeleafView` 对象。
-    4.  最后，调用 `ThymeleafView` 对象的 **`render`** 方法，将 `ModelAndView` 中的模型数据 (`map`里的数据) 填充到 Thymeleaf 模板文件中，生成最终的 HTML。
+    4.  最后，调用 `ThymeleafView` 对象的 **`render`** 方法，将 `ModelAndView` 中的模型数据 (`map` 里的数据) 填充到 Thymeleaf 模板文件中，生成最终的 HTML。
 - 渲染完成后，`DispatcherServlet` 将生成的响应返回给浏览器，用户最终看到 "在看转发二连" 这段文字。
 - 在整个过程结束后（无论成功还是异常），`triggerAfterCompletion` 会被调用，以执行拦截器的 `afterCompletion` 方法，用于资源清理等工作。
-
-## 3. 常见追问/易错点
-
-- 追问：Spring MVC的执行流程的核心流程或关键点是什么？
-  - 答：核心结论是：在 `doDispatch` 方法中，主要执行了以下关键操作：。展开时可按“总体执行流程、详细流程解析”组织，先概述再逐点展开，保证结构完整。其中总体执行流程侧重**用户请求**：用户的请求首先被发送到前端控制器 `DispatcherServlet`，详细流程解析侧重所有请求首先进入 `DispatcherServlet` 的 `service` 方法，该方法最终会调用 `doService` 方法。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
-- 易错点：Spring MVC的执行流程中最容易混淆或踩坑的点是什么？
-  - 答：常见易错点是忽略步骤顺序或前置条件。比如总体执行流程中提到：**用户请求**：用户的请求首先被发送到前端控制器 `DispatcherServlet`。详细流程解析中还提到：所有请求首先进入 `DispatcherServlet` 的 `service` 方法，该方法最终会调用 `doService` 方法。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。

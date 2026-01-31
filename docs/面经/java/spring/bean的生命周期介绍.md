@@ -1,23 +1,73 @@
-## 1. 生命周期流程
+## 1. 生命周期主线：从“配方”到“成品”
 
-1. 解析并注册 `BeanDefinition`。
-2. 实例化 Bean（构造器）。
-3. 依赖注入与属性填充。
-4. 调用 Aware 接口（如 `BeanNameAware`）。
-5. 执行 `BeanPostProcessor` 的前置处理。
-6. 初始化：`@PostConstruct`、`InitializingBean#afterPropertiesSet`、自定义 init-method。
-7. 执行 `BeanPostProcessor` 的后置处理（可能生成代理）。
-8. 容器关闭时调用销毁回调（`@PreDestroy`、`DisposableBean`、destroy-method）。
+Bean 生命周期可以按“配方 → 创建 → 注入 → 初始化 → 使用 → 销毁”来理解：
 
-## 2. 关键点/注意事项
+1. 注册 `BeanDefinition`（Bean 的配方）。
+2. 创建 Bean 实例（实例化）。
+3. 依赖注入（属性填充）。
+4. 初始化回调与后置处理（可能产生代理）。
+5. 容器关闭时执行销毁回调（单例）。
 
-- `BeanPostProcessor` 会影响所有 Bean，顺序需关注。
-- 单例 Bean 在容器启动时创建，原型 Bean 在每次获取时创建。
-- AOP 代理通常在后置处理阶段生成。
+## 2. 创建与初始化阶段的关键步骤
 
-## 3. 常见追问/易错点
+下面的顺序以常见单例 Bean 为主，能覆盖面试绝大多数问题。
 
-- 追问：原型 Bean 的销毁回调为什么不会自动触发？
-  - 答：核心结论是：Spring Bean 的生命周期包括实例化、依赖注入、初始化、使用与销毁几个阶段，核心扩展点集中在 `BeanPostProcessor` 与初始化/销毁回调。展开时可按“生命周期流程、关键点/注意事项”组织，先概述再逐点展开，保证结构完整。其中生命周期流程侧重解析并注册 `BeanDefinition`，关键点/注意事项侧重`BeanPostProcessor` 会影响所有 Bean，顺序需关注。回答时要体现步骤、关键点与适用场景，必要时补充示例或对比。
-- 易错点：在初始化前使用 Bean 会拿到未完成依赖注入的对象。
-  - 答：常见易错点是忽略步骤顺序或前置条件、遗漏关键点或注意事项。比如生命周期流程中提到：解析并注册 `BeanDefinition`。关键点/注意事项中还提到：`BeanPostProcessor` 会影响所有 Bean，顺序需关注。这些细节很容易被忽视。回答时应明确边界、关键步骤与适用场景，并用实例或对比验证。
+### 2.1 实例化（Instantiation）
+
+- 构造器实例化（反射）
+- 工厂方法实例化（`@Bean`、FactoryBean 等场景）
+
+### 2.2 属性填充（Populate Properties）
+
+解析依赖并注入：
+
+- `@Autowired`、`@Resource` 等
+- 构造器参数、setter 方法、字段等
+
+### 2.3 Aware 回调（让 Bean “感知容器”）
+
+常见如：
+
+- `BeanNameAware`
+- `BeanFactoryAware`
+- `ApplicationContextAware`
+
+### 2.4 初始化（Initialization）
+
+初始化常见触发点（顺序可概括为）：
+
+1. `@PostConstruct`
+2. `InitializingBean#afterPropertiesSet`
+3. 自定义 `init-method`
+
+### 2.5 `BeanPostProcessor`（生命周期最重要的扩展点）
+
+`BeanPostProcessor` 会在初始化前后对 Bean 做增强，是 AOP、事务、`@Async` 等能力的关键入口。
+
+常见影响：
+
+- 返回代理对象替换原对象（容器里保存的是代理）。
+- 修改属性、注入额外依赖、做校验等。
+
+## 3. 销毁阶段（Destruction）
+
+容器关闭时，单例 Bean 会执行销毁回调：
+
+- `@PreDestroy`
+- `DisposableBean#destroy`
+- 自定义 `destroy-method`
+
+prototype Bean 通常不由容器统一销毁，资源释放需要业务方自行管理。
+
+## 4. 作用域差异（Singleton vs Prototype）
+
+- singleton：默认，容器级单例，通常在容器启动或首次使用时创建。
+- prototype：每次 `getBean` 都新建，生命周期管理不完整（销毁不托管）。
+
+Web 场景还可能有 request/session 等作用域，生命周期与请求上下文绑定。
+
+## 5. 总结
+
+- Bean 生命周期主干：实例化 → 注入 → 初始化（含 BPP）→ 使用 → 销毁。
+- `BeanPostProcessor` 是核心扩展点，AOP/事务代理多在这里产生。
+- prototype 的销毁不由容器托管，外部资源释放要显式处理。
