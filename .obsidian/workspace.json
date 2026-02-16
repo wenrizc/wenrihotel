@@ -13,26 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "计划.md",
+                "file": "未命名.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "计划"
-            }
-          },
-          {
-            "id": "9e883f28e39a5b2e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/面经/AGENTS.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "AGENTS"
+              "title": "未命名"
             }
           }
         ]
@@ -127,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "计划.md",
+                "file": "未命名.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "计划 的出链列表"
+              "title": "未命名 的出链列表"
             }
           },
           {
@@ -185,8 +171,18 @@
   },
   "active": "516e62d2724e2359",
   "lastOpenFiles": [
-    "自我介绍.md",
+    "简历.md",
+    "未命名.md",
+    "docs/面经/AGENTS.md",
     "计划.md",
+    "docs/面经/Java/基础/JDK动态代理与CGLIB.md",
+    "docs/面经/Java/Spring/一次HTTP请求在服务端的处理链路.md",
+    "docs/面经/数据库/项目建表设计要点.md",
+    "docs/面经/分布式/Raft共识算法介绍.md",
+    "docs/面经/数据库/MySQL SQL 性能优化要点.md",
+    "docs/面经/数据库/MySQL复制与备份技术.md",
+    "docs/面经/数据库/MySQL幻读的成因与解决方案.md",
+    "自我介绍.md",
     "docs/面经/场景题/场景题思路.md",
     "agent.md",
     "项目.md",
@@ -201,16 +197,6 @@
     "docs/笔记/redis/Redis数据结构.md",
     "docs/笔记/redis/Redis数据类型.md",
     "docs/笔记/redis/Redis事务.md",
-    "docs/笔记/redis/Redis事件机制.md",
-    "docs/笔记/redis/Redis对象机制.md",
-    "docs/笔记/redis/Redis持久化.md",
-    "docs/笔记/redis/数据类型及其编码对应.md",
-    "docs/笔记/java/ZGC.md",
-    "docs/笔记/java/JVM 内存结构.md",
-    "docs/笔记/java/Java 内存模型.md",
-    "docs/笔记/java/Java 内存模型并发.md",
-    "docs/笔记/java/Java 类字节码.md",
-    "docs/笔记/java/Java 类加载机制.md",
     "docs/面经/同步与异步 I/O、阻塞与非阻塞 I/O、I",
     "docs/面经/同步与异步 I/O、阻塞与非阻塞 I",
     "docs/面经/同步与异步 I",
