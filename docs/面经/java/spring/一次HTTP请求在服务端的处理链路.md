@@ -1,4 +1,4 @@
-## 1. 从浏览器发出请求：到达服务端前发生了什么（快速总览）
+## 1. 从浏览器发出请求：到达服务端前发生了什么
 
 浏览器把 HTTP 请求发出去之前，通常会经历：
 
@@ -7,11 +7,9 @@
 - 建立连接：TCP（三次握手）+（如是 HTTPS）TLS 握手。
 - 选择协议栈：HTTP/1.1（多连接）或 HTTP/2（单连接多路复用）等。
 
-这部分更偏网络侧，延伸阅读可看：`面经/计算机网络/从输入 URL 到页面展示到底发生了什么.md`。
-
 ## 2. 请求进入机房：CDN / WAF / 负载均衡 / 反向代理
 
-一条典型链路（不一定每层都有）：
+一条典型链路：
 
 1. **CDN**：静态资源优先命中边缘缓存；未命中才回源。
 2. **WAF**：拦截常见攻击（SQL 注入、扫描、CC 等）。
@@ -21,8 +19,6 @@
    - 限流、熔断、重试（需谨慎，避免放大风暴）；
    - gzip/br 压缩；
    - 连接复用与缓冲（`proxy_buffering`）。
-
-> 面试加分点：你能说清楚“某些延迟发生在应用之前”，比如 TLS 握手、Nginx 缓冲、上游排队等。
 
 ## 3. 进入服务器之后：Linux 网络栈与 Socket 层
 
@@ -50,7 +46,7 @@
 - **Poller**：基于 NIO Selector 监听 socket 可读/可写事件。
 - **Worker 线程池**：把“解析请求 + 调用应用”交给工作线程执行。
 
-常见配置项（理解含义即可）：
+常见配置项：
 
 - `maxThreads`：最大工作线程数。
 - `acceptCount`：连接排队上限（队列满会拒绝/阻塞）。
@@ -95,8 +91,6 @@ Spring MVC 的入口是 `DispatcherServlet`，它是前端控制器。典型处�
 8. **异常处理**：
    - `HandlerExceptionResolver` 链（`@ControllerAdvice` / `@ExceptionHandler` 等）。
 
-延伸阅读：`面经/Java/Spring/Spring MVC的执行流程.md`。
-
 ## 6. “业务逻辑执行阶段”常见关键环节
 
 ### 6.1 事务：@Transactional
@@ -131,10 +125,4 @@ Spring MVC 的入口是 `DispatcherServlet`，它是前端控制器。典型处�
 - Tomcat：访问日志、线程池耗尽、GC 停顿。
 - 应用：接口耗时分布、Trace（TraceId）、关键下游 span。
 - MySQL：慢查询日志、锁等待、死锁信息。
-
-## 9. 总结（面试回答模板）
-
-- 客户端侧：缓存决策 → DNS → TCP/TLS → HTTP 协议发送。
-- 服务器侧：CDN/WAF/LB/Nginx → Linux 网络栈 → Tomcat Connector/线程池 → FilterChain → `DispatcherServlet` → Handler/Interceptor/参数解析/消息转换 → 业务逻辑 → 响应回写。
-- 排查性能要拆分：网络与代理层、容器线程池、应用逻辑、下游依赖与锁等待。
 

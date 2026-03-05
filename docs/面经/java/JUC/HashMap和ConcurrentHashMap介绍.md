@@ -1,8 +1,7 @@
 ## 1. 区别
 
 - `HashMap`：**非线程安全**，底层是数组桶（bucket）+（链表 / 红黑树）；均摊 `O(1)`，冲突严重时树化为 `O(log n)`；允许 `null` key 和 `null` value。
-- `ConcurrentHashMap`：**线程安全**，JDK 8+ 采用 **空桶 CAS + 冲突桶 bin 粒度 `synchronized` + 协助扩容**；迭代器为 **弱一致性**；不允许 `null` key/value。
-- 选型一句话：单线程或外部已保证互斥用 `HashMap`；高并发读写用 `ConcurrentHashMap`；`Hashtable` 与 `Collections.synchronizedMap()` 通常不作为新代码首选。
+- `ConcurrentHashMap`：**线程安全**，JDK 8+ 采用 **空桶 CAS + 冲突桶 `synchronized` + 协助扩容**；迭代器为 **弱一致性**；不允许 `null` key/value。
 
 ## 2. HashMap（JDK 8+ 视角）
 
@@ -44,7 +43,7 @@ int index = (n - 1) & hash; // 等价于 hash % n，但更快
 - 扩容翻倍时迁移更简单：元素要么留在原桶，要么移动到 `oldIndex + oldCap`。
 - 更容易让 `hash` 的低位均匀参与分桶，降低热点桶概率。
 
-#### 2.1.3 Node 字段与线程语义（为什么并发读写不可靠）
+#### 2.1.3 Node 字段与线程语义
 
 `HashMap.Node` 的典型字段（概念化）是：
 
@@ -120,8 +119,7 @@ if ((e.hash & oldCap) == 0) {
 
 成本：`O(n)` 的元素搬迁会带来短期 CPU 峰值与 GC 压力，因此容量预估对线上稳定性很重要。
 
-### 2.5 为什么 HashMap 线程不安全（源码级根因）
-
+### 2.5 为什么 HashMap 线程不安全
 `HashMap` 的问题可以拆成三个维度理解：
 
 - **原子性**：链表插入、树化、`size++`、`modCount++` 都是复合操作，多个线程交错会丢数据或覆盖写。
@@ -255,15 +253,3 @@ JDK 8+ 的计数使用类似 `LongAdder` 的分片设计：
 
 - 不抛 `ConcurrentModificationException`。
 - 能遍历到迭代开始时存在的元素；并发更新可能被看到，也可能看不到，但不会破坏遍历安全。
-
-### 3.5 常用 API 与正确用法
-
-- `putIfAbsent(k, v)`：只在 key 不存在时写入，避免“先 `get` 再 `put`”的竞态。
-- `computeIfAbsent(k, f)`：典型缓存写法；实现上会通过占位等手段减少同 key 的重复计算，但仍建议 `f` **无副作用、可重复调用**，并避免长耗时阻塞（否则会拖慢同 bin 内的并发）。
-- `compute` / `merge`：原子复合更新入口，优先于手写“读-改-写”。
-
-### 3.6 适用场景与最佳实践
-
-- 适合：高并发读写的共享映射（配置缓存、连接表、会话表、去重表）。
-- 不适合：需要强一致遍历快照、严格顺序、或 LRU/TTL 淘汰的缓存（优先用 Caffeine 等专业缓存）。
-- 容量规划：减少扩容触发；扩容在高峰期仍会引入额外 CPU 与内存带宽消耗。

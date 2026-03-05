@@ -1,236 +1,299 @@
-## 1. `@Transactional` 的“级别”在说什么
+## 1. `@Transactional` 解决什么问题
 
-面试里说的“`@Transactional` 各个级别”，通常指两类可枚举的策略：**事务传播行为（Propagation）** 和 **事务隔离级别（Isolation）**。前者解决“调用链里事务边界怎么接”，后者解决“并发读写时允许看到什么数据”。
+`@Transactional` 用来声明事务边界：在方法执行前开启事务，在方法正常返回时提交，在满足回滚规则时回滚。它解决的是“把事务控制从业务代码中抽离出来”，避免手写 `Connection`、`commit()`、`rollback()` 造成的重复与遗漏。
 
-需要先明确一个前提：这些参数本质上会被转换成 `TransactionDefinition`，最终由 `PlatformTransactionManager` 在运行期按规则创建/加入事务，并把隔离级别等信息落到具体资源（例如 JDBC `Connection`）上。
+- **事务只对同一线程内的数据库操作生效**。Spring 默认把事务上下文绑定到当前线程（`ThreadLocal`），跨线程（`@Async`、手动新建线程）不会自动继承。
+- **`@Transactional` 本质是 Spring AOP 代理拦截**。只有“通过代理对象调用”才会触发事务拦截器，自调用（`this.xxx()`）通常会绕过代理。
 
-## 2. 事务传播行为（Propagation）七种语义
+## 2. `@Transactional` 生效的前提与边界
 
-传播行为描述的是：当前线程已存在事务时，本次方法调用是 **加入、挂起、还是新建**。Spring 的 7 种传播行为如下（单数据源场景下最常用）。
+### 2.1 必要前提
 
-| 传播行为            | 是否新建物理事务    | 语义要点                   | 高频使用场景             |
-| --------------- | ----------- | ---------------------- | ------------------ |
-| `REQUIRED`      | 有则不新建，无则新建  | 默认：优先加入外层事务            | 绝大多数业务写操作          |
-| `REQUIRES_NEW`  | 总是新建        | 挂起外层事务，内层独立提交/回滚       | 独立日志、关键副作用需要“必达提交” |
-| `NESTED`        | 不新建（同一物理事务） | 基于保存点（Savepoint）实现局部回滚 | 局部失败不影响外层继续        |
-| `SUPPORTS`      | 取决于外层       | 有事务则加入，无事务则非事务执行       | 读操作复用外层事务          |
-| `NOT_SUPPORTED` | 不新建         | 挂起当前事务，强制非事务执行         | 需要避免长事务持锁的逻辑       |
-| `MANDATORY`     | 不新建         | 必须存在事务，否则抛异常           | 强制调用方提供事务边界        |
-| `NEVER`         | 不新建         | 必须不存在事务，否则抛异常          | 明确禁止在事务中调用         |
+- 目标对象必须是 Spring 容器管理的 Bean。
+- 调用必须经过代理对象（JDK 动态代理或 CGLIB 代理）。
+- 容器中存在可用的 `PlatformTransactionManager`（例如 `DataSourceTransactionManager`、`JpaTransactionManager`）。
 
-**`REQUIRES_NEW` vs `NESTED`** 是高频点：`REQUIRES_NEW` 是“独立物理事务”，`NESTED` 是“同一物理事务 + 保存点”。传播行为的更完整推导可参考同目录《Spring中事务是如何传播的，事务出错时如何实现回滚》。
+### 2.2 典型边界
 
-## 3. 事务隔离级别
+- `private` 方法通常无法被代理增强；`final` 类或 `final` 方法在 CGLIB 下也无法增强。
+- 事务对外部系统（RPC、MQ、Redis）不提供强一致保证，跨系统一致性需要依赖 `Saga`、`Outbox`、幂等、补偿等方案。
 
-隔离级别解决的是并发读写下的可见性问题。标准口径通常从三类现象切入：
+## 3. 注解参数
 
-- 脏读：读到其他事务 **未提交** 的数据。
-- 不可重复读：同一事务内两次读同一行，结果不一致（中间被他人提交修改）。
-- 幻读：同一事务内两次范围查询，结果集行数不一致（中间被他人提交插入/删除）。
+`@Transactional` 主要参数：
 
-### 3.1 并发现象与隔离级别对照（SQL 标准口径）
+| 参数 | 类型 | 默认值 | 作用 |
+| --- | --- | --- | --- |
+| `propagation` | `Propagation` | `REQUIRED` | **传播行为**：有无外层事务时如何参与或新建事务 |
+| `isolation` | `Isolation` | `DEFAULT` | 隔离级别：由具体数据库与驱动决定最终行为 |
+| `timeout` | `int` | `-1` | 超时时间（秒），由具体事务管理器实现解释 |
+| `readOnly` | `boolean` | `false` | 只读提示：可能影响路由、`flush`、优化器策略（不等于“禁止写入”） |
+| `rollbackFor` / `rollbackForClassName` | `Class[]` / `String[]` | 空 | 指定哪些异常需要回滚（补充默认规则） |
+| `noRollbackFor` / `noRollbackForClassName` | `Class[]` / `String[]` | 空 | 指定哪些异常不回滚（覆盖默认规则） |
+| `transactionManager` | `String` | 空 | 指定使用哪个 `PlatformTransactionManager` Bean（多数据源常用） |
 
-| 隔离级别               | 脏读  | 不可重复读 | 幻读  | 典型取舍             |
-| ------------------ | --- | ----- | --- | ---------------- |
-| `READ_UNCOMMITTED` | 可能  | 可能    | 可能  | 并发高，一致性差，几乎不用    |
-| `READ_COMMITTED`   | 不会  | 可能    | 可能  | 吞吐与一致性折中，很多数据库默认 |
-| `REPEATABLE_READ`  | 不会  | 不会    | 可能  | 更强一致性，可能增加锁冲突    |
-| `SERIALIZABLE`     | 不会  | 不会    | 不会  | 最强一致性，并发最低       |
+## 4. 传播行为（Propagation）
 
-注意：上表是 SQL 标准的抽象定义。不同数据库在 MVCC、间隙锁（gap lock）、谓词锁等实现细节上存在差异，某些实现会“弱化/规避”特定现象，但不改变隔离级别的语义目标。
+传播行为决定两件事：
 
-### 3.2 Spring `Isolation` 枚举逐项解释
+- 当前方法被调用时，如果调用方已经在事务中，**是否加入该事务**。
+- 如果调用方没有事务，**是否创建新事务**。
 
-Spring 在 `@Transactional` 里通过 `isolation` 指定隔离级别，其枚举来自 `org.springframework.transaction.annotation.Isolation`，并映射到 JDBC `Connection` 的隔离级别常量：
+### 4.1 传播行为矩阵
 
-| Spring `Isolation` | `TransactionDefinition` | JDBC `Connection` 常量 |
-| --- | --- | --- |
-| `DEFAULT` | `ISOLATION_DEFAULT`（-1） | 不设置，使用数据库/连接默认值 |
-| `READ_UNCOMMITTED` | `ISOLATION_READ_UNCOMMITTED` | `TRANSACTION_READ_UNCOMMITTED` |
-| `READ_COMMITTED` | `ISOLATION_READ_COMMITTED` | `TRANSACTION_READ_COMMITTED` |
-| `REPEATABLE_READ` | `ISOLATION_REPEATABLE_READ` | `TRANSACTION_REPEATABLE_READ` |
-| `SERIALIZABLE` | `ISOLATION_SERIALIZABLE` | `TRANSACTION_SERIALIZABLE` |
+| 传播行为            | 外层有事务                        | 外层无事务                | 典型用途                       |
+| --------------- | ---------------------------- | -------------------- | -------------------------- |
+| `REQUIRED`      | 加入外层事务                       | 新建事务                 | 绝大多数业务写操作（默认值）             |
+| `SUPPORTS`      | 加入外层事务                       | 非事务执行                | 读操作可用，想“有事务就加入”            |
+| `MANDATORY`     | 加入外层事务                       | 抛异常                  | 强制要求必须在事务中被调用              |
+| `REQUIRES_NEW`  | **挂起外层事务**，新建事务              | 新建事务                 | 独立提交的日志、审计、补偿记录            |
+| `NOT_SUPPORTED` | **挂起外层事务**，非事务执行             | 非事务执行                | 明确要求不在事务内执行的操作             |
+| `NEVER`         | 抛异常                          | 非事务执行                | 强制要求不能在事务中被调用              |
+| `NESTED`        | 在外层事务内创建嵌套事务（通常基于 Savepoint） | 新建事务（等价于 `REQUIRED`） | 局部回滚但不影响外层的场景（依赖具体事务管理器能力） |
 
-#### 3.2.1 `Isolation.DEFAULT`
+### 4.2 `REQUIRED`：默认且最常用
 
-**默认值不是“某个固定级别”，而是“交给底层数据库/数据源决定”**。例如：MySQL InnoDB 常见默认是 `REPEATABLE_READ`，PostgreSQL 常见默认是 `READ_COMMITTED`。
+`REQUIRED` 的关键点是“**参与**”：有外层事务就复用同一个物理事务边界，没有外层事务就创建新的。
 
-工程上优先使用 `DEFAULT` 的原因是：隔离级别一旦显式指定，就会变成“业务代码的隐含约束”，迁移数据库或调整实例参数时更难统一收敛。
+常见误区：
 
-#### 3.2.2 `Isolation.READ_UNCOMMITTED`
+- 你以为“内部方法标注了 `REQUIRED` 会开启新事务”，实际上它只是加入外层事务。
+- 外层抛异常导致回滚时，内部逻辑也会一起回滚，因为它们属于同一个事务。
 
-允许读取未提交数据，可能产生脏读。除非你明确知道读到“临时态数据”也不会造成业务错误（并且能接受回滚导致的反直觉结果），否则一般不建议使用。
+### 4.3 `REQUIRES_NEW`：强制独立事务
 
-#### 3.2.3 `Isolation.READ_COMMITTED`
+`REQUIRES_NEW` 的关键点是“**挂起外层** + **开启新事务**”。新事务的提交与回滚不受外层影响。
 
-保证不会脏读：只读到已提交版本。代价是同一事务中两次读可能看到不同提交点的数据，因此可能出现不可重复读与幻读。
+工程注意点：
 
-如果业务希望“读到尽可能新的已提交数据”，并且可通过幂等、校验、乐观锁等手段兜住并发写入带来的变化，`READ_COMMITTED` 通常是更平衡的选择。
+- 对 JDBC（`DataSourceTransactionManager`）来说，外层事务占用的 `Connection` 会被挂起，内层通常需要从连接池再拿一条新 `Connection`。连接池过小可能导致内层拿不到连接而卡死。
+- 外层事务最终回滚也不会影响内层已提交的数据，这既是能力也是风险，尤其是审计日志与业务数据的一致性需要你在设计上接受。
 
-#### 3.2.4 `Isolation.REPEATABLE_READ`
+### 4.4 `NESTED`：嵌套事务与 Savepoint
 
-保证同一事务内对同一行的重复读取结果一致（标准语义下仍可能幻读）。在 MVCC 数据库中，它通常意味着“事务级快照”：你的普通查询会基于同一个一致性视图（snapshot）。
+`NESTED` 的语义是“外层事务仍是一个大事务”，但内层可以通过 Savepoint 做局部回滚。
 
-在 MySQL/InnoDB 中，还要区分快照读与当前读：`SELECT ... FOR UPDATE` 这类当前读会参与加锁，锁冲突与死锁风险通常比快照读更敏感。
+关键点：
 
-#### 3.2.5 `Isolation.SERIALIZABLE`
+- 对 JDBC 来说，嵌套事务通常依赖数据库 Savepoint（同一条连接内的保存点），回滚到保存点不会回滚外层已执行但未提交的其他操作。
+- 并非所有事务管理器都支持真正的嵌套事务。比如 JTA 场景可能退化为 `REQUIRED` 或直接不支持 Savepoint（取决于实现）。
 
-最强隔离，目标是让并发事务的执行效果等价于串行执行。实现上通常需要更重的锁或谓词/范围锁，**吞吐会显著下降**，并且更容易出现锁等待与超时。
+### 4.5 传播行为最小示例
 
-工程上更常见的做法是：在必要的热点路径上使用“短事务 + 明确锁语义（如 `SELECT ... FOR UPDATE`）+ 唯一约束/幂等”替代全局 `SERIALIZABLE`。
-
-## 4. 隔离级别什么时候真正生效：只对“新事务”生效
-
-`isolation`（以及 `timeout`、`readOnly` 等）只有在 **本次调用会创建新的物理事务** 时才会被应用。原因是隔离级别是底层资源（如 JDBC `Connection`）的会话属性，参与已有事务时无法在不破坏一致性的前提下“半路切换”。
-
-下面这个例子是常见误区：内层标了更强隔离，但传播行为是 `REQUIRED`，结果内层只是在复用外层事务，隔离级别并不会变。
+#### 4.5.1 `REQUIRES_NEW`：审计日志独立提交
 
 ```java
-import org.springframework.transaction.annotation.Isolation;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional // 默认：Propagation.REQUIRED + Isolation.DEFAULT
-public void outer() {
-    inner(); // 复用 outer 的物理事务，inner 的 isolation 不会生效
+@Service
+public class OrderService {
+    private final AuditService auditService;
+    private final OrderRepository orderRepository;
+
+    public OrderService(AuditService auditService, OrderRepository orderRepository) {
+        this.auditService = auditService;
+        this.orderRepository = orderRepository;
+    }
+
+    @Transactional // REQUIRED
+    public void createOrder() {
+        orderRepository.insertOrder();
+        auditService.writeAuditLog(); // 独立事务，外层回滚也不会影响它
+        throw new RuntimeException("fail");
+    }
 }
 
-@Transactional(isolation = Isolation.SERIALIZABLE)
-public void inner() {}
-```
+@Service
+class AuditService {
+    private final AuditRepository auditRepository;
 
-如果你确实需要在调用链中“切换隔离级别”，通常要配合 `Propagation.REQUIRES_NEW` 新开事务；否则请把隔离级别统一放在最外层事务边界上。
+    AuditService(AuditRepository auditRepository) {
+        this.auditRepository = auditRepository;
+    }
 
-源码层面，这一行为由 `AbstractPlatformTransactionManager#getTransaction(...)` 的“已有事务分支”决定：默认不会因为内外层 `isolation` 不一致而报错；如需强校验，可通过 `AbstractPlatformTransactionManager#setValidateExistingTransaction(true)` 在发现不一致时抛出 `IllegalTransactionStateException`。
-
-## 5. Spring 如何把隔离级别落到 JDBC 连接上
-
-以 `DataSourceTransactionManager` 为例，事务开启时（`doBegin`）会从 `DataSource` 取出一个 JDBC `Connection`，并在需要时调用 `Connection#setTransactionIsolation(...)` 设置隔离级别，随后把连接绑定到当前线程（`TransactionSynchronizationManager`）。
-
-事务结束时（`doCleanupAfterCompletion`），Spring 会把连接的 `autoCommit`、隔离级别、`readOnly` 等属性尽量恢复成原值，再把连接归还给连接池。**这一步很关键**：如果属性未被恢复，连接池复用连接时就会出现“脏隔离级别”串扰。
-
-如果你用的是分布式事务（如 JTA），或 ORM 框架自行管理连接/会话，隔离级别是否能按 `@Transactional` 精确落地，取决于具体事务管理器与资源适配方式，不能一概而论。
-
-## 6. 实战选型建议
-
-- 能用 `DEFAULT` 就先用 `DEFAULT`，把隔离级别当作“数据库层面默认策略”，不要轻易在大量业务方法上散落显式配置。
-- 需要更强一致性时，优先缩短事务、优化索引与访问顺序，必要时使用显式锁（如 `SELECT ... FOR UPDATE`）或乐观锁，而不是直接把隔离级别拉满。
-- 要求“内层独立提交/回滚”时用 `REQUIRES_NEW`；要“同一事务内局部回滚”且底层支持保存点时用 `NESTED`。
-- 遇到“配了 `isolation` 但没效果”，第一反应检查：是否真的新开了物理事务（传播行为、是否已有外层事务）。
-
-## 7. `@Transactional` 的底层实现
-
-`@Transactional` 的实现可以一句话概括：**用 AOP 把 `TransactionInterceptor` 包到目标方法外层，在运行期把注解解析成 `TransactionAttribute`，再委托 `PlatformTransactionManager` 进行事务创建、挂起、提交与回滚**。
-
-它不是“编译期魔法”，而是 Spring 容器启动阶段注册的一套基础设施（Advisor/Interceptor/AttributeSource）在运行期协作完成。
-
-### 7.1 开启事务能力：`@EnableTransactionManagement` 做了什么
-
-Spring 通过 `@EnableTransactionManagement`（或 Spring Boot 的自动配置）启用声明式事务。其核心是导入 `ProxyTransactionManagementConfiguration`（代理模式），注册三类基础组件：
-
-- `TransactionAttributeSource`：从方法/类上解析 `@Transactional`，产出事务规则。
-- `TransactionInterceptor`：环绕增强，负责开启事务并在方法返回/抛异常时提交或回滚。
-- `BeanFactoryTransactionAttributeSourceAdvisor`：把“哪些方法需要事务”和“用哪个拦截器”绑定到一起，让 AOP 自动创建代理并织入调用链。
-
-如果选择 AspectJ 模式（较少见），事务织入不是通过代理完成，拦截范围与限制也会不同（例如非 `public` 方法）。
-
-### 7.2 注解如何被解析：`@Transactional` → `TransactionAttribute`
-
-默认解析链路是：
-
-- `AnnotationTransactionAttributeSource`：入口，定位方法/类上的事务注解。
-- `SpringTransactionAnnotationParser`：把注解属性转成 Spring 的事务定义。
-- `RuleBasedTransactionAttribute`：承载传播、隔离、超时、只读、回滚规则等信息。
-
-这里有两个容易忽略的点：
-
-- `TransactionAttributeSource` 内部会做缓存（基于 `AbstractFallbackTransactionAttributeSource`），避免每次调用都反射解析注解。
-- 规则合并顺序一般是“方法优先于类”，更具体的声明覆盖更抽象的声明。
-
-### 7.3 事务是怎么织入的：Advisor 匹配 + 代理拦截
-
-当一个 Bean 初始化完成后，Spring AOP 会根据 `BeanFactoryTransactionAttributeSourceAdvisor` 判断它是否需要创建代理：只要某个方法能从 `TransactionAttributeSource` 解析到事务属性，就会命中。
-
-运行期调用链（典型同步场景）可以理解为：
-
-- 业务方调用代理对象方法。
-- `TransactionInterceptor#invoke(...)` 执行，进入 `TransactionAspectSupport#invokeWithinTransaction(...)`。
-- 解析 `TransactionAttribute`，确定 `PlatformTransactionManager`，然后调用 `getTransaction(...)`。
-- 执行目标方法：正常返回则 `commit(...)`；抛异常则按回滚规则 `rollback(...)` 或 `commit(...)`。
-
-因此，事务的“边界”本质上就是 AOP 代理能否拦到这次方法调用。
-
-### 7.4 `PlatformTransactionManager` 如何决定“加入/新建/挂起”
-
-`AbstractPlatformTransactionManager#getTransaction(...)` 是传播行为的核心入口：
-
-- 没有当前事务：按传播行为选择“新建事务 / 直接非事务执行 / 抛异常”。
-- 已有当前事务：按传播行为选择“加入 / 挂起再新建 / 建保存点 / 抛异常”。
-
-以 `REQUIRES_NEW` 为例：先 `suspend(...)` 挂起外层资源（连接、同步回调等），再 `doBegin(...)` 新建事务；内层结束后 `resume(...)` 恢复外层事务继续执行。`NESTED` 则通常通过 `SavepointManager` 创建保存点来实现局部回滚。
-
-### 7.5 事务资源如何绑定到线程：`TransactionSynchronizationManager`
-
-Spring 用 `TransactionSynchronizationManager`（一组 `ThreadLocal`）把“当前线程的事务上下文”串起来，里面典型会存：
-
-- 资源句柄：例如 `DataSource` → `ConnectionHolder`，用来复用同一个 JDBC 连接。
-- 事务同步回调：`TransactionSynchronization`，用于 `afterCommit`、`afterCompletion` 等时机的回调。
-
-这也解释了一个工程事实：**事务上下文默认不跨线程传播**。一旦你把工作切到线程池（`@Async`、`CompletableFuture` 等），新的线程没有旧线程的 `ThreadLocal`，自然也就“没有事务”。
-
-### 7.6 以 JDBC 为例：`DataSourceTransactionManager` 的关键动作
-
-在单数据源 JDBC 场景，`DataSourceTransactionManager` 会在 `doBegin(...)` 阶段做几件关键事：
-
-- 从连接池取 `Connection`，必要时设置隔离级别、只读标记等连接属性。
-- 关闭 `autoCommit`，让后续 SQL 处在同一个事务里。
-- 把 `ConnectionHolder` 绑定到 `TransactionSynchronizationManager`，保证同线程内的 DAO/ORM 拿到的是同一连接。
-
-可以用伪代码抓住主线（方法名以 Spring 源码为准，细节略有简化）：
-
-```java
-Connection con = DataSourceUtils.getConnection(dataSource);
-Integer oldLevel = DataSourceUtils.prepareConnectionForTransaction(con, txAttr);
-con.setAutoCommit(false);
-TransactionSynchronizationManager.bindResource(dataSource, new ConnectionHolder(con));
-
-try {
-    invocation.proceed();
-    con.commit();
-} catch (Throwable ex) {
-    con.rollback();
-    throw ex;
-} finally {
-    TransactionSynchronizationManager.unbindResource(dataSource);
-    DataSourceUtils.resetConnectionAfterTransaction(con, oldLevel);
-    DataSourceUtils.releaseConnection(con, dataSource);
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void writeAuditLog() {
+        auditRepository.insertAudit();
+    }
 }
 ```
 
-这里的工程要点是：**连接属性必须在事务结束后被恢复**。否则连接池复用连接时，会把隔离级别、只读标记等“串”到下一次请求，出现非常隐蔽的一致性问题。
-
-### 7.7 回滚规则在哪里判定：`rollbackOn` 与 `setRollbackOnly`
-
-Spring 并不是看到“有异常”就一定回滚，它会调用 `TransactionAttribute#rollbackOn(Throwable)` 判断是否回滚：
-
-- 默认实现（`DefaultTransactionAttribute`）：遇到 `RuntimeException` 或 `Error` 才回滚。
-- 解析了 `rollbackFor` / `noRollbackFor` 后（`RuleBasedTransactionAttribute`）：按规则匹配异常类型，最接近的规则生效。
-
-还有一个常见误区：如果你在事务方法内部把异常吞掉，代理层看起来就是“正常返回”，会走提交分支。此时要么重新抛出异常，要么显式标记回滚：
+#### 4.5.2 `NESTED`：局部失败不影响外层继续
 
 ```java
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+class PaymentService {
+    private final CouponService couponService;
+
+    PaymentService(CouponService couponService) {
+        this.couponService = couponService;
+    }
+
+    @Transactional
+    public void pay() {
+        // 外层逻辑
+        reserve();
+        try {
+            couponService.couponInNested(); // 失败只回滚到保存点，不影响 reserve()
+        } catch (Exception ignore) {
+            // 注意：吞异常会让外层事务继续提交，是否合理取决于业务语义
+        }
+        confirm();
+    }
+
+    private void reserve() {}
+
+    private void confirm() {}
+}
+
+@Service
+class CouponService {
+    @Transactional(propagation = Propagation.NESTED)
+    public void couponInNested() {
+        // 内层逻辑
+        throw new IllegalStateException("coupon error");
+    }
+}
+```
+
+## 5. 底层实现原理：从注解到事务提交/回滚
+
+`@Transactional` 的底层实现可以按“三段式”理解：**解析注解**、**AOP 拦截**、**事务管理器执行**。
+
+### 5.1 解析注解：`TransactionAttributeSource`
+
+Spring 会把 `@Transactional` 解析成事务属性（传播、隔离、回滚规则等），核心抽象是：
+
+- `TransactionAttributeSource`：给定 `Method` 与 `Class`，解析出 `TransactionAttribute`。
+- 常见实现：`AnnotationTransactionAttributeSource`。
+- 常见属性实现：`RuleBasedTransactionAttribute`，它内部持有回滚规则（`RollbackRuleAttribute`）。
+
+结论是：`@Transactional` 不是“开关”，它会被解析为一份可执行的事务定义。
+
+### 5.2 AOP 拦截：`TransactionInterceptor`
+
+事务是通过 AOP Advisor 织入的，核心拦截器是 `TransactionInterceptor`（它实现了 AOP Alliance 的 `MethodInterceptor`）。
+
+在方法调用时，拦截器的逻辑可以抽象为：
+
+```text
+1. 根据方法与类解析 TransactionAttribute（含 propagation、isolation、rollback rules）
+2. 选择 PlatformTransactionManager（默认按类型注入，多数据源可按 transactionManager 指定）
+3. 调用 tm.getTransaction(...) 获取 TransactionStatus
+4. 执行目标方法
+5. 正常返回：tm.commit(status)
+6. 异常返回：根据 rollback rules 决定 tm.rollback(status) 或 tm.commit(status)
+```
+
+这也是为什么“自调用”会导致事务失效：没有走代理就不会进入 `TransactionInterceptor`。
+
+### 5.3 事务管理器模板：`AbstractPlatformTransactionManager`
+
+`PlatformTransactionManager` 定义了事务的三大操作：
+
+- `getTransaction(TransactionDefinition definition)`：根据传播行为决定加入、挂起、创建新事务。
+- `commit(TransactionStatus status)`：提交或在标记回滚时回滚。
+- `rollback(TransactionStatus status)`：回滚。
+
+常见实现会继承 `AbstractPlatformTransactionManager`，把“传播行为处理、挂起与恢复、同步回调”等通用流程模板化，子类只需要实现与具体资源相关的部分：
+
+- `DataSourceTransactionManager`：管理 JDBC `Connection`。
+- `JpaTransactionManager`：管理 JPA `EntityManager`。
+
+传播行为的关键处理点就在 `AbstractPlatformTransactionManager#getTransaction(...)`：它会判断当前线程是否已经绑定资源，从而决定加入、挂起或新建事务。
+
+### 5.4 JDBC 场景的关键细节：`DataSourceTransactionManager`
+
+以 JDBC 为例，事务的“资源绑定”与“线程绑定”是两条主线：
+
+- 资源绑定：开启事务时会拿到 `Connection`，设置 `autoCommit=false`，按需设置隔离级别与只读属性。
+- 线程绑定：通过 `TransactionSynchronizationManager` 把 `ConnectionHolder` 绑定到当前线程，DAO 层通过 `DataSourceUtils.getConnection(...)` 取到同一条连接，从而保证同一事务内的多次 SQL 在同一物理事务中执行。
+
+`REQUIRES_NEW` 的“挂起”通常意味着：
+
+- 把当前线程绑定的连接与同步信息暂存起来（suspend）。
+- 为新事务重新获取并绑定另一条连接（begin）。
+- 新事务结束后恢复外层绑定（resume）。
+
+### 5.5 回滚判定：为什么默认只回滚运行时异常
+
+Spring 的默认回滚规则是：
+
+- 遇到 `RuntimeException` 或 `Error`：回滚。
+- 遇到受检异常（`Exception` 但非 `RuntimeException`）：默认提交。
+
+原因是：受检异常通常被用来表达“业务可预期分支”，Spring 选择了“默认不回滚”的保守策略，避免把业务分支误判为系统失败。
+
+当你配置 `rollbackFor`、`noRollbackFor` 时，本质是在影响 `TransactionAttribute#rollbackOn(Throwable ex)` 的判断结果。
+
+## 6. 隔离级别（Isolation）与一致性直觉
+
+`isolation` 描述的是数据库层面的并发可见性，常见枚举包括：
+
+- `READ_UNCOMMITTED`：可能脏读。
+- `READ_COMMITTED`：避免脏读，仍可能不可重复读与幻读（取决于数据库实现）。
+- `REPEATABLE_READ`：保证同一事务内重复读一致性（InnoDB 还会用 MVCC 与间隙锁影响幻读表现）。
+- `SERIALIZABLE`：最强隔离，吞吐最差。
+- `DEFAULT`：使用数据库默认隔离级别。
+
+工程建议：
+
+- 优先使用数据库默认隔离级别并结合业务锁设计，除非你能解释清楚“为什么需要提升隔离级别”以及它的吞吐代价。
+- 不要把隔离级别当成“万能一致性开关”，唯一性约束、幂等键、乐观锁仍然是必要工具。
+
+## 7. 回滚规则与异常处理的坑
+
+### 7.1 `try/catch` 吞异常导致提交
+
+事务拦截器通常以“方法是否抛出异常”作为回滚触发条件之一。你把异常吞掉，拦截器看到的是“正常返回”，就会提交。
+
+```java
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+class FooService {
+    @Transactional
+    public void doBiz() {
+        try {
+            risky();
+        } catch (Exception e) {
+            // 如果这里必须吞异常，但又要回滚，需要显式标记回滚
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+    }
+
+    private void risky() {}
+}
 ```
 
-### 7.8 事务为什么会“失效”：你以为在用，其实没拦到
+### 7.2 受检异常默认不回滚
 
-只要把握住“事务靠代理拦截”这个事实，就能解释大多数失效场景：
+如果你抛的是受检异常（例如 `IOException`），默认可能不会触发回滚。需要显式配置：
 
-- 类内部自调用：`this.xxx()` 绕过代理，`@Transactional` 不生效。
-- 非 `public` 方法：代理模式下默认只对 `public` 方法应用事务属性（避免语义与可见性冲突）。
-- 初始化阶段调用：例如 `@PostConstruct` 中调用事务方法，此时代理通常尚未生效，属于典型坑点。
+```java
+import java.io.IOException;
+import org.springframework.transaction.annotation.Transactional;
 
-更完整的失效清单与修复方式可对照同目录《什么情况下@Transactional注解会失效》。
+class BarService {
+    @Transactional(rollbackFor = IOException.class)
+    public void f() throws IOException {
+        throw new IOException("io");
+    }
+}
+```
 
+## 8. 常见失效场景
 
+常见“看起来加了注解但不生效”的原因：
+
+- 同类内部自调用绕过代理。
+- 方法可见性或 `final` 限制导致无法增强。
+- 异常被吞掉或被转换成了不触发回滚的类型。
+- 多数据源场景事务管理器选错（`transactionManager` 未指定或 bean 装配不符合预期）。
+- 异步、跨线程导致事务上下文丢失。

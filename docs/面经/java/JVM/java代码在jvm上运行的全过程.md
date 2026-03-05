@@ -62,15 +62,3 @@ JIT 会基于运行时 profiling 数据进行优化，例如：
 - **元空间/方法区**：类元数据、常量、JIT 产物等。
 
 GC 在运行期根据触发条件（分配失败、阈值、显式触发等）回收不再可达对象，并可能伴随停顿（Stop-The-World）。
-
-## 5. 观测与排查（面试加分）
-
-面试中能把“过程”落地到工具，会显得更工程化：
-
-```bash
-jcmd <pid> VM.flags
-jcmd <pid> GC.heap_info
-jcmd <pid> Thread.print
-jstat -gcutil <pid> 1000
-```
-

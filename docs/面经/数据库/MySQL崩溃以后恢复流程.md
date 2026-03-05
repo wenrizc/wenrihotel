@@ -26,7 +26,7 @@ tail -n 200 /var/log/mysql/error.log
 journalctl -u mysqld -n 300 --no-pager
 ```
 
-### 2.2 重启与自动恢复阶段（你会在日志里看到什么）
+### 2.2 重启与自动恢复阶段
 
 当你正常启动 `mysqld` 时，InnoDB 会在启动阶段执行“崩溃恢复”，核心步骤可概括为：
 
@@ -87,7 +87,7 @@ mysqlcheck -uroot -p --databases your_db --check --quick
 - **想要“断电不丢提交”，通常需要 `innodb_flush_log_at_trx_commit=1` 且 `sync_binlog=1`**（再配合可靠存储与电源）。
 - 只做到其中一个，仍可能出现“事务提交了但恢复后看不到”的窗口（本质是提交链路上仍有未持久化点）。
 
-## 4. 进阶：两阶段提交与崩溃点（binlog 与 InnoDB 一致性）
+## 4. 进阶：两阶段提交与崩溃点
 
 MySQL 在开启 `binlog` 的情况下，需要确保“InnoDB 事务提交”和“binlog 记录”一致，否则会导致：
 
