@@ -1,4 +1,4 @@
-## 1. 总览：MySQL 的锁在“哪一层”
+## 1. MySQL 的锁在“哪一层”
 
 MySQL 的锁可以按“生效对象”和“实现层次”理解：一部分在 **Server 层**（对实例、表、元数据做并发控制），另一部分在 **InnoDB 引擎层**（主要是事务并发控制的行锁体系）。
 
@@ -107,8 +107,6 @@ SELECT RELEASE_LOCK('job:rebuild_index');
 - 排他锁（X Lock）：独占写，其他事务不能再读写该资源的锁定读版本。
 - 意向共享锁（IS）、意向排他锁（IX）：表级“声明”，表示事务接下来要在表内某些记录上加 S / X 锁，便于与表锁快速做冲突判断。
 
-**面试高频点**：普通 `SELECT`（一致性读）通常不加行锁；只有 `SELECT ... FOR UPDATE`、`SELECT ... FOR SHARE`（或旧语法 `LOCK IN SHARE MODE`）这类“锁定读”才会参与行锁竞争。
-
 ### 3.2 锁定读语法：`FOR UPDATE`、`FOR SHARE`、`NOWAIT`、`SKIP LOCKED`
 
 锁的“类型”决定了并发语义，但落地时你真正会写的是 SQL。InnoDB 里最常见的加锁入口就是锁定读：
@@ -194,7 +192,7 @@ COMMIT;
 - 面试落地说法：
   - 如果系统对“自增值连续”没有强需求，通常更关注并发与吞吐；如果依赖自增连续做分片/业务逻辑，要明确知道并发下可能出现跳号或不可预期分配的边界。
 
-### 3.9 外键约束相关的锁（常被忽略但很关键）
+### 3.9 外键约束相关的锁
 
 InnoDB 在维护外键一致性时，会对父表/子表相关记录加锁来防止并发破坏约束。
 
@@ -263,3 +261,177 @@ SELECT * FROM performance_schema.data_locks;
 ```sql
 SELECT * FROM performance_schema.metadata_locks;
 ```
+
+### 6.3 死锁现场：优先看 `SHOW ENGINE INNODB STATUS`
+
+如果 MySQL 已经报错 `Deadlock found when trying to get lock; try restarting transaction`，**最直接的第一现场**通常是：
+
+```sql
+SHOW ENGINE INNODB STATUS;
+```
+
+- 重点关注 `LATEST DETECTED DEADLOCK` 段落。
+- 这里通常会给出：
+  - 事务 1、事务 2 的事务 id、线程 id、持锁情况、等待的锁。
+  - 每个事务当时正在执行的 **最后一条 SQL**。
+  - 哪个事务被 InnoDB 选为回滚牺牲者。
+- 面试和线上排查都要注意一个边界：
+  - 它只保留“最近一次”死锁，不是完整历史。
+  - 如果死锁发生很频繁，后一次会覆盖前一次。
+
+可以把它当成一句结论记住：**死锁先看 `SHOW ENGINE INNODB STATUS`，锁等待再看 `performance_schema`。**
+
+### 6.4 MySQL 是如何判定死锁的
+
+先给结论：**InnoDB 判定死锁的核心方法，是在锁等待发生时构造“事务等待图”（wait-for graph），如果发现图中出现环，就认定发生了死锁。**
+
+#### 6.4.1 什么是等待图
+
+可以把每个事务看成一个节点：
+
+- 事务 A 等事务 B 释放锁，就记一条边 `A -> B`
+- 事务 B 又在等事务 C，就有 `B -> C`
+- 如果最后出现 `C -> A`，形成闭环，就说明这几个事务互相等着对方，谁都无法继续推进
+
+这就是死锁。
+
+例如：
+
+- 事务 A 持有记录 `id = 1` 的锁，等待 `id = 2`
+- 事务 B 持有记录 `id = 2` 的锁，等待 `id = 1`
+
+对应到等待图里就是：
+
+- `A -> B`
+- `B -> A`
+
+图里出现环，所以 InnoDB 会判定为死锁，而不是继续无限等待。
+
+#### 6.4.2 什么时候触发死锁检测
+
+不是所有事务都会被后台线程“定时全库扫描”一遍。更准确的理解是：
+
+- 当某个事务申请锁，但发现这把锁当前拿不到，需要进入等待时
+- InnoDB 会沿着“谁在等谁”的链路继续往后检查
+- 如果检查过程中发现又回到了当前事务自己，就说明形成了环
+
+也就是说，死锁检测通常是**在锁等待发生时按需触发**的，而不是纯粹靠低频定时任务。
+
+这也是为什么高冲突写场景里，死锁检测本身也可能带来额外 CPU 开销：因为大量事务都在频繁进入“等待并检测”的过程。
+
+#### 6.4.3 发现死锁后会怎么处理
+
+InnoDB 不会让所有事务一直卡死，而是会主动选一个事务作为 **victim（牺牲者）** 回滚，打破这个环。
+
+常见理解方式是：
+
+- 谁回滚代价更小，谁更可能被选中
+- 这里的“代价”通常和事务已经修改了多少行、持有多少锁、回滚成本多大有关
+
+所以线上经常会看到：
+
+- 两个事务都没错
+- 但其中一个突然收到死锁错误并被回滚
+
+这不是随机崩掉，而是 InnoDB 在做“最小代价解环”。
+
+### 6.5 如何定位“相互冲突、导致死锁”的语句
+
+死锁本质上不是“单条 SQL 慢”，而是 **两个或多个事务形成了循环等待**。定位时要回答 4 个问题：
+
+1. 谁在等待。
+2. 等的是哪把锁。
+3. 谁持有这把锁。
+4. 等待方和持有方各自在执行什么 SQL。
+
+推荐按下面顺序看。
+
+#### 6.5.1 从死锁日志里先拿到两个事务的最后 SQL
+
+`SHOW ENGINE INNODB STATUS` 中通常会直接出现类似下面的信息：
+
+- `TRANSACTION ...`
+- `WAITING FOR THIS LOCK TO BE GRANTED`
+- `HOLDS THE LOCK(S)`
+- `query id ... updating`
+
+其中最关键的是两部分：
+
+- **等待方正在执行的 SQL**：这往往就是“被卡住的语句”。
+- **持锁方最近执行的 SQL**：这往往就是“先拿到锁、又去等别人锁的语句”。
+
+如果两边分别是：
+
+- 事务 A：`UPDATE ... WHERE id = 1`
+- 事务 B：`UPDATE ... WHERE id = 2`
+
+同时日志又显示：
+
+- A 持有 `id = 1` 对应记录锁，等待 `id = 2`
+- B 持有 `id = 2` 对应记录锁，等待 `id = 1`
+
+那这两条语句就是直接冲突链路，根因通常是 **访问顺序不一致**。
+
+#### 6.5.2 再用 `performance_schema` 把“锁”映射回“会话和 SQL”
+
+如果死锁刚发生完，或者你看到的是“长时间锁等待，怀疑马上会死锁”，可以把等待关系、锁对象、当前 SQL 串起来看。
+
+```sql
+SELECT
+  w.REQUESTING_ENGINE_TRANSACTION_ID AS waiting_trx_id,
+  w.BLOCKING_ENGINE_TRANSACTION_ID AS blocking_trx_id,
+  rl.OBJECT_SCHEMA AS waiting_schema,
+  rl.OBJECT_NAME AS waiting_table,
+  rl.INDEX_NAME AS waiting_index,
+  rl.LOCK_TYPE AS waiting_lock_type,
+  rl.LOCK_MODE AS waiting_lock_mode,
+  rl.LOCK_DATA AS waiting_lock_data,
+  bl.LOCK_TYPE AS blocking_lock_type,
+  bl.LOCK_MODE AS blocking_lock_mode,
+  bl.LOCK_DATA AS blocking_lock_data
+FROM performance_schema.data_lock_waits w
+JOIN performance_schema.data_locks rl
+  ON w.REQUESTING_ENGINE_LOCK_ID = rl.ENGINE_LOCK_ID
+JOIN performance_schema.data_locks bl
+  ON w.BLOCKING_ENGINE_LOCK_ID = bl.ENGINE_LOCK_ID;
+```
+
+这条 SQL 解决的是“**哪两个事务因为哪条记录/哪段索引范围冲突**”。
+
+然后继续把事务 id 关联到线程和 SQL：
+
+```sql
+SELECT
+  t.THREAD_ID,
+  t.PROCESSLIST_ID,
+  t.PROCESSLIST_USER,
+  t.PROCESSLIST_HOST,
+  t.PROCESSLIST_DB,
+  es.SQL_TEXT,
+  es.TIMER_WAIT
+FROM performance_schema.threads t
+JOIN performance_schema.events_statements_current es
+  ON t.THREAD_ID = es.THREAD_ID
+WHERE t.PROCESSLIST_ID IS NOT NULL;
+```
+
+- `PROCESSLIST_ID` 可以对应 `SHOW PROCESSLIST` 里的会话 id。
+- `SQL_TEXT` 可以看到线程当前正在执行的 SQL。
+- 如果当前语句已经切走，可以再看 `events_statements_history` 或 `events_statements_history_long`。
+
+把这两组结果结合起来，才能真正回答：
+
+- **等待方是哪条 SQL。**
+- **阻塞方是哪条 SQL。**
+- **它们争用的是哪张表、哪个索引、哪条记录或哪个间隙。**
+
+### 6.6 定位顺序
+
+线上排查可以直接按这个顺序走：
+
+1. 先确认是不是死锁报错，还是普通锁等待超时。
+2. 如果已经发生死锁，立刻执行 `SHOW ENGINE INNODB STATUS;`，保存 `LATEST DETECTED DEADLOCK`。
+3. 提取两个事务各自的 SQL、等待锁、已持有锁、受影响表和索引。
+4. 再查 `performance_schema.data_lock_waits`、`data_locks`，确认冲突点到底是主键记录、二级索引记录，还是 Gap / Next-Key。
+5. 结合 `performance_schema.threads`、`events_statements_current/history`，把事务 id 映射回应用连接和具体 SQL。
+6. 最后回到业务代码核对事务边界、加锁顺序、索引命中情况。

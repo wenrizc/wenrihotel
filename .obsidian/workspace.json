@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "ac29a377d174b993",
+        "id": "6c9e18ea419ebd5c",
         "type": "tabs",
         "children": [
           {
-            "id": "023e0588a6ca38c0",
+            "id": "52036d2fd72b9098",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/面经/分布式/分布式爬虫架构：原理、吞吐优化与常见问题治理.md",
+                "file": "提示词.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "分布式爬虫架构：原理、吞吐优化与常见问题治理"
+              "title": "提示词"
             }
           }
         ]
@@ -113,12 +113,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/面经/分布式/分布式爬虫架构：原理、吞吐优化与常见问题治理.md",
+                "file": "提示词.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "分布式爬虫架构：原理、吞吐优化与常见问题治理 的出链列表"
+              "title": "提示词 的出链列表"
             }
           },
           {
@@ -156,7 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 310.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -169,44 +169,46 @@
       "bases:新建数据库": false
     }
   },
-  "active": "023e0588a6ca38c0",
+  "active": "52036d2fd72b9098",
   "lastOpenFiles": [
-    "docs/面经/场景题/爬虫多线程下可能遇到什么问题.md",
-    "docs/面经/分布式/分布式爬虫架构：原理、吞吐优化与常见问题治理.md",
+    "自我介绍.md",
+    "docs/面经/HR面.md",
     "docs/面经/tobedone.md",
-    "docs/面经/场景题/爬虫多线程下可能遇到什么问题，如何解决.md",
-    "提示词.md",
-    "docs/面经/todo.md",
-    "docs/面经/Java/JVM/GC类型.md",
-    "docs/面经/Java/JVM/GC事件类型介绍.md",
-    "docs/面经/Java/JVM/JVM的垃圾回收机制.md",
-    "docs/面经/数据库/MySQL有哪些索引.md",
-    "docs/面经/数据库/为什么 MySQL 采用 B+ 树作为索引.md",
-    "docs/面经/Java/Spring/Spring MVC的执行流程.md",
-    "docs/面经/Java/Spring/Spring的事务什么情况下会失效.md",
-    "docs/面经/Java/JUC/wait和sleep的区别是什么.md",
-    "docs/面经/Java/JUC/volatile有什么用.md",
-    "docs/面经/Java/JVM/JVM由什么组成.md",
-    "docs/面经/Java/JVM/JDK8新特性.md",
-    "docs/面经/Java/基础/Java 异常处理.md",
-    "docs/面经/Java/基础/深拷贝和浅拷贝.md",
-    "docs/面经/Java/基础/什么是反射.md",
-    "docs/面经/Java/基础/什么是泛型.md",
-    "docs/面经/Java/基础/什么是序列化.md",
-    "docs/面经/Java/基础/tomcat介绍.md",
-    "docs/面经/Java/基础/JDK动态代理与CGLIB.md",
-    "docs/面经/Java/基础/Java常用的集合有哪些.md",
-    "docs/面经/计算机网络/HTTP响应码.md",
-    "docs/面经/todo",
-    "node_modules/mime/bin/cli.js",
-    "node_modules/mime/bin",
-    "package.json",
-    "node_modules/highlight.js/README.md.orig",
-    "node_modules/highlight.js/classref.txt",
-    "node_modules/highlight.js/src/export.html",
-    "node_modules/highlight.js/src/languages/diff.js",
-    "node_modules/highlight.js/src/languages/vhdl.js",
-    "node_modules/highlight.js/src/languages/r.js",
+    "docs/笔记/高并发/高并发系统.md",
+    "docs/笔记/高并发/基础架构.md",
+    "docs/面经/AGENTS.md",
+    "docs/面经/场景题.md",
+    "docs/面经/CLAUDE.md",
+    "docs/面经/场景题/jvm不停gc的原因可能是什么，如何排查.md",
+    "docs/面经/场景题/红包雨设计.md",
+    "docs/面经/场景题/Redis异常排查思路.md",
+    "docs/面经/场景题/Kafka 消息积压怎么处理.md",
+    "docs/面经/场景题/JVM调优思路.md",
+    "docs/面经/场景题/HTTP 请求全链路性能优化.md",
+    "docs/面经/场景题/如何设计一个接口.md",
+    "docs/面经/场景题/线程池参数如何设置.md",
+    "docs/面经/场景题/若缓存数据丢失，有哪些应对方案.md",
+    "docs/面经/场景题/提示词.md",
+    "docs/面经/场景题/设计一个Feed流系统.md",
+    "docs/面经/场景题/设计一个短链系统.md",
+    "docs/面经/场景题/如何设计一个线程池.md",
+    "docs/面经/场景题/请描述一次你使用过的JVM监控和诊断工具分析和解决问题的过程.md",
+    "docs/面经/场景题/如何存储大量的IP地址.md",
+    "docs/面经/场景题/慢查询优化思路.md",
+    "docs/面经/场景题/秒杀.md",
+    "docs/面经/场景题/场景题思路.md",
+    "图片/1346871-20240730112327521-241140105.svg",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarityRange.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarityParams.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarityNearestNeighbors.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarityBasic.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarity.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/SortStep.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/QueryStep.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/ParamsStep.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/HybridSearchResult.java",
+    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/HybridQueryParams.java",
+    "docs/redisson_repo/docs/logo.png",
     "node_modules/highlight.js/src/styles/school_book.png",
     "node_modules/highlight.js/src/styles/brown_papersq.png",
     "node_modules/connect/lib/public/icons/page_world.png",
@@ -215,8 +217,6 @@
     "node_modules/connect/lib/public/icons/page_white_wrench.png",
     "node_modules/connect/lib/public/icons/page_white_world.png",
     "node_modules/connect/lib/public/icons/page_white_word.png",
-    "node_modules/connect/lib/public/icons/page_white_width.png",
-    "node_modules/connect/lib/public/icons/page_white_visualstudio.png",
     "未命名.canvas",
     "docs/面经/未命名.canvas",
     "docs/面经/功能设计/未命名.canvas",

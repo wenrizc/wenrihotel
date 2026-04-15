@@ -59,4 +59,3 @@ Spring Boot 会创建一个 `Environment` 对象，用于管理应用的配置�
 
 在容器刷新和 Web 服务器启动之后，`run` 方法会执行一些收尾工作，例如调用 `ApplicationRunner` 和 `CommandLineRunner` 接口的实现，允许用户在应用启动后执行一些自定义的初始化代码。至此，Spring Boot 容器的启动过程就全部完成了。
 
-总结来说，Spring Boot 的启动流程是一个高度自动化和可扩展的过程，它通过约定大于配置的思想，利用自动配置和内嵌 Web 服务器等特性，极大地简化了 Spring 应用的开发、配置和部署。

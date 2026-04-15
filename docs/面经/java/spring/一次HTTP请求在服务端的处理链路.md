@@ -118,11 +118,3 @@ Spring MVC 的入口是 `DispatcherServlet`，它是前端控制器。典型处�
 3. 上游（Nginx/LB）可能做缓冲、压缩、连接复用等，再返回给客户端。
 4. 浏览器接收响应，决定是否缓存并触发渲染/JS 执行。
 
-## 8. 一条链路里常见的观测点（定位慢在哪里）
-
-- 浏览器侧：TTFB、DNS、TLS、下载耗时。
-- Nginx：`request_time`、`upstream_response_time`、状态码分布。
-- Tomcat：访问日志、线程池耗尽、GC 停顿。
-- 应用：接口耗时分布、Trace（TraceId）、关键下游 span。
-- MySQL：慢查询日志、锁等待、死锁信息。
-

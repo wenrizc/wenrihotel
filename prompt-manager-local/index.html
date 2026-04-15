@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>提示词管理</title>
+  <style>
+    :root {
+      --bg: #f5f5f5;
+      --card: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --border: #d8d8d8;
+      --hover: #efefef;
+      --accent: #111111;
+      --danger: #a30000;
+      --radius: 14px;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .app {
+      width: min(1200px, 94vw);
+      margin: 24px auto 28px;
+      display: grid;
+      gap: 16px;
+    }
+    .topbar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0.02em;
+    }
+    .btn-export {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      font-size: 13px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .btn-export:hover { background: var(--hover); }
+    .btn-export svg { width: 15px; height: 15px; }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 16px;
+      min-height: 72vh;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .left, .right {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+    .left { grid-template-rows: auto 1fr; }
+    .right { grid-template-rows: auto 1fr auto; }
+    .row { display: flex; gap: 8px; align-items: center; }
+    .grow { flex: 1; }
+    input, textarea, select, button { font: inherit; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #333;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, .08);
+    }
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+    button {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    button:hover { background: var(--hover); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: #000;
+    }
+    .btn-primary:hover { background: #262626; }
+    .btn-danger {
+      color: var(--danger);
+      border-color: #e2bcbc;
+      background: #fff;
+    }
+    .btn-danger:hover { background: #fff1f1; }
+    .icon-only {
+      width: 34px;
+      height: 34px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .icon-only svg {
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+    .cat-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+    .cat-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+    }
+    .cat-item.active {
+      border-color: #111;
+      box-shadow: inset 0 0 0 1px #111;
+    }
+    .cat-main {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .cat-name { font-size: 14px; }
+    .cat-count { font-size: 12px; color: var(--muted); }
+    .cat-ops { display: flex; gap: 4px; justify-content: flex-end; }
+    .prompts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 10px;
+      align-content: start;
+      overflow: auto;
+      max-height: 48vh;
+      padding-right: 4px;
+    }
+    .prompt-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+    .prompt-title {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+    .prompt-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .prompt-text {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: #333;
+      white-space: pre-wrap;
+      max-height: 78px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .editor { display: grid; gap: 10px; }
+    .muted {
+      color: var(--muted);
+      font-size: 13px;
+      min-width: 88px;
+      text-align: right;
+    }
+    .form-actions { justify-content: flex-end; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .prompts { max-height: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>提示词管理</h1>
+      <button class="btn-export" id="exportBtn" title="导出为 Markdown">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        导出
+      </button>
+    </header>
+    <main class="layout">
+      <aside class="panel left">
+        <div class="row">
+          <input id="categoryInput" type="text" placeholder="分类名称">
+          <button id="addCategoryBtn" class="icon-only" title="新增分类" aria-label="新增分类"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+        <ul id="categoryList" class="cat-list"></ul>
+      </aside>
+      <section class="panel right">
+        <div class="row"><div class="grow"></div></div>
+        <div id="promptContainer" class="prompts"></div>
+        <form id="promptForm" class="editor">
+          <input id="promptTitle" type="text" placeholder="标题" required>
+          <select id="promptCategory"></select>
+          <textarea id="promptContent" placeholder="提示词内容" required></textarea>
+          <div class="row form-actions">
+            <button class="btn-primary icon-only" type="submit" title="保存" aria-label="保存"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
+            <button class="icon-only" type="button" id="cancelEditBtn" title="取消" aria-label="取消"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <span id="statusText" class="muted"></span>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = "prompt_manager_data_v1";
+      const LEGACY_UNCATEGORIZED_ID = "uncategorized";
+
+      const ICON = {
+        plus:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+        check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+        x:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+        edit:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>',
+        trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>',
+        copy:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
+      };
+
+      function exportMarkdown() {
+        const prompts = [...state.prompts].sort((a, b) => (a.categoryId || "").localeCompare(b.categoryId || ""));
+        if (!prompts.length) { setStatus("暂无提示词可导出"); return; }
+
+        const groups = {};
+        for (const p of prompts) {
+          const catName = getCategoryName(p.categoryId) || TXT.defaultCategory;
+          if (!groups[catName]) groups[catName] = [];
+          groups[catName].push(p);
+        }
+
+        let md = "# 提示词管理\n\n";
+        const date = new Date().toLocaleDateString("zh-CN");
+        md += `> 导出时间：${date}  \n`;
+        md += `> 共 ${prompts.length} 条提示词\n\n---\n\n`;
+
+        for (const [catName, items] of Object.entries(groups)) {
+          md += `## ${catName}\n\n`;
+          for (const p of items) {
+            md += `### ${p.title}\n\n`;
+            md += `${p.content}\n\n`;
+            md += "---\n\n";
+          }
+        }
+
+        const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `提示词_${date.replace(/\//g, "-")}.md`;
+        a.click();
+        URL.revokeObjectURL(url);
+        setStatus("已导出 " + prompts.length + " 条提示词");
+      }
+
+      const TXT = {
+        defaultCategory: "\u9ed8\u8ba4",
+        all: "\u5168\u90e8",
+        seedWriting: "\u5199\u4f5c",
+        seedCoding: "\u7f16\u7a0b",
+        seedTitle1: "\u6587\u7ae0\u6da6\u8272",
+        seedTitle2: "\u4ee3\u7801\u5ba1\u67e5",
+        seedContent1: "\u8bf7\u628a\u4ee5\u4e0b\u5185\u5bb9\u6da6\u8272\u4e3a\u7b80\u6d01\u4e13\u4e1a\u7684\u4e2d\u6587\u8868\u8fbe\uff0c\u5e76\u4fdd\u7559\u539f\u610f\uff1a",
+        seedContent2: "\u4f60\u662f\u8d44\u6df1\u5de5\u7a0b\u5e08\uff0c\u8bf7\u4ece\u53ef\u7ef4\u62a4\u6027\u3001\u8fb9\u754c\u6761\u4ef6\u3001\u6027\u80fd\u98ce\u9669\u89d2\u5ea6\u5ba1\u67e5\u4ee5\u4e0b\u4ee3\u7801\uff1a",
+        renameCategory: "\u91cd\u547d\u540d\u5206\u7c7b\uff1a",
+        confirmDeleteCategoryPrefix: "\u5220\u9664\u5206\u7c7b\u201c",
+        confirmDeleteCategorySuffix: "\u201d\uff1f",
+        confirmDeletePromptPrefix: "\u5220\u9664\u63d0\u793a\u8bcd\u201c",
+        confirmDeletePromptSuffix: "\u201d\uff1f",
+        statusCategoryExists: "\u5206\u7c7b\u5df2\u5b58\u5728",
+        statusCategoryAdded: "\u5206\u7c7b\u5df2\u6dfb\u52a0",
+        statusCategoryNameDup: "\u5206\u7c7b\u540d\u91cd\u590d",
+        statusCategoryRenamed: "\u5206\u7c7b\u5df2\u91cd\u547d\u540d",
+        statusKeepOneCategory: "\u81f3\u5c11\u4fdd\u7559\u4e00\u4e2a\u5206\u7c7b",
+        statusCategoryDeleted: "\u5206\u7c7b\u5df2\u5220\u9664",
+        statusEditCanceled: "\u5df2\u53d6\u6d88\u7f16\u8f91",
+        statusCreateCategoryFirst: "\u8bf7\u5148\u521b\u5efa\u5206\u7c7b",
+        statusRequired: "\u6807\u9898\u548c\u5185\u5bb9\u4e0d\u80fd\u4e3a\u7a7a",
+        statusPromptUpdated: "\u63d0\u793a\u8bcd\u5df2\u66f4\u65b0",
+        statusPromptCreated: "\u63d0\u793a\u8bcd\u5df2\u521b\u5efa",
+        statusCopyOk: "\u5df2\u590d\u5236\u5230\u526a\u8d34\u677f",
+        statusCopyFail: "\u590d\u5236\u5931\u8d25\uff0c\u8bf7\u624b\u52a8\u590d\u5236",
+        statusEditing: "\u6b63\u5728\u7f16\u8f91",
+        statusPromptDeleted: "\u63d0\u793a\u8bcd\u5df2\u5220\u9664"
+      };
+
+      const el = {
+        categoryList: document.getElementById("categoryList"),
+        categoryInput: document.getElementById("categoryInput"),
+        addCategoryBtn: document.getElementById("addCategoryBtn"),
+        promptContainer: document.getElementById("promptContainer"),
+        promptForm: document.getElementById("promptForm"),
+        promptTitle: document.getElementById("promptTitle"),
+        promptCategory: document.getElementById("promptCategory"),
+        promptContent: document.getElementById("promptContent"),
+        cancelEditBtn: document.getElementById("cancelEditBtn"),
+        statusText: document.getElementById("statusText")
+      };
+
+      let state = {
+        categories: [],
+        prompts: [],
+        activeCategoryId: "all",
+        editingId: null
+      };
+
+      function uid() {
+        return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+      }
+
+      function now() {
+        return new Date().toISOString();
+      }
+
+      function escapeHtml(text) {
+        return String(text)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function formatDate(iso) {
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return "";
+        return d.toLocaleString();
+      }
+
+      function save() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          categories: state.categories,
+          prompts: state.prompts,
+          activeCategoryId: state.activeCategoryId
+        }));
+      }
+
+      function normalizeData() {
+        state.categories = state.categories
+          .filter(c => c && c.id && c.id !== LEGACY_UNCATEGORIZED_ID)
+          .map(c => ({ id: c.id, name: c.name || TXT.defaultCategory, createdAt: c.createdAt || now() }));
+
+        if (!state.categories.length) {
+          state.categories = [{ id: uid(), name: TXT.defaultCategory, createdAt: now() }];
+        }
+
+        const validIds = new Set(state.categories.map(c => c.id));
+        const fallbackId = state.categories[0].id;
+        state.prompts = state.prompts.map(p => ({
+          ...p,
+          categoryId: validIds.has(p.categoryId) ? p.categoryId : fallbackId
+        }));
+
+        if (state.activeCategoryId !== "all" && !validIds.has(state.activeCategoryId)) {
+          state.activeCategoryId = "all";
+        }
+      }
+
+      function seed() {
+        const t = now();
+        const writingId = uid();
+        const codingId = uid();
+        state.categories = [
+          { id: writingId, name: TXT.seedWriting, createdAt: t },
+          { id: codingId, name: TXT.seedCoding, createdAt: t }
+        ];
+        state.prompts = [
+          { id: uid(), title: TXT.seedTitle1, categoryId: writingId, content: TXT.seedContent1, createdAt: t, updatedAt: t },
+          { id: uid(), title: TXT.seedTitle2, categoryId: codingId, content: TXT.seedContent2, createdAt: t, updatedAt: t }
+        ];
+        state.activeCategoryId = "all";
+        save();
+      }
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) {
+            seed();
+            return;
+          }
+          const parsed = JSON.parse(raw);
+          state.categories = Array.isArray(parsed.categories) ? parsed.categories : [];
+          state.prompts = Array.isArray(parsed.prompts) ? parsed.prompts : [];
+          state.activeCategoryId = parsed.activeCategoryId || "all";
+          normalizeData();
+          save();
+        } catch (_) {
+          seed();
+        }
+      }
+
+      function getCategoryName(id) {
+        const c = state.categories.find(i => i.id === id);
+        return c ? c.name : "";
+      }
+
+      function promptsByFilter() {
+        let arr = [...state.prompts];
+        if (state.activeCategoryId !== "all") {
+          arr = arr.filter(p => p.categoryId === state.activeCategoryId);
+        }
+        arr.sort((a, b) => (b.updatedAt || "").localeCompare(a.updatedAt || ""));
+        return arr;
+      }
+
+      function renderCategories() {
+        const total = state.prompts.length;
+        const allActive = state.activeCategoryId === "all" ? "active" : "";
+        let html = `
+          <li class="cat-item ${allActive}" data-id="all">
+            <span class="cat-name">${TXT.all}</span>
+            <span class="cat-count">${total}</span>
+          </li>
+        `;
+        for (const cat of state.categories) {
+          const count = state.prompts.filter(p => p.categoryId === cat.id).length;
+          const active = state.activeCategoryId === cat.id ? "active" : "";
+          html += `
+            <li class="cat-item ${active}" data-id="${cat.id}">
+              <div class="cat-main">
+                <span class="cat-name">${escapeHtml(cat.name)}</span>
+                <span class="cat-count">${count}</span>
+              </div>
+              <div class="cat-ops">
+                <button class="icon-only" data-cat-action="rename" data-id="${cat.id}" title="重命名分类" aria-label="重命名分类">${ICON.edit}</button>
+                <button class="icon-only btn-danger" data-cat-action="delete" data-id="${cat.id}" title="删除分类" aria-label="删除分类">${ICON.trash}</button>
+              </div>
+            </li>
+          `;
+        }
+        el.categoryList.innerHTML = html;
+      }
+
+      function renderCategoryOptions() {
+        el.promptCategory.innerHTML = state.categories
+          .map(c => `<option value="${c.id}">${escapeHtml(c.name)}</option>`)
+          .join("");
+      }
+
+      function renderPrompts() {
+        const list = promptsByFilter();
+        if (!list.length) {
+          el.promptContainer.innerHTML = "";
+          return;
+        }
+        el.promptContainer.innerHTML = list.map(p => `
+          <article class="prompt-card">
+            <h3 class="prompt-title">${escapeHtml(p.title)}</h3>
+            <div class="prompt-meta">${escapeHtml(getCategoryName(p.categoryId))} · ${escapeHtml(formatDate(p.updatedAt || p.createdAt))}</div>
+            <p class="prompt-text">${escapeHtml(p.content)}</p>
+            <div class="actions">
+              <button class="icon-only" data-action="copy" data-id="${p.id}" title="复制提示词" aria-label="复制提示词">${ICON.copy}</button>
+              <button class="icon-only" data-action="edit" data-id="${p.id}" title="编辑提示词" aria-label="编辑提示词">${ICON.edit}</button>
+              <button class="icon-only btn-danger" data-action="delete" data-id="${p.id}" title="删除提示词" aria-label="删除提示词">${ICON.trash}</button>
+            </div>
+          </article>
+        `).join("");
+      }
+
+      function render() {
+        renderCategories();
+        renderCategoryOptions();
+        renderPrompts();
+      }
+
+      function setStatus(text) {
+        el.statusText.textContent = text || "";
+      }
+
+      function resetForm() {
+        state.editingId = null;
+        el.promptForm.reset();
+        if (state.activeCategoryId !== "all") {
+          el.promptCategory.value = state.activeCategoryId;
+        } else {
+          el.promptCategory.value = state.categories[0]?.id || "";
+        }
+      }
+
+      function startEdit(id) {
+        const item = state.prompts.find(p => p.id === id);
+        if (!item) return;
+        state.editingId = id;
+        el.promptTitle.value = item.title;
+        el.promptCategory.value = item.categoryId || state.categories[0]?.id || "";
+        el.promptContent.value = item.content;
+        el.promptTitle.focus();
+      }
+
+      async function copyText(text) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch (_) {
+          const area = document.createElement("textarea");
+          area.value = text;
+          document.body.appendChild(area);
+          area.select();
+          const ok = document.execCommand("copy");
+          area.remove();
+          return ok;
+        }
+      }
+
+      function addCategory() {
+        const name = el.categoryInput.value.trim();
+        if (!name) return;
+        const exists = state.categories.some(c => c.name === name);
+        if (exists) {
+          setStatus(TXT.statusCategoryExists);
+          return;
+        }
+        const cat = { id: uid(), name, createdAt: now() };
+        state.categories.push(cat);
+        state.activeCategoryId = cat.id;
+        el.categoryInput.value = "";
+        save();
+        render();
+        resetForm();
+        setStatus(TXT.statusCategoryAdded);
+      }
+
+      function renameCategory(id) {
+        const cat = state.categories.find(c => c.id === id);
+        if (!cat) return;
+        const next = window.prompt(TXT.renameCategory, cat.name);
+        if (next === null) return;
+        const name = next.trim();
+        if (!name) return;
+        if (state.categories.some(c => c.name === name && c.id !== id)) {
+          setStatus(TXT.statusCategoryNameDup);
+          return;
+        }
+        cat.name = name;
+        save();
+        render();
+        setStatus(TXT.statusCategoryRenamed);
+      }
+
+      function deleteCategory(id) {
+        const cat = state.categories.find(c => c.id === id);
+        if (!cat) return;
+        if (state.categories.length <= 1) {
+          setStatus(TXT.statusKeepOneCategory);
+          return;
+        }
+        const ok = window.confirm(TXT.confirmDeleteCategoryPrefix + cat.name + TXT.confirmDeleteCategorySuffix);
+        if (!ok) return;
+        const fallbackId = state.categories.find(c => c.id !== id)?.id || "";
+        state.categories = state.categories.filter(c => c.id !== id);
+        state.prompts = state.prompts.map(p => (p.categoryId === id ? { ...p, categoryId: fallbackId } : p));
+        if (state.activeCategoryId === id) state.activeCategoryId = "all";
+        save();
+        render();
+        setStatus(TXT.statusCategoryDeleted);
+      }
+
+      function bindEvents() {
+        document.getElementById("exportBtn").addEventListener("click", exportMarkdown);
+        el.addCategoryBtn.addEventListener("click", addCategory);
+        el.categoryInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") addCategory();
+        });
+
+        el.cancelEditBtn.addEventListener("click", () => {
+          resetForm();
+          setStatus(TXT.statusEditCanceled);
+        });
+
+        el.categoryList.addEventListener("click", (e) => {
+          const catOpBtn = e.target.closest("button[data-cat-action]");
+          if (catOpBtn) {
+            const action = catOpBtn.getAttribute("data-cat-action");
+            const id = catOpBtn.getAttribute("data-id");
+            if (action === "rename") renameCategory(id);
+            if (action === "delete") deleteCategory(id);
+            return;
+          }
+          const item = e.target.closest(".cat-item");
+          if (!item) return;
+          const id = item.getAttribute("data-id");
+          state.activeCategoryId = id;
+          renderCategories();
+          renderPrompts();
+          if (id !== "all") el.promptCategory.value = id;
+        });
+
+        el.promptForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const title = el.promptTitle.value.trim();
+          const content = el.promptContent.value.trim();
+          const categoryId = el.promptCategory.value || state.categories[0]?.id || "";
+          if (!categoryId) {
+            setStatus(TXT.statusCreateCategoryFirst);
+            return;
+          }
+          if (!title || !content) {
+            setStatus(TXT.statusRequired);
+            return;
+          }
+
+          if (state.editingId) {
+            const item = state.prompts.find(p => p.id === state.editingId);
+            if (!item) return;
+            item.title = title;
+            item.content = content;
+            item.categoryId = categoryId;
+            item.updatedAt = now();
+            setStatus(TXT.statusPromptUpdated);
+          } else {
+            const t = now();
+            state.prompts.unshift({
+              id: uid(),
+              title,
+              content,
+              categoryId,
+              createdAt: t,
+              updatedAt: t
+            });
+            setStatus(TXT.statusPromptCreated);
+          }
+          save();
+          render();
+          resetForm();
+        });
+
+        el.promptContainer.addEventListener("click", async (e) => {
+          const btn = e.target.closest("button[data-action]");
+          if (!btn) return;
+          const action = btn.getAttribute("data-action");
+          const id = btn.getAttribute("data-id");
+          const item = state.prompts.find(p => p.id === id);
+          if (!item) return;
+
+          if (action === "copy") {
+            const ok = await copyText(item.content);
+            setStatus(ok ? TXT.statusCopyOk : TXT.statusCopyFail);
+          }
+          if (action === "edit") {
+            startEdit(id);
+            setStatus(TXT.statusEditing);
+          }
+          if (action === "delete") {
+            const ok = window.confirm(TXT.confirmDeletePromptPrefix + item.title + TXT.confirmDeletePromptSuffix);
+            if (!ok) return;
+            state.prompts = state.prompts.filter(p => p.id !== id);
+            save();
+            render();
+            setStatus(TXT.statusPromptDeleted);
+            if (state.editingId === id) resetForm();
+          }
+        });
+      }
+
+      load();
+      bindEvents();
+      render();
+      resetForm();
+    })();
+  </script>
+</body>
+</html>

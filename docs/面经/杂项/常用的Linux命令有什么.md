@@ -68,7 +68,7 @@ systemctl status nginx
 journalctl -u nginx --since "1 hour ago"
 ```
 
-## 7. 调试与抓包（进阶工具）
+## 7. 调试与抓包
 
 当“看日志看不出来、但就是慢/卡/连不上”时，常用的进阶工具有：
 
@@ -86,9 +86,3 @@ tcpdump -i any tcp port 8080 -nn -vv
 # DNS 查询
 dig example.com
 ```
-
-## 8. 总结：线上排查常用组合
-
-- 查端口占用：`ss -lntp` + `lsof -i`
-- 查异常日志：`tail -f` + `grep`
-- 查资源瓶颈：`top` + `free -h` + `df -h`
