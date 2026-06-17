@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "6c9e18ea419ebd5c",
+        "id": "77f29cb95203a324",
         "type": "tabs",
         "children": [
           {
-            "id": "52036d2fd72b9098",
+            "id": "e94bb3ee2011bfad",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "提示词.md",
+                "file": "场景题.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "提示词"
+              "title": "场景题"
             }
           }
         ]
@@ -35,7 +35,24 @@
         "type": "tabs",
         "children": [
           {
-            "id": "a86fdb0bd4f1495b",
+            "id": "e77bfa1cede889cb",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "f0f5147db89411b0",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -48,7 +65,7 @@
             }
           },
           {
-            "id": "20b73cd26d6a6030",
+            "id": "7a426fc1e48130a1",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -56,29 +73,13 @@
               "icon": "lucide-bookmark",
               "title": "书签"
             }
-          },
-          {
-            "id": "e77bfa1cede889cb",
-            "type": "leaf",
-            "state": {
-              "type": "search",
-              "state": {
-                "query": "IO 同步、异步、阻塞、非阻塞概念区分",
-                "matchingCase": false,
-                "explainSearch": false,
-                "collapseAll": false,
-                "extraContext": false,
-                "sortOrder": "alphabetical"
-              },
-              "icon": "lucide-search",
-              "title": "搜索"
-            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
-    "width": 362.5
+    "width": 200
   },
   "right": {
     "id": "fff8a72030cb26a2",
@@ -113,12 +114,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "提示词.md",
+                "file": "场景题.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "提示词 的出链列表"
+              "title": "场景题 的出链列表"
             }
           },
           {
@@ -169,34 +170,37 @@
       "bases:新建数据库": false
     }
   },
-  "active": "52036d2fd72b9098",
+  "active": "e94bb3ee2011bfad",
   "lastOpenFiles": [
-    "自我介绍.md",
-    "docs/面经/HR面.md",
-    "docs/面经/tobedone.md",
-    "docs/笔记/高并发/高并发系统.md",
-    "docs/笔记/高并发/基础架构.md",
-    "docs/面经/AGENTS.md",
-    "docs/面经/场景题.md",
-    "docs/面经/CLAUDE.md",
-    "docs/面经/场景题/jvm不停gc的原因可能是什么，如何排查.md",
-    "docs/面经/场景题/红包雨设计.md",
-    "docs/面经/场景题/Redis异常排查思路.md",
-    "docs/面经/场景题/Kafka 消息积压怎么处理.md",
-    "docs/面经/场景题/JVM调优思路.md",
-    "docs/面经/场景题/HTTP 请求全链路性能优化.md",
-    "docs/面经/场景题/如何设计一个接口.md",
-    "docs/面经/场景题/线程池参数如何设置.md",
-    "docs/面经/场景题/若缓存数据丢失，有哪些应对方案.md",
-    "docs/面经/场景题/提示词.md",
-    "docs/面经/场景题/设计一个Feed流系统.md",
-    "docs/面经/场景题/设计一个短链系统.md",
-    "docs/面经/场景题/如何设计一个线程池.md",
-    "docs/面经/场景题/请描述一次你使用过的JVM监控和诊断工具分析和解决问题的过程.md",
-    "docs/面经/场景题/如何存储大量的IP地址.md",
-    "docs/面经/场景题/慢查询优化思路.md",
-    "docs/面经/场景题/秒杀.md",
+    "题单.md",
+    "场景题.md",
+    "计网.md",
+    "编译原理.md",
     "docs/面经/场景题/场景题思路.md",
+    "docs/面经/操作系统/Linux的系统调用讲解全过程.md",
+    "docs/面经/操作系统/用户态和内核态是如何切换的？.md",
+    "docs/面经/操作系统/自旋锁是什么.md",
+    "docs/面经/操作系统/线程上下文切换介绍.md",
+    "docs/面经/操作系统/死锁的原因是什么，如何解决死锁.md",
+    "docs/面经/AGENTS.md",
+    "docs/面经/操作系统/内存屏障是什么.md",
+    "docs/面经/操作系统/零拷贝介绍.md",
+    "docs/面经/操作系统/进程间通信的方式有什么.md",
+    "docs/面经/操作系统/进程、线程、协程区别.md",
+    "docs/index.md",
+    "后端改造方案：Crawler Agent Web 化.md",
+    "docs/面经/CLAUDE.md",
+    "docs/面经/Redis/缓存穿透、缓存击穿、缓存雪崩.md",
+    "面试/长亭科技一面.md",
+    "面试/小米二面.md",
+    "面试/洪恩一面.md",
+    "面试/车联天下一面.md",
+    "面试/滴滴一面.md",
+    "待办/待阅读书籍.md",
+    "未命名.base",
+    "2026-04-17.md",
+    "未命名.canvas",
+    "笔记",
     "图片/1346871-20240730112327521-241140105.svg",
     "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarityRange.java",
     "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/VectorSimilarityParams.java",
@@ -206,8 +210,6 @@
     "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/SortStep.java",
     "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/QueryStep.java",
     "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/ParamsStep.java",
-    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/HybridSearchResult.java",
-    "docs/redisson_repo/redisson/src/main/java/org/redisson/api/search/query/hybrid/HybridQueryParams.java",
     "docs/redisson_repo/docs/logo.png",
     "node_modules/highlight.js/src/styles/school_book.png",
     "node_modules/highlight.js/src/styles/brown_papersq.png",
@@ -217,7 +219,6 @@
     "node_modules/connect/lib/public/icons/page_white_wrench.png",
     "node_modules/connect/lib/public/icons/page_white_world.png",
     "node_modules/connect/lib/public/icons/page_white_word.png",
-    "未命名.canvas",
     "docs/面经/未命名.canvas",
     "docs/面经/功能设计/未命名.canvas",
     "docs/面经/java/未命名.canvas"

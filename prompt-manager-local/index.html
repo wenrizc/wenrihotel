@@ -45,6 +45,12 @@
       font-size: 22px;
       letter-spacing: 0.02em;
     }
+    .topbar-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
     .btn-export {
       display: inline-flex;
       align-items: center;
@@ -220,6 +226,41 @@
       text-align: right;
     }
     .form-actions { justify-content: flex-end; }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal-overlay.hidden { display: none; }
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      min-width: 280px;
+      display: grid;
+      gap: 16px;
+    }
+    .modal h2 { margin: 0; font-size: 18px; }
+    .modal-options { display: grid; gap: 10px; }
+    .modal-option {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: #fff;
+      cursor: pointer;
+      transition: all .15s ease;
+      text-align: left;
+      font: inherit;
+    }
+    .modal-option:hover { background: var(--hover); border-color: #333; }
+    .modal-option .opt-title { font-weight: 600; font-size: 15px; }
+    .modal-option .opt-desc { font-size: 12px; color: var(--muted); margin-top: 4px; }
     @media (max-width: 900px) {
       .layout { grid-template-columns: 1fr; }
       .prompts { max-height: none; }
@@ -230,10 +271,10 @@
   <div class="app">
     <header class="topbar">
       <h1>提示词管理</h1>
-      <button class="btn-export" id="exportBtn" title="导出为 Markdown">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        导出
-      </button>
+      <div class="topbar-actions">
+        <button class="btn-export" id="importBtn" title="导入">导入</button>
+        <button class="btn-export" id="exportBtn" title="导出">导出</button>
+      </div>
     </header>
     <main class="layout">
       <aside class="panel left">
@@ -259,11 +300,27 @@
       </section>
     </main>
   </div>
+  <input id="importFileInput" type="file" accept=".json,application/json" hidden>
+  <div class="modal-overlay hidden" id="exportModal">
+    <div class="modal">
+      <h2>选择导出格式</h2>
+      <div class="modal-options">
+        <button class="modal-option" data-format="json">
+          <div class="opt-title">JSON</div>
+        </button>
+        <button class="modal-option" data-format="md">
+          <div class="opt-title">Markdown</div>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script>
     (function () {
       const STORAGE_KEY = "prompt_manager_data_v1";
       const LEGACY_UNCATEGORIZED_ID = "uncategorized";
+      const EXPORT_APP = "prompt-manager-local";
+      const EXPORT_VERSION = 1;
 
       const ICON = {
         plus:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
@@ -273,6 +330,29 @@
         trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>',
         copy:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>'
       };
+
+      function buildTimestamp() {
+        const d = new Date();
+        const pad = (value) => String(value).padStart(2, "0");
+        return [
+          d.getFullYear(),
+          pad(d.getMonth() + 1),
+          pad(d.getDate())
+        ].join("-") + "_" + [
+          pad(d.getHours()),
+          pad(d.getMinutes()),
+          pad(d.getSeconds())
+        ].join("-");
+      }
+
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+      }
 
       function exportMarkdown() {
         const prompts = [...state.prompts].sort((a, b) => (a.categoryId || "").localeCompare(b.categoryId || ""));
@@ -300,13 +380,24 @@
         }
 
         const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = `提示词_${date.replace(/\//g, "-")}.md`;
-        a.click();
-        URL.revokeObjectURL(url);
+        downloadBlob(blob, `提示词_${buildTimestamp()}.md`);
         setStatus("已导出 " + prompts.length + " 条提示词");
+      }
+
+      function exportJson() {
+        const payload = {
+          version: EXPORT_VERSION,
+          app: EXPORT_APP,
+          exportedAt: now(),
+          data: {
+            categories: state.categories,
+            prompts: state.prompts,
+            activeCategoryId: state.activeCategoryId
+          }
+        };
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+        downloadBlob(blob, `提示词_${buildTimestamp()}.json`);
+        setStatus("已导出 JSON 备份");
       }
 
       const TXT = {
@@ -337,13 +428,25 @@
         statusCopyOk: "\u5df2\u590d\u5236\u5230\u526a\u8d34\u677f",
         statusCopyFail: "\u590d\u5236\u5931\u8d25\uff0c\u8bf7\u624b\u52a8\u590d\u5236",
         statusEditing: "\u6b63\u5728\u7f16\u8f91",
-        statusPromptDeleted: "\u63d0\u793a\u8bcd\u5df2\u5220\u9664"
+        statusPromptDeleted: "\u63d0\u793a\u8bcd\u5df2\u5220\u9664",
+        statusImportCanceled: "\u5df2\u53d6\u6d88\u5bfc\u5165",
+        statusImportInvalidFile: "\u53ea\u652f\u6301\u5bfc\u5165 JSON \u6587\u4ef6",
+        statusImportReadFail: "\u8bfb\u53d6\u6587\u4ef6\u5931\u8d25",
+        statusImportParseFail: "JSON \u89e3\u6790\u5931\u8d25",
+        statusImportSchemaFail: "\u5bfc\u5165\u6587\u4ef6\u683c\u5f0f\u4e0d\u6b63\u786e",
+        statusImportDuplicateId: "\u5bfc\u5165\u6587\u4ef6\u5305\u542b\u91cd\u590d ID",
+        statusImportNoData: "\u5bfc\u5165\u6587\u4ef6\u4e0d\u5305\u542b\u53ef\u7528\u6570\u636e",
+        importConfirm: "\u5c06\u6309 ID \u5408\u5e76\u5bfc\u5165\uff0c\u5df2\u5b58\u5728\u7684\u5206\u7c7b\u6216\u63d0\u793a\u8bcd\u4f1a\u88ab\u8986\u76d6\u3002\u662f\u5426\u7ee7\u7eed\uff1f"
       };
 
       const el = {
         categoryList: document.getElementById("categoryList"),
         categoryInput: document.getElementById("categoryInput"),
         addCategoryBtn: document.getElementById("addCategoryBtn"),
+        importBtn: document.getElementById("importBtn"),
+        importFileInput: document.getElementById("importFileInput"),
+        exportBtn: document.getElementById("exportBtn"),
+        exportModal: document.getElementById("exportModal"),
         promptContainer: document.getElementById("promptContainer"),
         promptForm: document.getElementById("promptForm"),
         promptTitle: document.getElementById("promptTitle"),
@@ -389,6 +492,82 @@
           prompts: state.prompts,
           activeCategoryId: state.activeCategoryId
         }));
+      }
+
+      function isObject(value) {
+        return value !== null && typeof value === "object" && !Array.isArray(value);
+      }
+
+      function ensureUniqueIds(items, label) {
+        const ids = new Set();
+        for (const item of items) {
+          if (!item || !item.id) {
+            throw new Error(TXT.statusImportSchemaFail + "：" + label);
+          }
+          if (ids.has(item.id)) {
+            throw new Error(TXT.statusImportDuplicateId + "：" + label);
+          }
+          ids.add(item.id);
+        }
+      }
+
+      function sanitizeImportedCategory(item) {
+        if (!isObject(item) || !item.id) {
+          throw new Error(TXT.statusImportSchemaFail);
+        }
+        return {
+          id: String(item.id),
+          name: String(item.name || TXT.defaultCategory).trim() || TXT.defaultCategory,
+          createdAt: item.createdAt || now()
+        };
+      }
+
+      function sanitizeImportedPrompt(item) {
+        if (!isObject(item) || !item.id || typeof item.title !== "string" || typeof item.content !== "string") {
+          throw new Error(TXT.statusImportSchemaFail);
+        }
+        const title = item.title.trim();
+        const content = item.content.trim();
+        if (!title || !content) {
+          throw new Error(TXT.statusImportSchemaFail);
+        }
+        return {
+          id: String(item.id),
+          title,
+          content,
+          categoryId: item.categoryId ? String(item.categoryId) : "",
+          createdAt: item.createdAt || now(),
+          updatedAt: item.updatedAt || item.createdAt || now()
+        };
+      }
+
+      function parseImportPayload(rawText) {
+        let parsed;
+        try {
+          parsed = JSON.parse(rawText);
+        } catch (_) {
+          throw new Error(TXT.statusImportParseFail);
+        }
+
+        if (!isObject(parsed) || parsed.app !== EXPORT_APP || parsed.version !== EXPORT_VERSION || !isObject(parsed.data)) {
+          throw new Error(TXT.statusImportSchemaFail);
+        }
+
+        const categories = Array.isArray(parsed.data.categories) ? parsed.data.categories.map(sanitizeImportedCategory) : [];
+        const prompts = Array.isArray(parsed.data.prompts) ? parsed.data.prompts.map(sanitizeImportedPrompt) : [];
+
+        ensureUniqueIds(categories, "categories");
+        ensureUniqueIds(prompts, "prompts");
+
+        if (!categories.length && !prompts.length) {
+          throw new Error(TXT.statusImportNoData);
+        }
+
+        return {
+          categories,
+          prompts,
+          activeCategoryId: typeof parsed.data.activeCategoryId === "string" ? parsed.data.activeCategoryId : "all"
+        };
       }
 
       function normalizeData() {
@@ -613,10 +792,99 @@
       }
 
       function bindEvents() {
-        document.getElementById("exportBtn").addEventListener("click", exportMarkdown);
+        el.importBtn.addEventListener("click", () => el.importFileInput.click());
+        el.exportBtn.addEventListener("click", () => el.exportModal.classList.remove("hidden"));
+        el.exportModal.addEventListener("click", (e) => {
+          if (e.target === el.exportModal) el.exportModal.classList.add("hidden");
+          const opt = e.target.closest(".modal-option");
+          if (!opt) return;
+          const format = opt.getAttribute("data-format");
+          el.exportModal.classList.add("hidden");
+          if (format === "json") exportJson();
+          if (format === "md") exportMarkdown();
+        });
         el.addCategoryBtn.addEventListener("click", addCategory);
         el.categoryInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") addCategory();
+        });
+        el.importFileInput.addEventListener("change", async (e) => {
+          const file = e.target.files && e.target.files[0];
+          el.importFileInput.value = "";
+          if (!file) {
+            setStatus(TXT.statusImportCanceled);
+            return;
+          }
+          const isJsonFile = file.type === "application/json" || /\.json$/i.test(file.name);
+          if (!isJsonFile) {
+            setStatus(TXT.statusImportInvalidFile);
+            return;
+          }
+
+          let text = "";
+          try {
+            text = await file.text();
+          } catch (_) {
+            setStatus(TXT.statusImportReadFail);
+            return;
+          }
+
+          let payload;
+          try {
+            payload = parseImportPayload(text);
+          } catch (error) {
+            setStatus(error && error.message ? error.message : TXT.statusImportSchemaFail);
+            return;
+          }
+
+          const ok = window.confirm(TXT.importConfirm);
+          if (!ok) {
+            setStatus(TXT.statusImportCanceled);
+            return;
+          }
+
+          const existingCategoryIds = new Set(state.categories.map(item => item.id));
+          const existingPromptIds = new Set(state.prompts.map(item => item.id));
+          let categoryAdded = 0;
+          let categoryUpdated = 0;
+          let promptAdded = 0;
+          let promptUpdated = 0;
+
+          const categoryMap = new Map(state.categories.map(item => [item.id, item]));
+          for (const item of payload.categories) {
+            if (existingCategoryIds.has(item.id)) categoryUpdated += 1;
+            else categoryAdded += 1;
+            categoryMap.set(item.id, item);
+          }
+          state.categories = Array.from(categoryMap.values());
+
+          const validCategoryIds = new Set(state.categories.map(item => item.id));
+          const fallbackCategoryId = state.categories[0]?.id || "";
+          let promptRepaired = 0;
+          const promptMap = new Map(state.prompts.map(item => [item.id, item]));
+          for (const item of payload.prompts) {
+            const nextItem = { ...item };
+            if (!validCategoryIds.has(nextItem.categoryId)) {
+              nextItem.categoryId = fallbackCategoryId;
+              promptRepaired += 1;
+            }
+            if (existingPromptIds.has(nextItem.id)) promptUpdated += 1;
+            else promptAdded += 1;
+            promptMap.set(nextItem.id, nextItem);
+          }
+          state.prompts = Array.from(promptMap.values());
+
+          normalizeData();
+          save();
+          render();
+          resetForm();
+
+          const parts = [];
+          if (categoryAdded) parts.push(`新增 ${categoryAdded} 个分类`);
+          if (categoryUpdated) parts.push(`覆盖 ${categoryUpdated} 个分类`);
+          if (promptAdded) parts.push(`新增 ${promptAdded} 条提示词`);
+          if (promptUpdated) parts.push(`覆盖 ${promptUpdated} 条提示词`);
+          if (promptRepaired) parts.push(`修复 ${promptRepaired} 条分类归属`);
+          setStatus(parts.join("，") || TXT.statusImportNoData);
         });
 
         el.cancelEditBtn.addEventListener("click", () => {
