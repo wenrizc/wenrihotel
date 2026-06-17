@@ -1,0 +1,6212 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://wenrizc.github.io/wenrihotel/%E9%9D%A2%E7%BB%8F/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BC%9A%E5%8F%91%E5%87%BA%E5%93%AA%E4%BA%9B%E8%AF%B7%E6%B1%82%EF%BC%8C%E6%8A%93%E5%8C%85%E5%92%8C%E7%88%AC%E8%99%AB%E6%97%B6%E5%BA%94%E5%85%B3%E6%B3%A8%E4%BB%80%E4%B9%88/">
+      
+      
+        <link rel="prev" href="../%E4%BB%8E%E8%BE%93%E5%85%A5%20URL%20%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/">
+      
+      
+        <link rel="next" href="../%E7%AE%80%E8%BF%B0TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8F%A1%E6%89%8B%E6%98%AF%E4%B8%89%E6%AC%A1%EF%BC%8C%E6%8C%A5%E6%89%8B%E6%98%AF%E5%9B%9B%E6%AC%A1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>浏览器会发出哪些请求，抓包和爬虫时应关注什么 - 文日小栈</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="文日小栈" class="md-header__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            文日小栈
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              浏览器会发出哪些请求，抓包和爬虫时应关注什么
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="文日小栈" class="md-nav__button md-logo" aria-label="文日小栈" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    文日小栈
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    欢迎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    面经
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    面经
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../AGENTS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AGENTS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CLAUDE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLAUDE
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ai
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Ai
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ai/RAG%E5%90%91%E9%87%8F%E5%8C%96%E6%98%AF%E6%80%8E%E4%B9%88%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RAG向量化是怎么实现的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Java
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_1" id="__nav_2_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JUC
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JUC
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/CAS%E5%92%8Csynchronized%E4%BB%8B%E7%BB%8D%EF%BC%8C%E4%B8%A4%E8%80%85%E5%AD%98%E5%9C%A8%E4%BB%80%E4%B9%88%E4%B8%8D%E5%90%8C/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAS和synchronized介绍，两者存在什么不同
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/HashMap%E5%92%8CConcurrentHashMap%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HashMap和ConcurrentHashMap介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java内存模型介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/ThreadLocal%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ThreadLocal介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/synchronized%E9%94%81%E5%92%8Creentrantlock%E9%94%81%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Synchronized锁和reentrantlock锁区别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/volatile%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Volatile有什么用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%87%A0%E7%A7%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    创建线程的方式有几种
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线程池介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JUC/%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线程的生命周期介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_2" id="__nav_2_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    JVM
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/GC%E4%BA%8B%E4%BB%B6%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GC事件类型介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/JVM%E4%B8%AD%E9%94%81%E5%8D%87%E7%BA%A7%E7%9A%84%E6%B5%81%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM中锁升级的流程是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/JVM%E7%94%B1%E4%BB%80%E4%B9%88%E7%BB%84%E6%88%90/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM由什么组成
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/JVM%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM的垃圾回收机制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/JVM%E7%9B%91%E8%A7%86%E5%99%A8%E9%94%81%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM监视器锁是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/Java%20%E7%B1%BB%E5%8A%A0%E8%BD%BD%E8%BF%87%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java 类加载过程介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/Java%E7%9A%84%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E5%92%8C%E5%9B%9E%E6%94%B6%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java的内存分配和回收过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/javac%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Javac编译过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/java%E5%AF%B9%E8%B1%A1%E5%88%9B%E5%BB%BA%E7%9A%84%E8%BF%87%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java对象创建的过程介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/jvm%E5%9E%83%E5%9C%BE%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%A4%E5%AE%9A%E6%A0%87%E5%87%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jvm垃圾对象的判定标准
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    垃圾回收算法介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/JVM/%E5%B8%B8%E7%94%A8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用垃圾回收器介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_3" id="__nav_2_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Spring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/Bean%20%E6%98%AF%E6%80%8E%E4%B9%88%E5%8A%A0%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8%E7%9A%84%EF%BC%8C%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E6%80%8E%E4%B9%88%E8%A7%A3%E5%86%B3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bean 是怎么加载和使用的，循环依赖怎么解决
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/Spring%20AOP%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring AOP是什么，是如何实现的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/Spring%20Boot%E5%81%9A%E5%87%BA%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot做出了哪些优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/Spring%20Boot%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot容器启动过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/Spring%20IoC%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring IoC是什么，底层实现思路是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/Spring%E4%BA%8B%E5%8A%A1%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring事务介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/spring/%E4%B8%80%E6%AC%A1HTTP%E8%AF%B7%E6%B1%82%E5%9C%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一次HTTP请求在服务端的处理链路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4_4" id="__nav_2_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基础
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9F%BA%E7%A1%80/JDK%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E4%B8%8ECGLIB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JDK动态代理与CGLIB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9F%BA%E7%A1%80/Java%20%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java 异常处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9F%BA%E7%A1%80/Java%20%E6%B5%8B%E8%AF%95%E4%BD%93%E7%B3%BB%E4%B8%8E%E5%B8%B8%E7%94%A8%E6%A1%86%E6%9E%B6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java 测试体系与常用框架
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9F%BA%E7%A1%80/Java%E5%B8%B8%E7%94%A8%E7%9A%84%E9%9B%86%E5%90%88%E6%9C%89%E5%93%AA%E4%BA%9B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Java常用的集合有哪些
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9F%BA%E7%A1%80/Maven%20%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven 生命周期介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../java/%E5%9F%BA%E7%A1%80/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    什么是反射
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Redis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E4%BA%8B%E5%8A%A1%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis事务介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis内存模型介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis持久化机制详解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis的使用场景
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis的底层数据结构有什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis的数据类型介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E7%9A%84%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis的线程模型介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/Redis%E7%9A%84%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis的过期删除策略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/redis%20LFU%E7%AD%96%E7%95%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    redis LFU策略是如何实现的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/redis%20LRU%E7%AD%96%E7%95%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    redis LRU策略是如何实现的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/redis%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis内存淘汰策略介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/redis%E9%9B%86%E7%BE%A4%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis集群介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/%E4%B8%BA%E4%BB%80%E4%B9%88%20Redis%20%E8%BF%99%E4%B9%88%E5%BF%AB%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    为什么 Redis 这么快？
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81Redis%E4%B8%8EMySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何保证Redis与MySQL的数据一致性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../redis/%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F%E3%80%81%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF%E3%80%81%E7%BC%93%E5%AD%98%E9%9B%AA%E5%B4%A9/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    缓存穿透、缓存击穿、缓存雪崩
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    中间件
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    中间件
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%90%9E%E5%90%90%E9%87%8F%E9%AB%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka 为什么吞吐量高
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%AD%E9%97%B4%E4%BB%B6/Kafka%20%E7%9A%84%E6%8C%81%E4%B9%85%E5%8C%96%E6%9C%BA%E5%88%B6%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka 的持久化机制介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E4%B8%AD%E9%97%B4%E4%BB%B6/%E4%B8%BB%E6%B5%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E4%BB%8B%E7%BB%8D%EF%BC%8CKafka%20%E7%9B%B8%E6%AF%94%E5%85%B6%E4%BD%99%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E5%8A%A3%E5%8A%BF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    主流消息队列介绍，Kafka 相比其余消息队列有什么优劣势
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    分布式
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    分布式
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%86%E5%B8%83%E5%BC%8F/CAP%20%E5%AE%9A%E7%90%86%E4%B8%8E%E5%B7%A5%E7%A8%8B%E5%8F%96%E8%88%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CAP 定理与工程取舍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%86%E5%B8%83%E5%BC%8F/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一致性哈希算法介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B8%B8%E8%A7%81%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%AE%97%E6%B3%95%E6%9C%89%E5%93%AA%E4%BA%9B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常见的分布式算法有哪些
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%88%86%E5%B8%83%E5%BC%8F/%E9%9B%AA%E8%8A%B1%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雪花算法介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    场景题
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    场景题
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/HTTP%20%E8%AF%B7%E6%B1%82%E5%85%A8%E9%93%BE%E8%B7%AF%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HTTP 请求全链路性能优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/JVM%E8%B0%83%E4%BC%98%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM调优思路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/Kafka%20%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E6%80%8E%E4%B9%88%E5%A4%84%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kafka 消息积压怎么处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/Redis%E4%B8%AD%E7%9A%84%E5%A4%A7Key%E4%B8%8E%E7%83%ADKey%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis中的大Key与热Key问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/Redis%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis和数据库的一致性问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/Redis%E5%BC%82%E5%B8%B8%E6%8E%92%E6%9F%A5%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redis异常排查思路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/jvm%E4%B8%8D%E5%81%9Cgc%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%8F%AF%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%8E%92%E6%9F%A5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jvm不停gc的原因可能是什么，如何排查
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/%E5%9C%BA%E6%99%AF%E9%A2%98%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    场景题思路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%8E%A5%E5%8F%A3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    如何设计一个接口
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/%E6%85%A2%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    慢查询优化思路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%9C%BA%E6%99%AF%E9%A2%98/%E8%AF%B7%E6%8F%8F%E8%BF%B0%E4%B8%80%E6%AC%A1%E4%BD%A0%E4%BD%BF%E7%94%A8%E8%BF%87%E7%9A%84JVM%E7%9B%91%E6%8E%A7%E5%92%8C%E8%AF%8A%E6%96%AD%E5%B7%A5%E5%85%B7%E5%88%86%E6%9E%90%E5%92%8C%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    请描述一次你使用过的JVM监控和诊断工具分析和解决问题的过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    操作系统
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    操作系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Linux%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E8%AE%B2%E8%A7%A3%E5%85%A8%E8%BF%87%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux的系统调用讲解全过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%86%85%E5%AD%98%E5%B1%8F%E9%9A%9C%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    内存屏障是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%AD%BB%E9%94%81%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E6%AD%BB%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    死锁的原因是什么，如何解决死锁
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%94%A8%E6%88%B7%E6%80%81%E5%92%8C%E5%86%85%E6%A0%B8%E6%80%81%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%87%E6%8D%A2%E7%9A%84%EF%BC%9F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用户态和内核态是如何切换的？
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%BA%BF%E7%A8%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线程上下文切换介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进程、线程、协程区别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    进程间通信的方式有什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E9%9B%B6%E6%8B%B7%E8%B4%9D%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    零拷贝介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数据库
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E4%B8%A4%E9%98%B6%E6%AE%B5%E6%8F%90%E4%BA%A4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL两阶段提交
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%A4%8D%E5%88%B6%E4%B8%8E%E5%A4%87%E4%BB%BD%E6%8A%80%E6%9C%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL复制与备份技术
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E5%B4%A9%E6%BA%83%E4%BB%A5%E5%90%8E%E6%81%A2%E5%A4%8D%E6%B5%81%E7%A8%8B/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL崩溃以后恢复流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL%E6%9C%89%E4%BB%80%E4%B9%88%E9%A1%B5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL有什么页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Redo%20Log%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Redo Log介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/Undo%20Log%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Undo Log介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/explain%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explain介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mvcc%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. MVCC 的底层实现原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E6%97%A5%E5%BF%97/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1. 服务层日志 (Server Level Logs)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%B8%AD%E6%9C%89%E5%93%AA%E4%BA%9B%E9%94%81/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mysql中有哪些锁
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E4%BA%8B%E5%8A%A1%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mysql事务是如何实现的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E6%8C%81%E4%B9%85%E5%8C%96%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mysql数据库是如何实现持久化的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/sql%E6%9F%A5%E8%AF%A2%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sql查询的执行过程是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%B8%80%E6%AC%A1%E6%95%B0%E6%8D%AE%E6%9F%A5%E8%AF%A2%E5%8F%AF%E8%83%BD%E7%BB%8F%E5%8E%86%E5%87%A0%E6%AC%A1%E7%A3%81%E7%9B%98IO/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一次数据查询可能经历几次磁盘IO
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%B8%A4%E6%AE%B5%E9%94%81%E5%8D%8F%E8%AE%AE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    两段锁协议
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BA%8B%E5%8A%A1%E7%9A%84%E5%90%84%E4%B8%AA%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    事务的各个隔离级别是如何实现的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    事务的隔离级别有什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%8B%E5%8A%A1%EF%BC%8C%E4%BA%8B%E5%8A%A1%E6%9C%89%E5%93%AA%E5%87%A0%E7%A7%8D%E7%89%B9%E6%80%A7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    什么是事务，事务有哪几种特性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%93%AA%E4%BA%9B%E5%AD%97%E6%AE%B5%E9%80%82%E5%90%88%E5%8A%A0%E7%B4%A2%E5%BC%95%EF%BC%8C%E5%93%AA%E4%BA%9B%E4%B8%8D%E9%80%82%E5%90%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    哪些字段适合加索引，哪些不适合
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%8C%83%E5%BC%8F/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数据库范式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%95%B0%E6%8D%AE%E5%BA%93/%E7%B4%A2%E5%BC%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    索引介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    杂项
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    杂项
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E9%A1%B9/RBAC%E6%A8%A1%E5%9E%8B%E5%92%8CABAC%E6%A8%A1%E5%9E%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RBAC模型和ABAC模型是什么，有什么区别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E9%A1%B9/%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%8C%E4%BB%A5%E5%8F%8A%E4%BC%98%E5%8C%96%E6%8E%AA%E6%96%BD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    介绍一下布隆过滤器，以及优化措施
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E9%A1%B9/%E5%93%88%E5%B8%8C%E6%91%98%E8%A6%81%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    哈希摘要是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E9%A1%B9/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    密码学基础知识
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E9%A1%B9/%E5%B8%B8%E7%94%A8%E7%9A%84Linux%E5%91%BD%E4%BB%A4%E6%9C%89%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用的Linux命令有什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E6%9D%82%E9%A1%B9/%E9%99%90%E6%B5%81%E6%80%9D%E8%B7%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    限流思路
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    算法
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    算法
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AE%97%E6%B3%95/%E5%B8%B8%E7%94%A8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用排序算法介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E7%AE%97%E6%B3%95/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    负载均衡算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    计算机网络
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    计算机网络
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Cookie%E3%80%81Session%E3%80%81Token%E3%80%81JWT%20%E4%B8%8E%E5%89%8D%E7%AB%AF%E7%99%BB%E5%BD%95%E6%80%81%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cookie、Session、Token、JWT 与前端登录态介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../IO%20%E5%90%8C%E6%AD%A5%E3%80%81%E5%BC%82%E6%AD%A5%E3%80%81%E9%98%BB%E5%A1%9E%E3%80%81%E9%9D%9E%E9%98%BB%E5%A1%9E%E6%A6%82%E5%BF%B5%E5%8C%BA%E5%88%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IO 同步、异步、阻塞、非阻塞概念区分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../JWT%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JWT介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TCP%E6%8B%A5%E5%A1%9E%E7%AA%97%E5%8F%A3%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCP拥塞窗口是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../TCP%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TCP是如何实现可靠传输的
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Web%20%E5%AE%89%E5%85%A8%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Web 安全常见漏洞
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../https%20%E5%92%8C%20http%20%E5%8C%BA%E5%88%AB/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Https 和 http 区别
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp%20udp%E4%BB%8B%E7%BB%8D%E5%B9%B6%E8%AF%B4%E6%98%8E%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcp udp介绍并说明使用场景
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tcp滑动窗口是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../websocket%E6%98%AF%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Websocket是什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E4%BB%8E%E8%BE%93%E5%85%A5%20URL%20%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%B1%95%E7%A4%BA%E5%88%B0%E5%BA%95%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    从输入 URL 到页面展示到底发生了什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浏览器会发出哪些请求，抓包和爬虫时应关注什么
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浏览器会发出哪些请求，抓包和爬虫时应关注什么
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 浏览器请求的分类方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 浏览器请求的分类方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 不要只按 DevTools 标签理解请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 DevTools 常见标签与底层语义映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 浏览器常见请求类型详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 浏览器常见请求类型详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 导航请求 document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-scriptstyleimagefontmedia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 静态子资源请求：script、style、image、font、media
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-xmlhttprequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 XMLHttpRequest 请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 fetch() 请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 表单提交请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 OPTIONS 预检请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-websocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 WebSocket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-eventsource-sse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 EventSource 与 SSE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-navigatorsendbeacon-a-ping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 navigator.sendBeacon() 与 &lt;a ping&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-preloadmodulepreloadprefetchpreconnectdns-prefetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 预加载与投机请求：preload、modulepreload、prefetch、preconnect、dns-prefetch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.11 其它容易忽略的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-xhr-fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. XHR 和 fetch 的区别
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. XHR 和 fetch 的区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 相同点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 关键差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 对爬虫的实际意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 从爬虫视角看，哪些请求最值得关注
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 从爬虫视角看，哪些请求最值得关注">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 第一优先级：真正承载业务数据的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 第二优先级：帮助你还原接口逻辑的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 通常可以先忽略的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 判断“真正业务接口”的几个强信号
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 抓包时的实战流程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 抓包时的实战流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 建议的排查顺序
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 必须记录的关键信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 三个高频误判
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 三个高频误判">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#531-fetchxhr-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.1 只盯 Fetch/XHR，错过了 HTML 首屏数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#532-optionsbeaconping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.2 把 OPTIONS、beacon、ping 当成核心接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#533-websocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.3 看到了 WebSocket 握手，却没继续看消息帧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 复现浏览器请求时的关键细节
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 复现浏览器请求时的关键细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 不要机械复制所有头
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-304" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 注意缓存、304 与条件请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-service-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 注意 Service Worker 和前端缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 注意接口之外的“前端计算”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 面试回答精简版
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%AE%80%E8%BF%B0TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8F%A1%E6%89%8B%E6%98%AF%E4%B8%89%E6%AC%A1%EF%BC%8C%E6%8C%A5%E6%89%8B%E6%98%AF%E5%9B%9B%E6%AC%A1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    简述TCP三次握手四次挥手，为什么握手是三次，挥手是四次
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E7%BD%91%E7%BB%9C%E7%9A%84%E5%88%86%E5%B1%82%E7%BB%93%E6%9E%84/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    网络的分层结构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%A7%A3%E9%87%8A%20DNS%20%E7%9A%84%E4%BD%9C%E7%94%A8%E5%92%8C%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    解释 DNS 的作用和工作原理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E8%AF%81%E4%B9%A6%E7%9A%84%E5%8E%9F%E7%90%86%E5%92%8C%E5%B8%B8%E7%94%A8%E5%9C%BA%E6%99%AF/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    证书的原理和常用场景
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_14" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    设计模式
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_14_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_14">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    设计模式
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常用的设计模式介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%B4%A3%E4%BB%BB%E9%93%BE%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%BB%8B%E7%BB%8D/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    责任链设计模式介绍
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. 浏览器请求的分类方式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 浏览器请求的分类方式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 不要只按 DevTools 标签理解请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 DevTools 常见标签与底层语义映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. 浏览器常见请求类型详解
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 浏览器常见请求类型详解">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-document" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 导航请求 document
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-scriptstyleimagefontmedia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 静态子资源请求：script、style、image、font、media
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-xmlhttprequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 XMLHttpRequest 请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.4 fetch() 请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.5 表单提交请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.6 OPTIONS 预检请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-websocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.7 WebSocket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-eventsource-sse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 EventSource 与 SSE
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#29-navigatorsendbeacon-a-ping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.9 navigator.sendBeacon() 与 &lt;a ping&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#210-preloadmodulepreloadprefetchpreconnectdns-prefetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.10 预加载与投机请求：preload、modulepreload、prefetch、preconnect、dns-prefetch
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.11 其它容易忽略的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-xhr-fetch" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. XHR 和 fetch 的区别
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. XHR 和 fetch 的区别">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 相同点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 关键差异
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 对爬虫的实际意义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. 从爬虫视角看，哪些请求最值得关注
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 从爬虫视角看，哪些请求最值得关注">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 第一优先级：真正承载业务数据的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 第二优先级：帮助你还原接口逻辑的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 通常可以先忽略的请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 判断“真正业务接口”的几个强信号
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. 抓包时的实战流程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 抓包时的实战流程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 建议的排查顺序
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 必须记录的关键信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3 三个高频误判
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.3 三个高频误判">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#531-fetchxhr-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.1 只盯 Fetch/XHR，错过了 HTML 首屏数据
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#532-optionsbeaconping" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.2 把 OPTIONS、beacon、ping 当成核心接口
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#533-websocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.3.3 看到了 WebSocket 握手，却没继续看消息帧
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. 复现浏览器请求时的关键细节
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 复现浏览器请求时的关键细节">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 不要机械复制所有头
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-304" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 注意缓存、304 与条件请求
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-service-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.3 注意 Service Worker 和前端缓存
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.4 注意接口之外的“前端计算”
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. 面试回答精简版
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+  <h1>浏览器会发出哪些请求，抓包和爬虫时应关注什么</h1>
+
+<h2 id="1">1. 浏览器请求的分类方式</h2>
+<h3 id="11-devtools">1.1 不要只按 <code>DevTools</code> 标签理解请求</h3>
+<p>面试里常见误区，是把 <code>xhr</code>、<code>fetch</code>、<code>document</code>、<code>websocket</code> 都当成同一层级的“请求类型”。
+实际上它们混合了 <strong>发起方式</strong>、<strong>资源目标</strong>、<strong>协议形态</strong> 这三类维度，所以抓包时容易看乱。</p>
+<p>更稳妥的理解方式，是把浏览器请求拆成三层：</p>
+<ul>
+<li><strong>导航类请求</strong>：例如地址栏输入 URL、点击链接、表单跳转，目标通常是 <code>document</code>。</li>
+<li><strong>子资源请求</strong>：例如 <code>script</code>、<code>style</code>、<code>image</code>、<code>font</code>、<code>media</code>，它们服务于页面渲染。</li>
+<li><strong>编程式请求</strong>：例如 <code>XMLHttpRequest</code>、<code>fetch()</code>、<code>EventSource</code>、<code>WebSocket</code>、<code>sendBeacon()</code>，它们通常由 JavaScript 主动发起。</li>
+</ul>
+<p><code>Fetch</code> 标准里的 <code>Request.destination</code> 提供了一个很好的统一视角。
+它把请求目标描述为 <code>document</code>、<code>script</code>、<code>style</code>、<code>image</code>、<code>font</code>、<code>worker</code>、<code>manifest</code> 等；而 <code>fetch()</code>、<code>XMLHttpRequest</code>、<code>EventSource</code>、<code>WebSocket</code>、<code>navigator.sendBeacon()</code>、<code>&lt;a ping&gt;</code> 这类请求，<code>destination</code> 通常是空字符串 <code>""</code>。</p>
+<h3 id="12-devtools">1.2 <code>DevTools</code> 常见标签与底层语义映射</h3>
+<p>不同浏览器的开发者工具命名略有差异，但底层语义大致一致。抓包时可以先做如下映射：</p>
+<table>
+<thead>
+<tr>
+<th>面板常见标签</th>
+<th>底层语义</th>
+<th>常见触发方式</th>
+<th>对爬虫价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Doc</code> / <code>document</code></td>
+<td>页面导航请求</td>
+<td>输入 URL、点击链接、<code>iframe</code> 加载</td>
+<td>很高</td>
+</tr>
+<tr>
+<td><code>Fetch/XHR</code></td>
+<td>JavaScript 发起的数据请求</td>
+<td><code>fetch()</code>、<code>XMLHttpRequest</code></td>
+<td>很高</td>
+</tr>
+<tr>
+<td><code>JS</code> / <code>script</code></td>
+<td>脚本资源</td>
+<td><code>&lt;script&gt;</code>、动态导入</td>
+<td>中</td>
+</tr>
+<tr>
+<td><code>CSS</code> / <code>style</code></td>
+<td>样式资源</td>
+<td><code>&lt;link rel="stylesheet"&gt;</code></td>
+<td>低</td>
+</tr>
+<tr>
+<td><code>Img</code> / <code>image</code></td>
+<td>图片资源</td>
+<td><code>&lt;img&gt;</code>、CSS 背景图</td>
+<td>低</td>
+</tr>
+<tr>
+<td><code>Font</code></td>
+<td>字体资源</td>
+<td><code>@font-face</code></td>
+<td>低</td>
+</tr>
+<tr>
+<td><code>Media</code></td>
+<td>音视频资源</td>
+<td><code>&lt;video&gt;</code>、分片流媒体</td>
+<td>视场景而定</td>
+</tr>
+<tr>
+<td><code>WS</code></td>
+<td><code>WebSocket</code> 握手与帧</td>
+<td><code>new WebSocket()</code></td>
+<td>高</td>
+</tr>
+<tr>
+<td><code>Manifest</code></td>
+<td>PWA 清单</td>
+<td><code>&lt;link rel="manifest"&gt;</code></td>
+<td>低</td>
+</tr>
+<tr>
+<td><code>Other</code></td>
+<td>其它杂项</td>
+<td><code>sendBeacon()</code>、<code>ping</code>、报告上报等</td>
+<td>通常低</td>
+</tr>
+</tbody>
+</table>
+<p>结论是：<strong>抓包时不要先盯“数量最多的请求”，而要先盯“真正承载业务数据的请求”</strong>。
+对大多数业务站点来说，优先级一般是 <code>document</code>、<code>Fetch/XHR</code>、<code>WS</code>、<code>EventSource</code>，而不是图片和字体。</p>
+<h2 id="2">2. 浏览器常见请求类型详解</h2>
+<h3 id="21-document">2.1 导航请求 <code>document</code></h3>
+<p>导航请求是浏览器最基础的一类请求。
+它由地址栏输入、点击 <code>&lt;a&gt;</code>、<code>window.location</code> 跳转、<code>iframe</code> 加载、表单提交跳转等动作触发，服务端通常返回 HTML 文档。</p>
+<p>这类请求对爬虫非常关键，原因有三点：</p>
+<ul>
+<li>首屏数据可能直接写在 HTML 中，根本没有额外的 <code>XHR</code> 或 <code>fetch</code>。</li>
+<li>页面里可能内嵌了初始化状态，例如 <code>__INITIAL_STATE__</code>、<code>window.__DATA__</code>、<code>script[type="application/json"]</code>。</li>
+<li>首次响应往往会下发登录态、<code>Set-Cookie</code>、防重放令牌、<code>csrf token</code> 等后续请求依赖的信息。</li>
+</ul>
+<p>如果一个站点是传统的服务端渲染，也就是 <code>SSR</code>，那么 <strong>真正的数据可能就在 <code>document</code> 响应体里</strong>。
+这时只盯 <code>Fetch/XHR</code> 会得出“页面没有接口”的错误结论。</p>
+<h3 id="22-scriptstyleimagefontmedia">2.2 静态子资源请求：<code>script</code>、<code>style</code>、<code>image</code>、<code>font</code>、<code>media</code></h3>
+<p>浏览器解析 HTML 和 CSS 之后，会继续请求脚本、样式、图片、字体、音视频等子资源。
+这些请求的主要目标是“把页面渲染出来”，而不是“把业务数据返回给你”。</p>
+<p>从爬虫角度看，它们通常分成两类：</p>
+<ul>
+<li><strong>大多可忽略</strong>：<code>style</code>、<code>image</code>、<code>font</code> 通常不承载结构化业务数据。</li>
+<li><strong>有时必须分析</strong>：<code>script</code> 里可能藏着接口地址、签名算法、分页参数拼接逻辑；<code>media</code> 可能对应分片流，例如 <code>m3u8</code>、<code>ts</code>、<code>mp4</code> 分段。</li>
+</ul>
+<p>很多视频站或音频站还会发出 <code>Range</code> 请求，只取资源的一部分。
+如果看到请求头里有 <code>Range: bytes=...</code>，说明它不是普通文本接口，而更像是大文件或流媒体的分片读取。</p>
+<h3 id="23-xmlhttprequest">2.3 <code>XMLHttpRequest</code> 请求</h3>
+<p><code>XMLHttpRequest</code>，也就是常说的 <code>XHR</code>，是早期 <code>Ajax</code> 的核心 API。
+它允许页面在不整页刷新的情况下，向服务端发起 HTTP 请求并读取响应，因此经常被用来加载列表、搜索结果、评论、详情数据。</p>
+<p><code>XHR</code> 的几个关键点：</p>
+<ul>
+<li>它是 <strong>事件驱动模型</strong>，而不是 <code>Promise</code> 模型。</li>
+<li>它支持下载和上传进度事件，所以一些老项目上传文件时仍然常见。</li>
+<li>它曾支持同步请求，但同步 <code>XHR</code> 会阻塞主线程，现代前端通常应避免。</li>
+</ul>
+<p>最小示例：</p>
+<pre><code class="language-js">const xhr = new XMLHttpRequest();
+xhr.open(&quot;GET&quot;, &quot;/api/list?page=1&quot;, true);
+
+xhr.onreadystatechange = function () {
+  if (xhr.readyState === 4 &amp;&amp; xhr.status === 200) {
+    console.log(JSON.parse(xhr.responseText));
+  }
+};
+
+xhr.send();
+</code></pre>
+<p>抓包时，<code>XHR</code> 往往是最值得看的请求之一。
+尤其是老站、后台管理系统、<code>jQuery</code> 项目、历史包袱较重的业务，仍然会大量使用它。</p>
+<h3 id="24-fetch">2.4 <code>fetch()</code> 请求</h3>
+<p><code>fetch()</code> 是现代浏览器更推荐的请求 API。
+它和 <code>XHR</code> 一样可以发 HTTP 请求，但模型更贴近现代 JavaScript：基于 <code>Promise</code>，并且与 <code>Service Worker</code>、<code>Streams</code>、<code>CORS</code> 等机制结合得更自然。</p>
+<p><code>fetch()</code> 的几个高频考点：</p>
+<ul>
+<li><code>fetch()</code> 返回的 <code>Promise</code>，在 <strong>收到响应头</strong> 时就会兑现，不必等整个响应体读完。</li>
+<li>HTTP <code>404</code>、<code>500</code> 这类业务失败，不会让 <code>Promise</code> 自动 <code>reject</code>；它只在网络错误、请求构造失败等情况下 <code>reject</code>。</li>
+<li>如果要中止请求，通常配合 <code>AbortController</code> 使用。</li>
+</ul>
+<p>最小示例：</p>
+<pre><code class="language-js">const controller = new AbortController();
+
+const resp = await fetch(&quot;/api/list?page=1&quot;, {
+  method: &quot;GET&quot;,
+  credentials: &quot;include&quot;,
+  signal: controller.signal,
+});
+
+if (!resp.ok) {
+  throw new Error(`HTTP ${resp.status}`);
+}
+
+const data = await resp.json();
+console.log(data);
+</code></pre>
+<p>在现代 <code>SPA</code>、<code>React</code>、<code>Vue</code>、<code>Next.js</code>、<code>Nuxt</code> 等应用里，业务数据接口大多优先使用 <code>fetch()</code>。
+所以抓包时看到 <code>Fetch/XHR</code>，里面非常大一部分实际就是 <code>fetch()</code> 请求。</p>
+<h3 id="25">2.5 表单提交请求</h3>
+<p>表单提交是很多人抓包时容易忽略的一类请求。
+登录、注册、搜索、筛选、上传文件、导出报表，仍然大量依赖 <code>&lt;form&gt;</code> 提交。</p>
+<p>常见表单编码方式有三种：</p>
+<ul>
+<li><code>application/x-www-form-urlencoded</code></li>
+<li><code>multipart/form-data</code></li>
+<li><code>text/plain</code></li>
+</ul>
+<p>这类请求的几个重点是：</p>
+<ul>
+<li>文件上传几乎一定要看 <code>multipart/form-data</code> 的边界和字段名。</li>
+<li>登录表单通常包含隐藏字段，例如 <code>csrf token</code>、<code>nonce</code>、一次性验证码票据。</li>
+<li>JavaScript 调用 <code>form.submit()</code> 和用户真正点击提交按钮，并不完全等价；前者不会触发 <code>submit</code> 事件和约束校验。</li>
+</ul>
+<h3 id="26-options">2.6 <code>OPTIONS</code> 预检请求</h3>
+<p>当页面发起跨域请求，并且该请求不属于“简单请求”时，浏览器会先自动发一个 <code>OPTIONS</code> 请求做 <code>CORS preflight</code>。
+这个请求不是业务方手写的，而是浏览器为了确认“目标站是否允许这样跨域访问”自动插入的。</p>
+<p>典型预检请求会带上这些头：</p>
+<ul>
+<li><code>Origin</code></li>
+<li><code>Access-Control-Request-Method</code></li>
+<li><code>Access-Control-Request-Headers</code></li>
+</ul>
+<p>抓包和复现时，预检请求的意义是：</p>
+<ul>
+<li>它告诉你：<strong>真正的业务请求是跨域的，而且用了特殊方法或特殊头</strong>。</li>
+<li>但它本身通常不是你要复现的数据接口。</li>
+<li>很多后端脚本、服务端爬虫直接请求接口时，不会自动遭遇浏览器同源策略，因此也未必需要自己先发 <code>OPTIONS</code>。</li>
+</ul>
+<p>所以不要把“只复现了 <code>OPTIONS</code>”误认为“接口已经调通了”。
+真正有业务价值的，仍然是后面的实际请求。</p>
+<h3 id="27-websocket">2.7 <code>WebSocket</code></h3>
+<p><code>WebSocket</code> 适合做长连接、双向通信。
+它一开始通过 HTTP 发起握手，随后协议升级为 <code>WebSocket</code>，不再是传统的一问一答式 HTTP 请求。</p>
+<p>典型握手特征是：</p>
+<ul>
+<li>请求里带 <code>Upgrade: websocket</code></li>
+<li>服务端返回 <code>101 Switching Protocols</code></li>
+<li>后续真正的数据在帧里收发，而不是普通 HTTP 响应体里</li>
+</ul>
+<p>最小示例：</p>
+<pre><code class="language-js">const ws = new WebSocket(&quot;wss://example.com/socket&quot;);
+
+ws.addEventListener(&quot;open&quot;, () =&gt; {
+  ws.send(JSON.stringify({ op: &quot;subscribe&quot;, roomId: 123 }));
+});
+
+ws.addEventListener(&quot;message&quot;, (event) =&gt; {
+  console.log(event.data);
+});
+</code></pre>
+<p>如果页面数据是实时刷新的，例如聊天室、行情、推送通知、直播间弹幕，那么 <strong>真正的数据流很可能不在 <code>Fetch/XHR</code>，而在 <code>WebSocket</code> 帧里</strong>。
+这时只看握手 URL 还不够，必须继续看发送帧和接收帧。</p>
+<h3 id="28-eventsource-sse">2.8 <code>EventSource</code> 与 <code>SSE</code></h3>
+<p><code>EventSource</code> 对应的是 <code>Server-Sent Events</code>，简称 <code>SSE</code>。
+它基于普通 HTTP 连接，但响应体是持续不断推送的 <code>text/event-stream</code>，属于“服务端单向推送”。</p>
+<p>它和 <code>WebSocket</code> 的区别很明确：</p>
+<ul>
+<li><code>SSE</code> 是 <strong>单向</strong> 的，只能服务端推给客户端。</li>
+<li><code>WebSocket</code> 是 <strong>双向</strong> 的，双方都可以主动发消息。</li>
+</ul>
+<p>如果页面看起来在自动更新，但没有发现明显的轮询 <code>XHR</code> 或 <code>fetch()</code>，就要检查是否存在 <code>EventSource</code>。
+很多监控面板、实时状态页、日志流页面会用这种方式。</p>
+<h3 id="29-navigatorsendbeacon-a-ping">2.9 <code>navigator.sendBeacon()</code> 与 <code>&lt;a ping&gt;</code></h3>
+<p>这两类请求通常是埋点和统计噪声。
+它们的价值不在业务数据，而在“告诉服务端用户发生了什么动作”。</p>
+<p><code>navigator.sendBeacon()</code> 的特点：</p>
+<ul>
+<li>只能异步发送一个小型 <code>POST</code> 请求。</li>
+<li>常用于页面卸载、隐藏、跳转时上报埋点。</li>
+<li>调用方通常不关心响应内容。</li>
+</ul>
+<p><code>&lt;a ping&gt;</code> 的特点：</p>
+<ul>
+<li>用户点击链接时，浏览器会额外向 <code>ping</code> 指定的地址发送 <code>POST</code> 请求。</li>
+<li>典型用途是点击统计、广告归因、跳转链路埋点。</li>
+</ul>
+<p>对爬虫来说，这类请求大多可以忽略。
+但它们会污染抓包视图，所以识别出来很重要，避免误把埋点接口当成业务接口。</p>
+<h3 id="210-preloadmodulepreloadprefetchpreconnectdns-prefetch">2.10 预加载与投机请求：<code>preload</code>、<code>modulepreload</code>、<code>prefetch</code>、<code>preconnect</code>、<code>dns-prefetch</code></h3>
+<p>这类请求不是为了立即展示业务数据，而是为了优化性能。
+它们的目标是“提前做准备”，所以抓包时很容易和真实业务请求混淆。</p>
+<p>几个概念需要分清：</p>
+<ul>
+<li><code>preload</code>：提前下载当前页面很快就要用到的资源，例如脚本、样式、字体、图片。</li>
+<li><code>modulepreload</code>：提前获取、解析、编译模块脚本及其依赖。</li>
+<li><code>prefetch</code>：低优先级预取未来可能用到的资源，常用于“下一页可能会访问”的内容。</li>
+<li><code>preconnect</code>：提前做 <code>DNS</code>、<code>TCP</code>、<code>TLS</code> 握手，重点是“连上”，不一定立刻下载资源。</li>
+<li><code>dns-prefetch</code>：只提前做域名解析，不会直接发 HTTP 资源请求。</li>
+</ul>
+<p>因此：</p>
+<ul>
+<li><code>preload</code>、<code>modulepreload</code>、<code>prefetch</code> 可能在 <code>Network</code> 面板里看到真实资源请求。</li>
+<li><code>preconnect</code> 更像“连接预热”。</li>
+<li><code>dns-prefetch</code> 甚至可能根本不表现为普通 HTTP 请求。</li>
+</ul>
+<p>如果你在抓包时看见页面一打开就先去请求几个脚本、字体、下一页资源，不要急着判断那就是核心业务接口。
+先确认它到底是“渲染资源”，还是“真实数据接口”。</p>
+<h3 id="211">2.11 其它容易忽略的请求</h3>
+<p>还有几类请求也会在真实项目里出现：</p>
+<ul>
+<li><code>manifest</code>：PWA 清单，请求 <code>manifest.json</code> 之类的元数据。</li>
+<li><code>worker</code> / <code>sharedworker</code> / <code>serviceworker</code>：加载不同类型的 <code>Worker</code> 脚本。</li>
+<li><code>report</code>：浏览器安全或性能上报，例如 <code>CSP</code>、<code>NEL</code>、<code>Reporting API</code>。</li>
+<li><code>favicon.ico</code>：标签页图标请求。</li>
+</ul>
+<p>其中最需要额外注意的是 <code>Service Worker</code>。
+它可以拦截页面和子资源请求，并从本地缓存返回响应。这样一来，你在浏览器里看到的数据，不一定每次都真的来自网络。</p>
+<p>所以分析站点时，最好同时关注：</p>
+<ul>
+<li>该请求是否被 <code>Service Worker</code> 接管</li>
+<li>响应是否来自内存缓存、磁盘缓存或 <code>Service Worker</code></li>
+<li>重新加载时数据是否仍然命中缓存</li>
+</ul>
+<h2 id="3-xhr-fetch">3. <code>XHR</code> 和 <code>fetch</code> 的区别</h2>
+<h3 id="31">3.1 相同点</h3>
+<p><code>XMLHttpRequest</code> 和 <code>fetch()</code> 都能发 HTTP 请求，也都经常承载业务数据。
+所以浏览器工具常把它们放进同一个 <code>Fetch/XHR</code> 视图里，抓包时也常一起看。</p>
+<h3 id="32">3.2 关键差异</h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th><code>XMLHttpRequest</code></th>
+<th><code>fetch()</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>编程模型</td>
+<td>事件驱动，常见 <code>readystatechange</code></td>
+<td><code>Promise</code> 模型</td>
+</tr>
+<tr>
+<td>错误处理</td>
+<td>通过事件和状态判断</td>
+<td>HTTP 错误不会自动 <code>reject</code></td>
+</tr>
+<tr>
+<td>上传进度</td>
+<td>支持 <code>xhr.upload.onprogress</code></td>
+<td>原生支持相对弱，常需额外方案</td>
+</tr>
+<tr>
+<td>下载流</td>
+<td>能做，但模型不如 <code>fetch</code> 自然</td>
+<td>更适合与 <code>Streams</code> 协作</td>
+</tr>
+<tr>
+<td>同步请求</td>
+<td>历史上支持，但不推荐</td>
+<td>不提供同步模式</td>
+</tr>
+<tr>
+<td>中止请求</td>
+<td><code>xhr.abort()</code></td>
+<td><code>AbortController</code></td>
+</tr>
+<tr>
+<td>与现代 Web 特性协同</td>
+<td>较旧</td>
+<td>更适合 <code>Service Worker</code>、现代框架</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33">3.3 对爬虫的实际意义</h3>
+<p>从“抓包复现”的角度看，<code>XHR</code> 和 <code>fetch()</code> 的差别没有“接口参数、鉴权头、签名逻辑”重要。
+但从“还原前端行为”的角度看，二者差异会影响你如何分析源码。</p>
+<p>例如：</p>
+<ul>
+<li>老站里你更容易在 <code>xhr.open()</code>、<code>xhr.send()</code> 附近找到参数拼装逻辑。</li>
+<li>新站里你更容易在 <code>fetch()</code> 包装器、请求拦截器、中间层 SDK 里找到公共头和签名逻辑。</li>
+</ul>
+<h2 id="4">4. 从爬虫视角看，哪些请求最值得关注</h2>
+<h3 id="41">4.1 第一优先级：真正承载业务数据的请求</h3>
+<p>通常最值得优先排查的是：</p>
+<ol>
+<li><code>document</code>：确认首屏 HTML 是否已经包含数据。</li>
+<li><code>Fetch/XHR</code>：确认列表、翻页、搜索、筛选、详情接口。</li>
+<li><code>WebSocket</code> / <code>EventSource</code>：确认实时数据是否通过长连接推送。</li>
+<li>表单提交：确认登录、搜索、上传、导出是否通过传统表单完成。</li>
+</ol>
+<p>这四类请求决定了你到底要用哪种抓取策略：</p>
+<ul>
+<li>只拉 HTML 就够。</li>
+<li>直接复用 JSON 接口即可。</li>
+<li>必须执行 JavaScript。</li>
+<li>必须维持长连接或订阅通道。</li>
+</ul>
+<h3 id="42">4.2 第二优先级：帮助你还原接口逻辑的请求</h3>
+<p>这类请求本身不一定是最终数据，但常常能帮助你把接口复现出来：</p>
+<ul>
+<li><code>script</code>：定位接口地址、公共请求头、签名算法、加密逻辑。</li>
+<li><code>OPTIONS</code> 预检：判断真实请求是否跨域、是否带自定义头。</li>
+<li><code>manifest</code>、初始化配置 JSON：可能暴露环境变量、资源域名、接口网关。</li>
+</ul>
+<h3 id="43">4.3 通常可以先忽略的请求</h3>
+<p>以下请求多数时候不值得一开始就深挖：</p>
+<ul>
+<li>图片、字体、样式</li>
+<li>埋点 <code>beacon</code></li>
+<li><code>&lt;a ping&gt;</code> 跳转统计</li>
+<li><code>prefetch</code>、<code>preload</code>、<code>preconnect</code></li>
+<li><code>favicon.ico</code></li>
+</ul>
+<p>但“可先忽略”不等于“永远无用”。
+例如图片站的核心数据可能就在图片 URL，本地化字体接口也可能带防盗链参数，视频站的核心目标可能就是媒体分片地址。</p>
+<h3 id="44">4.4 判断“真正业务接口”的几个强信号</h3>
+<p>如果一个请求同时满足下面几条，它大概率就是你真正要复现的接口：</p>
+<ul>
+<li>响应是 <code>JSON</code>、<code>protobuf</code>、<code>graphql</code> 结果，而不是 HTML 或静态资源。</li>
+<li>参数里出现 <code>page</code>、<code>offset</code>、<code>cursor</code>、<code>keyword</code>、<code>sort</code>、<code>filter</code> 之类字段。</li>
+<li>这个请求会随着滚动、翻页、点击筛选条件而重复出现。</li>
+<li>响应里直接出现商品、帖子、评论、用户、订单、文章等业务实体。</li>
+<li>请求头里带 <code>Authorization</code>、<code>Cookie</code>、<code>x-csrf-token</code>、<code>x-requested-with</code> 等鉴权信息。</li>
+</ul>
+<h2 id="5">5. 抓包时的实战流程</h2>
+<h3 id="51">5.1 建议的排查顺序</h3>
+<p>抓包时建议严格按顺序做，而不是一上来就翻几百条请求：</p>
+<ol>
+<li>打开 <code>Network</code>，勾选 <code>Preserve log</code>，必要时关闭缓存。</li>
+<li>清空面板，只执行一个业务动作，例如“点下一页”或“输入关键词搜索”。</li>
+<li>先看 <code>document</code> 和 <code>Fetch/XHR</code>，再看 <code>WS</code>、<code>Other</code>。</li>
+<li>对可疑请求重点看 <code>Headers</code>、<code>Payload</code>、<code>Response</code>、<code>Initiator</code>。</li>
+<li>确认这个请求是否真的承载了业务数据，而不是埋点或性能预取。</li>
+</ol>
+<p>这种做法的本质，是建立“动作 -&gt; 请求 -&gt; 响应 -&gt; 页面变化”的因果链。
+没有这个因果链，抓包只是看热闹。</p>
+<h3 id="52">5.2 必须记录的关键信息</h3>
+<p>真正准备复现某个接口时，至少要记下这些字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>为什么重要</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td>确定接口地址和路由模式</td>
+<td><code>/api/search</code></td>
+</tr>
+<tr>
+<td>Method</td>
+<td>区分 <code>GET</code>、<code>POST</code>、<code>PUT</code> 等</td>
+<td><code>POST</code></td>
+</tr>
+<tr>
+<td>Query / Body</td>
+<td>业务参数就在这里</td>
+<td><code>page=2</code>、<code>cursor=abc</code></td>
+</tr>
+<tr>
+<td><code>Content-Type</code></td>
+<td>决定请求体编码</td>
+<td><code>application/json</code></td>
+</tr>
+<tr>
+<td><code>Cookie</code> / <code>Authorization</code></td>
+<td>决定是否有权限访问</td>
+<td><code>Bearer ...</code></td>
+</tr>
+<tr>
+<td><code>Origin</code> / <code>Referer</code></td>
+<td>有些站点会校验来源</td>
+<td>页面来源 URL</td>
+</tr>
+<tr>
+<td><code>x-csrf-token</code> 等自定义头</td>
+<td>很多请求没有它就会失败</td>
+<td>防重放令牌</td>
+</tr>
+<tr>
+<td>响应格式</td>
+<td>判断如何解析</td>
+<td><code>JSON</code>、HTML、二进制</td>
+</tr>
+<tr>
+<td>分页标记</td>
+<td>决定如何翻页</td>
+<td><code>offset</code>、<code>cursor</code></td>
+</tr>
+<tr>
+<td>错误码和限流信息</td>
+<td>决定重试策略</td>
+<td><code>429</code>、<code>Retry-After</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="53">5.3 三个高频误判</h3>
+<h4 id="531-fetchxhr-html">5.3.1 只盯 <code>Fetch/XHR</code>，错过了 HTML 首屏数据</h4>
+<p>很多 <code>SSR</code> 页面在初始 <code>document</code> 里已经给出了完整列表。
+这时额外的 <code>XHR</code> 只是局部刷新，不是主数据源。</p>
+<h4 id="532-optionsbeaconping">5.3.2 把 <code>OPTIONS</code>、<code>beacon</code>、<code>ping</code> 当成核心接口</h4>
+<p>这类请求经常很多，也很显眼。
+但它们通常只是跨域预检或埋点，不是页面业务数据的真正来源。</p>
+<h4 id="533-websocket">5.3.3 看到了 <code>WebSocket</code> 握手，却没继续看消息帧</h4>
+<p><code>WS</code> 的价值不在 <code>101</code> 握手本身，而在握手之后收发的内容。
+如果不继续看帧数据，就等于只看到了门牌号，没进门。</p>
+<h2 id="6">6. 复现浏览器请求时的关键细节</h2>
+<h3 id="61">6.1 不要机械复制所有头</h3>
+<p>复现接口时，不是所有请求头都同样重要。
+你应该优先判断“哪些头决定业务是否成功”，而不是把浏览器里看到的每个头全量照抄。</p>
+<p>通常优先级更高的头包括：</p>
+<ul>
+<li><code>Cookie</code></li>
+<li><code>Authorization</code></li>
+<li><code>Content-Type</code></li>
+<li><code>Origin</code></li>
+<li><code>Referer</code></li>
+<li><code>X-CSRF-Token</code> 或类似自定义头</li>
+<li><code>If-None-Match</code>、<code>If-Modified-Since</code> 这类缓存相关头</li>
+</ul>
+<p>而像 <code>sec-ch-ua</code>、<code>priority</code>、部分 <code>Sec-Fetch-*</code> 头，更多是浏览器上下文信息。
+有些站点会校验它们，但很多普通接口并不依赖它们决定业务正确性。</p>
+<h3 id="62-304">6.2 注意缓存、<code>304</code> 与条件请求</h3>
+<p>浏览器为了减轻流量，会自动发条件请求。
+如果你看到 <code>ETag</code>、<code>If-None-Match</code>、<code>Last-Modified</code>、<code>If-Modified-Since</code>，说明浏览器可能并没有每次都重新下载完整资源。</p>
+<p>对爬虫来说，这意味着：</p>
+<ul>
+<li>看到 <code>304 Not Modified</code> 并不代表“没拿到数据”，而是“浏览器复用了本地缓存”。</li>
+<li>如果你脱离浏览器单独复现请求，可能会得到 <code>200</code> 全量响应，而不是 <code>304</code>。</li>
+</ul>
+<h3 id="63-service-worker">6.3 注意 <code>Service Worker</code> 和前端缓存</h3>
+<p>有些站点的请求虽然显示在 <code>Network</code> 里，但响应可能来自：</p>
+<ul>
+<li>内存缓存</li>
+<li>磁盘缓存</li>
+<li><code>Service Worker</code></li>
+</ul>
+<p>这会带来一个常见误区：
+你以为“页面没有真实请求”，其实只是响应已经被前端缓存层接住了。</p>
+<h3 id="64">6.4 注意接口之外的“前端计算”</h3>
+<p>很多站点真正的难点，不是接口地址，而是接口参数并不是静态写死的。
+例如：</p>
+<ul>
+<li>签名参数由脚本运行后计算出来</li>
+<li>请求体被加密</li>
+<li>分页游标来自上一页响应</li>
+<li><code>csrf token</code> 先藏在 HTML 或脚本变量里</li>
+</ul>
+<p>所以分析请求时，要同时看：</p>
+<ul>
+<li>这个请求是谁发起的</li>
+<li>发起前做了哪些参数加工</li>
+<li>这些参数是写死的，还是运行时生成的</li>
+</ul>
+<h2 id="7">7. 面试回答精简版</h2>
+<p>浏览器发出的请求，不能只按 <code>xhr</code>、<code>fetch</code> 这种 API 名称理解，更应该按目标和语义来分。最核心的几类是：页面导航的 <code>document</code> 请求、渲染页面的静态资源请求、JavaScript 发起的 <code>Fetch/XHR</code> 请求，以及 <code>WebSocket</code>、<code>SSE</code> 这类长连接或流式请求。像 <code>beacon</code>、<code>ping</code>、<code>prefetch</code>、<code>preload</code> 更多是埋点和性能优化请求，不一定承载业务数据。</p>
+<p>如果从爬虫角度抓包，我会优先看 <code>document</code>、<code>Fetch/XHR</code>、<code>WebSocket</code>、表单提交这几类请求，先判断数据到底是在首屏 HTML、普通 JSON 接口，还是在长连接消息里。然后重点记录 URL、方法、请求体、鉴权头、<code>Cookie</code>、<code>csrf token</code>、分页参数和响应格式。预检 <code>OPTIONS</code>、埋点 <code>beacon</code>、图片字体这类请求通常不是第一优先级，但它们能帮助我排除噪声、识别跨域和反爬策略。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
